@@ -5,56 +5,56 @@ const TOOLS = [
   {
     name: "KALEIDOSCOPE",
     desc: "Symmetrical pattern generator. Move your mouse. Watch physics become art.",
-    href: "https://unavoide.com/kaleidoscope",
+    href: "https://spacescape.vercel.app/kaleidoscope",
     tag: "visual · generative",
     img: "/prints/print3.webp",
   },
   {
     name: "GENERATIVE ART",
     desc: "Algorithmic canvas. Every refresh is a new world that never existed before.",
-    href: "https://unavoide.com/generative-art",
+    href: "https://spacescape.vercel.app/generative-art",
     tag: "visual · algorithmic",
     img: "/prints/print4.webp",
   },
   {
     name: "PIXEL EDITOR",
     desc: "Low-fi pixel art tool built from scratch. Old internet energy.",
-    href: "https://unavoide.com/pixel-editor",
+    href: "https://spacescape.vercel.app/pixel-editor",
     tag: "visual · tool",
     img: "/prints/print5.webp",
   },
   {
     name: "GIF MAKER",
     desc: "Make animated GIFs in the browser. No installs. No sign-up. Just go.",
-    href: "https://unavoide.com/gif-maker",
+    href: "https://spacescape.vercel.app/gif-maker",
     tag: "animation · tool",
     img: "/prints/print21.webp",
   },
   {
     name: "WALLPAPER GENERATOR",
     desc: "Generate desktop wallpapers using generative patterns. Infinite variety.",
-    href: "https://unavoide.com/wallpaper-generator",
+    href: "https://spacescape.vercel.app/wallpaper-generator",
     tag: "visual · generative",
     img: "/prints/print8.webp",
   },
   {
     name: "DIGITAL RAIN",
     desc: "Matrix-style falling code. Hypnotic. Based on the original.",
-    href: "https://unavoide.com/digital-rain",
+    href: "https://spacescape.vercel.app/digital-rain",
     tag: "visual · ambient",
     img: "/prints/print2.webp",
   },
   {
     name: "ASCII CONVERTER",
     desc: "Turn any image into ASCII art. Old school rendering, new school browser.",
-    href: "https://unavoide.com/ascii-converter",
+    href: "https://spacescape.vercel.app/ascii-converter",
     tag: "image · tool",
     img: "/prints/print17.webp",
   },
   {
     name: "GALLERY WALK",
     desc: "A virtual gallery built from community-submitted art. You're the curator.",
-    href: "https://unavoide.com/gallery-walk",
+    href: "https://spacescape.vercel.app/gallery-walk",
     tag: "community · gallery",
     img: "/prints/print11.webp",
   },
@@ -115,7 +115,7 @@ export default function Play() {
         </div>
 
         <div style={{ marginTop: "3rem", textAlign: "center" }}>
-          <a href="https://unavoide.com" target="_blank" rel="noopener noreferrer" style={{
+          <a href="https://spacescape.vercel.app" target="_blank" rel="noopener noreferrer" style={{
             fontFamily: "monospace", fontSize: "0.6rem", letterSpacing: "0.25em",
             color: "#333", textDecoration: "none", textTransform: "uppercase",
             border: "1px solid #1a1a1a", padding: "0.9rem 2rem",

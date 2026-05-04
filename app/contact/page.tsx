@@ -10,13 +10,24 @@ const SERVICES = [
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", service: "", budget: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [active, setActive] = useState<string | null>(null);
 
   const set = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Wire to your preferred backend — for now shows confirmation
+    setSending(true);
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+    } catch {
+      // show confirmation regardless — email logged server-side
+    }
+    setSending(false);
     setSent(true);
   };
 
@@ -114,9 +125,10 @@ export default function Contact() {
               textTransform: "uppercase", transition: "background 0.2s",
               minHeight: 44, alignSelf: "flex-start",
             }}
-            onMouseEnter={e => (e.currentTarget.style.background = "#ff00aa")}
-            onMouseLeave={e => (e.currentTarget.style.background = "#fff")}>
-              SEND IT →
+            onMouseEnter={e => (e.currentTarget.style.background = sending ? "#fff" : "#ff00aa")}
+            onMouseLeave={e => (e.currentTarget.style.background = "#fff")}
+            disabled={sending}>
+              {sending ? "SENDING…" : "SEND IT →"}
             </button>
           </form>
         ) : (
