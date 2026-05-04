@@ -236,34 +236,34 @@ html.mid .machine:hover .machine-name { color: rgba(255,232,185,0.95); }
    SCREEN VISUALS
    ============================================================ */
 
-/* SIGNAL FM — frequency bars */
-.m-signal .screen { background: #0d0010; }
+/* SIGNAL FM — dual-channel audio spectrum */
+.m-signal .screen { background: #0a000d; }
+/* Left channel — thin bars, fast */
 .m-signal .screen::before {
   content: '';
-  position: absolute; inset: 0;
+  position: absolute; bottom: 0; left: 0; width: 49%; height: 100%;
   background: repeating-linear-gradient(
     90deg,
-    rgba(255,0,170,0.7) 0px, rgba(255,0,170,0.7) 3px,
-    transparent 3px, transparent 9px
+    rgba(255,0,170,0.88) 0px, rgba(255,0,170,0.88) 2px,
+    transparent 2px, transparent 6px
   );
-  transform-origin: bottom center;
-  animation: signal-bars 0.85s ease-in-out infinite alternate;
+  transform-origin: bottom;
+  animation: sig-left 0.55s ease-in-out infinite alternate;
 }
+/* Right channel — slightly wider bars, offset timing */
 .m-signal .screen::after {
   content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 55%;
+  position: absolute; bottom: 0; right: 0; width: 49%; height: 100%;
   background: repeating-linear-gradient(
     90deg,
-    rgba(255,0,170,0.4) 0px, rgba(255,0,170,0.4) 3px,
-    transparent 3px, transparent 14px
+    rgba(255,60,190,0.72) 0px, rgba(255,60,190,0.72) 2px,
+    transparent 2px, transparent 6px
   );
-  transform-origin: bottom center;
-  animation: signal-bars 0.55s ease-in-out infinite alternate-reverse;
+  transform-origin: bottom;
+  animation: sig-right 0.42s ease-in-out infinite alternate-reverse;
 }
-@keyframes signal-bars {
-  from { transform: scaleY(0.18); }
-  to   { transform: scaleY(1); }
-}
+@keyframes sig-left  { from { transform: scaleY(0.06); } to { transform: scaleY(0.92); } }
+@keyframes sig-right { from { transform: scaleY(0.18); } to { transform: scaleY(0.78); } }
 
 /* VANTA — nightclub light beams */
 .m-vanta .screen {
@@ -286,29 +286,39 @@ html.mid .machine:hover .machine-name { color: rgba(255,232,185,0.95); }
   to   { transform: rotate(360deg); }
 }
 
-/* HOLLOW — café warmth / steam */
+/* HOLLOW — cold brew: dark coffee bloom */
 .m-hollow .screen {
-  background: radial-gradient(ellipse at 50% 110%, rgba(180,83,9,0.7) 0%, #0d0800 65%);
+  background: #060200;
 }
+/* Slow coffee bloom rising from bottom */
 .m-hollow .screen::before {
   content: '';
   position: absolute;
-  bottom: 0; left: 25%; right: 25%; height: 65%;
-  background: linear-gradient(to top, rgba(251,191,36,0.35), transparent);
-  border-radius: 60% 60% 0 0;
-  animation: hollow-steam 3.5s ease-in-out infinite alternate;
+  bottom: 0; left: 10%; right: 10%; height: 0;
+  background: radial-gradient(ellipse at 50% 100%,
+    rgba(120,52,10,0.8) 0%,
+    rgba(70,25,4,0.5) 45%,
+    transparent 80%
+  );
+  animation: hollow-bloom 4.5s cubic-bezier(0.4,0,0.2,1) infinite alternate;
 }
+/* Subtle condensation rings on the glass surface */
 .m-hollow .screen::after {
   content: '';
   position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    -45deg, transparent, transparent 22px,
-    rgba(251,191,36,0.05) 22px, rgba(251,191,36,0.05) 23px
-  );
+  background:
+    radial-gradient(ellipse at 50% 90%, rgba(100,40,8,0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 30% 80%, rgba(80,30,6,0.15) 0%, transparent 35%),
+    radial-gradient(ellipse at 70% 75%, rgba(90,35,7,0.15) 0%, transparent 30%);
+  animation: hollow-drift 8s ease-in-out infinite alternate;
 }
-@keyframes hollow-steam {
-  from { transform: scaleY(0.75) scaleX(0.65); opacity: 0.5; }
-  to   { transform: scaleY(1.1)  scaleX(1);    opacity: 1; }
+@keyframes hollow-bloom {
+  from { height: 15%; opacity: 0.5; }
+  to   { height: 90%; opacity: 1; }
+}
+@keyframes hollow-drift {
+  from { transform: scale(0.9); opacity: 0.6; }
+  to   { transform: scale(1.1); opacity: 1; }
 }
 
 /* BIOME — organic colour blobs */
@@ -337,29 +347,39 @@ html.mid .machine:hover .machine-name { color: rgba(255,232,185,0.95); }
   100% { transform: translate(4%,  -6%) scale(1.03); }
 }
 
-/* CIRCUIT CITY — circuit board grid */
-.m-circuit .screen { background: #000a0d; }
+/* CIRCUIT CITY — urban photo manipulation: glitch + chromatic aberration */
+.m-circuit .screen { background: #060809; }
+/* Subtle city block grid underlay */
 .m-circuit .screen::before {
   content: '';
   position: absolute; inset: 0;
   background:
-    linear-gradient(rgba(6,182,212,0.22) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(6,182,212,0.22) 1px, transparent 1px);
-  background-size: 18px 18px;
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 26px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 26px);
 }
+/* Glitch scan line with RGB chromatic aberration offset */
 .m-circuit .screen::after {
   content: '';
-  position: absolute;
-  left: 15%; right: 15%; height: 2px;
-  background: linear-gradient(90deg, transparent, #06b6d4, transparent);
-  box-shadow: 0 0 12px rgba(6,182,212,0.9);
-  animation: circuit-scan 2.8s ease-in-out infinite;
+  position: absolute; left: 0; right: 0; height: 2px;
+  background: rgba(240,240,255,0.95);
+  box-shadow:
+    0 0 8px rgba(0,200,255,0.8),
+    -5px 0 0 rgba(255,30,30,0.65),
+    5px 0 0 rgba(0,255,120,0.5);
+  animation: circuit-glitch 3.2s ease-in-out infinite;
 }
-@keyframes circuit-scan {
-  0%   { top: 12%; opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { top: 88%; opacity: 0; }
+@keyframes circuit-glitch {
+  0%   { top: 5%;  opacity: 0; transform: translateX(0); }
+  5%   { opacity: 1; }
+  38%  { transform: translateX(0); }
+  40%  { transform: translateX(7px); }
+  42%  { transform: translateX(-5px); }
+  44%  { transform: translateX(0); }
+  70%  { transform: translateX(0); }
+  72%  { transform: translateX(-8px); }
+  74%  { transform: translateX(0); }
+  92%  { opacity: 1; }
+  100% { top: 95%; opacity: 0; }
 }
 
 /* FREQUENCY — concentric rings */
@@ -421,22 +441,28 @@ html.mid .machine:hover .machine-name { color: rgba(255,232,185,0.95); }
   to   { background-position: 24px 24px, -24px 24px; }
 }
 
-/* UNAVOIDE — rotating conic */
-.m-unavoide .screen {
-  background: conic-gradient(
-    from 0deg at 50% 50%,
-    #ff00aa, #7c3aed, #00ffee, #ff6600, #ff00aa, #7c3aed, #00ffee, #ff00aa
-  );
-  animation: unavoide-spin 5s linear infinite;
-}
+/* UNAVOIDE — kaleidoscope viewport (references the tools) */
+.m-unavoide .screen { background: #020208; overflow: hidden; }
+/* Spinning color wheel, faded at edges like looking through a lens */
 .m-unavoide .screen::before {
   content: '';
-  position: absolute; inset: 0;
-  background: conic-gradient(
-    from 180deg at 50% 50%,
-    rgba(5,5,8,0.55), transparent, rgba(5,5,8,0.55), transparent, rgba(5,5,8,0.55)
+  position: absolute; inset: -25%;
+  background: conic-gradient(from 0deg at 50% 50%,
+    #ff00aa, #7c3aed, #00ffee, #ccff00, #ff6600, #ff00aa, #7c3aed, #00ffee, #ff00aa
   );
-  animation: unavoide-spin 5s linear infinite reverse;
+  animation: unavoide-spin 6s linear infinite;
+}
+/* Heavy vignette to frame it like a tool viewport */
+.m-unavoide .screen::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%,
+    transparent 0%,
+    transparent 28%,
+    rgba(2,2,8,0.55) 50%,
+    rgba(2,2,8,0.88) 70%,
+    rgba(2,2,8,0.97) 85%
+  );
 }
 @keyframes unavoide-spin {
   from { transform: rotate(0deg); }
