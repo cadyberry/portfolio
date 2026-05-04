@@ -52,18 +52,18 @@ const ICONS: Record<Theme, React.ReactNode> = {
 
 function themeColors(theme: Theme) {
   if (theme === "light") return {
-    nav:    "rgba(240,236,228,0.92)",
-    text:   "#0a0a0a",
-    dim:    "rgba(0,0,0,0.35)",
-    accent: "#cc006e",
-    border: "rgba(0,0,0,0.08)",
+    nav:    "rgba(249,247,244,0.96)",
+    text:   "#111111",
+    dim:    "rgba(17,17,17,0.38)",
+    accent: "#e8003d",
+    border: "rgba(0,0,0,0.1)",
   };
   if (theme === "mid") return {
-    nav:    "rgba(6,5,26,0.85)",
-    text:   "rgba(210,205,255,0.9)",
-    dim:    "rgba(180,170,255,0.38)",
-    accent: "#00ffee",
-    border: "rgba(120,100,255,0.12)",
+    nav:    "rgba(18,8,42,0.9)",
+    text:   "rgba(255,232,185,0.92)",
+    dim:    "rgba(255,195,120,0.42)",
+    accent: "#ffaa00",
+    border: "rgba(180,120,255,0.2)",
   };
   return {
     nav:    "transparent",
@@ -90,8 +90,8 @@ export default function Nav() {
       padding: "1.2rem 2rem",
       fontFamily: "'Courier New', monospace",
       background: c.nav,
-      backdropFilter: theme === "light" ? "blur(12px)" : "none",
-      borderBottom: theme === "light" ? `1px solid ${c.border}` : "none",
+      backdropFilter: theme !== "dark" ? "blur(12px)" : "none",
+      borderBottom: theme !== "dark" ? `1px solid ${c.border}` : "none",
       transition: "background 0.3s ease",
     }}>
       <Link href="/" style={{

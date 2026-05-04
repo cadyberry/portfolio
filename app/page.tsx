@@ -6,18 +6,18 @@ import { useTheme, type Theme } from "./theme";
 
 function pageColors(theme: Theme) {
   if (theme === "light") return {
-    border:     "rgba(0,0,0,0.07)",
-    text:       "#0a0a0a",
-    textDim:    "rgba(0,0,0,0.35)",
-    textFaint:  "rgba(0,0,0,0.18)",
-    accent:     "#cc006e",
+    border:     "rgba(0,0,0,0.09)",
+    text:       "#111111",
+    textDim:    "rgba(17,17,17,0.45)",
+    textFaint:  "rgba(17,17,17,0.2)",
+    accent:     "#e8003d",
   };
   if (theme === "mid") return {
-    border:     "rgba(120,100,255,0.15)",
-    text:       "rgba(215,210,255,0.95)",
-    textDim:    "rgba(180,170,255,0.38)",
-    textFaint:  "rgba(180,170,255,0.18)",
-    accent:     "#00ffee",
+    border:     "rgba(180,120,255,0.18)",
+    text:       "rgba(255,232,185,0.92)",
+    textDim:    "rgba(255,195,120,0.45)",
+    textFaint:  "rgba(255,180,80,0.2)",
+    accent:     "#ffaa00",
   };
   return {
     border:     "rgba(255,255,255,0.05)",
