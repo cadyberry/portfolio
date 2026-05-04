@@ -2,6 +2,31 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useTheme, type Theme } from "./theme";
+
+function pageColors(theme: Theme) {
+  if (theme === "light") return {
+    border:     "rgba(0,0,0,0.07)",
+    text:       "#0a0a0a",
+    textDim:    "rgba(0,0,0,0.35)",
+    textFaint:  "rgba(0,0,0,0.18)",
+    accent:     "#cc006e",
+  };
+  if (theme === "mid") return {
+    border:     "rgba(120,100,255,0.15)",
+    text:       "rgba(215,210,255,0.95)",
+    textDim:    "rgba(180,170,255,0.38)",
+    textFaint:  "rgba(180,170,255,0.18)",
+    accent:     "#00ffee",
+  };
+  return {
+    border:     "rgba(255,255,255,0.05)",
+    text:       "#ffffff",
+    textDim:    "rgba(255,255,255,0.28)",
+    textFaint:  "rgba(255,255,255,0.14)",
+    accent:     "#ff00aa",
+  };
+}
 
 const PROJECTS = [
   { slug: "signal-fm",    name: "SIGNAL FM",    sub: "Radio identity",      tag: "branding", size: "large",  cls: "m-signal"   },
@@ -21,6 +46,8 @@ const MARQUEE_TEXT = Array(6).fill(
 ).join("");
 
 export default function Home() {
+  const { theme } = useTheme();
+  const c = pageColors(theme);
   const [tab, setTab] = useState("ALL");
   const [mobile, setMobile] = useState(false);
 
@@ -80,8 +107,8 @@ export default function Home() {
 
       {/* ── MARQUEE ── */}
       <div style={{
-        borderTop: "1px solid rgba(255,255,255,0.05)",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
+        borderTop: `1px solid ${c.border}`,
+        borderBottom: `1px solid ${c.border}`,
         overflow: "hidden",
         whiteSpace: "nowrap",
         padding: "0.85rem 0",
@@ -93,7 +120,7 @@ export default function Home() {
           fontFamily: "monospace",
           fontSize: "0.52rem",
           letterSpacing: "0.28em",
-          color: "rgba(255,255,255,0.14)",
+          color: c.textFaint,
           textTransform: "uppercase",
         }}>
           {MARQUEE_TEXT}
@@ -110,10 +137,10 @@ export default function Home() {
           fontFamily: "Georgia, serif",
           fontSize: mobile ? "clamp(1.2rem, 5vw, 1.8rem)" : "clamp(1.4rem, 2.4vw, 2.2rem)",
           lineHeight: 1.55,
-          color: "rgba(255,255,255,0.35)",
+          color: c.textDim,
           fontStyle: "italic",
           maxWidth: 720,
-          borderLeft: "2px solid #ff00aa",
+          borderLeft: `2px solid ${c.accent}`,
           paddingLeft: "1.5rem",
           margin: 0,
         }}>
@@ -124,13 +151,13 @@ export default function Home() {
             fontFamily: "monospace",
             fontSize: "0.52rem",
             letterSpacing: "0.2em",
-            color: "rgba(255,255,255,0.28)",
+            color: c.textDim,
             textDecoration: "none",
             textTransform: "uppercase",
             transition: "color 0.2s",
           }}
-          onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
-          onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.28)")}>
+          onMouseEnter={e => (e.currentTarget.style.color = c.text)}
+          onMouseLeave={e => (e.currentTarget.style.color = c.textDim)}>
             ABOUT ACADIA →
           </Link>
         </div>
@@ -138,52 +165,52 @@ export default function Home() {
 
       {/* ── PLAY + SHOP ── */}
       <section style={{
-        borderTop: "1px solid rgba(255,255,255,0.05)",
+        borderTop: `1px solid ${c.border}`,
         display: "grid",
         gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
       }}>
         <div style={{
           padding: mobile ? "2.5rem 1.5rem" : "3.5rem 3rem",
-          borderRight: mobile ? "none" : "1px solid rgba(255,255,255,0.05)",
-          borderBottom: mobile ? "1px solid rgba(255,255,255,0.05)" : "none",
+          borderRight: mobile ? "none" : `1px solid ${c.border}`,
+          borderBottom: mobile ? `1px solid ${c.border}` : "none",
         }}>
-          <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: "#ff00aa", textTransform: "uppercase", marginBottom: "1rem" }}>Play</p>
-          <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: "#fff", margin: "0 0 0.8rem", lineHeight: 1 }}>
+          <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "uppercase", marginBottom: "1rem" }}>Play</p>
+          <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             8 FREE TOOLS
           </p>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.28)", lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
+          <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
             Kaleidoscope, pixel editor, generative art, digital rain — all browser-based, all free, built from scratch since 2018.
           </p>
           <Link href="/play" style={{
             fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
-            color: "rgba(255,255,255,0.28)", textDecoration: "none", textTransform: "uppercase",
-            border: "1px solid rgba(255,255,255,0.1)", padding: "0.8rem 1.5rem",
+            color: c.textDim, textDecoration: "none", textTransform: "uppercase",
+            border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
             display: "inline-flex", alignItems: "center", minHeight: 44,
             transition: "all 0.2s",
           }}
-          onMouseEnter={e => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; }}
-          onMouseLeave={e => { e.currentTarget.style.color = "rgba(255,255,255,0.28)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}>
+          onMouseEnter={e => { e.currentTarget.style.color = c.text; e.currentTarget.style.borderColor = c.textDim; }}
+          onMouseLeave={e => { e.currentTarget.style.color = c.textDim; e.currentTarget.style.borderColor = c.border; }}>
             EXPLORE TOOLS →
           </Link>
         </div>
 
         <div style={{ padding: mobile ? "2.5rem 1.5rem" : "3.5rem 3rem" }}>
-          <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: "#ff00aa", textTransform: "uppercase", marginBottom: "1rem" }}>Shop</p>
-          <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: "#fff", margin: "0 0 0.8rem", lineHeight: 1 }}>
+          <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "uppercase", marginBottom: "1rem" }}>Shop</p>
+          <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             PRINTS + BOOKS
           </p>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.28)", lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
+          <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
             60+ digital art prints. Three books in production — travel photography, coloring book, print collection.
           </p>
           <Link href="/shop" style={{
             fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
-            color: "rgba(255,255,255,0.28)", textDecoration: "none", textTransform: "uppercase",
-            border: "1px solid rgba(255,255,255,0.1)", padding: "0.8rem 1.5rem",
+            color: c.textDim, textDecoration: "none", textTransform: "uppercase",
+            border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
             display: "inline-flex", alignItems: "center", minHeight: 44,
             transition: "all 0.2s",
           }}
-          onMouseEnter={e => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; }}
-          onMouseLeave={e => { e.currentTarget.style.color = "rgba(255,255,255,0.28)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}>
+          onMouseEnter={e => { e.currentTarget.style.color = c.text; e.currentTarget.style.borderColor = c.textDim; }}
+          onMouseLeave={e => { e.currentTarget.style.color = c.textDim; e.currentTarget.style.borderColor = c.border; }}>
             VISIT SHOP →
           </Link>
         </div>
@@ -191,7 +218,7 @@ export default function Home() {
 
       {/* ── FOOTER ── */}
       <footer style={{
-        borderTop: "1px solid rgba(255,255,255,0.05)",
+        borderTop: `1px solid ${c.border}`,
         padding: mobile ? "1.8rem 1.5rem" : "1.8rem 3rem",
         display: "flex",
         justifyContent: "space-between",
@@ -199,10 +226,10 @@ export default function Home() {
         flexWrap: "wrap",
         gap: "1rem",
       }}>
-        <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: "rgba(255,255,255,0.14)", textTransform: "uppercase" }}>
+        <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "uppercase" }}>
           © 2026 ACADIA · Brooklyn, NY
         </span>
-        <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: "rgba(255,255,255,0.14)", textTransform: "uppercase" }}>
+        <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "uppercase" }}>
           acadiaberry.com
         </span>
       </footer>

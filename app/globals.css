@@ -2,19 +2,65 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── Theme tokens ───────────────────────────────────────────── */
 :root {
-  --neon-pink: #ff00aa;
-  --neon-cyan: #00ffee;
+  --neon-pink:   #ff00aa;
+  --neon-cyan:   #00ffee;
   --neon-yellow: #ccff00;
   --neon-orange: #ff6600;
-  --void: #000000;
+  --void:        #000000;
+
+  /* Semantic tokens — dark (default) */
+  --bg:           #050508;
+  --text:         #ffffff;
+  --text-dim:     rgba(255,255,255,0.28);
+  --accent:       #ff00aa;
+  --border:       rgba(255,255,255,0.05);
+  --border-sub:   rgba(255,255,255,0.08);
+}
+
+html.light {
+  --bg:           #f0ece4;
+  --text:         #0a0a0a;
+  --text-dim:     rgba(0,0,0,0.42);
+  --accent:       #cc006e;
+  --border:       rgba(0,0,0,0.07);
+  --border-sub:   rgba(0,0,0,0.1);
+}
+
+html.mid {
+  --bg:           #06051a;
+  --text:         rgba(215,210,255,0.95);
+  --text-dim:     rgba(180,170,255,0.38);
+  --accent:       #00ffee;
+  --border:       rgba(120,100,255,0.1);
+  --border-sub:   rgba(120,100,255,0.15);
 }
 
 body {
-  background: #000;
-  color: #fff;
+  background: var(--bg);
+  color: var(--text);
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
+
+/* ── Page-level background overrides ───────────────────────── */
+/* Inline styles on <main> and outer wrappers can't be overridden
+   without !important since they take specificity priority.       */
+html.light main,
+html.light [data-page] { background: var(--bg) !important; color: var(--text) !important; }
+html.mid   main,
+html.mid   [data-page] { background: var(--bg) !important; color: var(--text) !important; }
+
+/* Text colour cascades for inline-styled children */
+html.light main p,
+html.light main h1,
+html.light main h2,
+html.light main h3 { color: var(--text); }
+html.mid   main p,
+html.mid   main h1,
+html.mid   main h2,
+html.mid   main h3 { color: var(--text); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -24,7 +70,7 @@ body {
    HOME — ARCADE FLOOR
    ============================================================ */
 
-.home-wrap { background: #050508; color: #fff; min-height: 100vh; }
+.home-wrap { background: var(--bg); color: var(--text); min-height: 100vh; transition: background 0.3s ease; }
 
 .home-header { text-align: center; padding: 4rem 1rem 2rem; }
 
@@ -33,19 +79,23 @@ body {
   font-size: clamp(3.5rem, 11vw, 8rem);
   font-weight: 800;
   letter-spacing: -0.04em;
-  color: #fff;
+  color: var(--text);
   margin: 0 0 0.6rem;
   text-shadow: 0 0 80px rgba(255,255,255,0.12);
   line-height: 1;
+  transition: color 0.3s ease;
 }
+
+html.light .home-wordmark { text-shadow: 0 0 40px rgba(0,0,0,0.06); }
 
 .home-tagline {
   font-family: monospace;
   font-size: 0.56rem;
   letter-spacing: 0.3em;
-  color: rgba(255,255,255,0.28);
+  color: var(--text-dim);
   text-transform: uppercase;
   margin: 0;
+  transition: color 0.3s ease;
 }
 
 /* --- Tab Bar --- */
@@ -54,17 +104,18 @@ body {
   gap: 2px;
   justify-content: center;
   margin: 0 auto 2.5rem;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid var(--border-sub);
   border-radius: 4px;
   padding: 3px;
   width: fit-content;
-  background: rgba(255,255,255,0.02);
+  background: rgba(128,128,128,0.04);
+  transition: border-color 0.3s;
 }
 
 .home-tab {
   background: transparent;
   border: none;
-  color: rgba(255,255,255,0.28);
+  color: var(--text-dim);
   font-family: monospace;
   font-size: 0.58rem;
   font-weight: 600;
@@ -76,8 +127,8 @@ body {
   transition: color 0.15s, background 0.15s;
   min-height: 36px;
 }
-.home-tab:hover { color: rgba(255,255,255,0.7); }
-.home-tab.active { background: rgba(255,255,255,0.1); color: #fff; }
+.home-tab:hover { color: var(--text); }
+.home-tab.active { background: rgba(128,128,128,0.12); color: var(--text); }
 
 /* --- Floor --- */
 .floor-wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem 3rem; }
@@ -169,6 +220,14 @@ body {
 }
 .machine:hover .machine-name { color: #fff; }
 .machine:hover .machine-enter { opacity: 1; transform: translateY(0); }
+
+html.light .machine-name { color: rgba(0,0,0,0.55); text-shadow: 0 1px 10px rgba(255,255,255,0.8); }
+html.light .machine-enter { color: rgba(0,0,0,0.3); text-shadow: 0 1px 6px rgba(255,255,255,0.8); }
+html.light .machine:hover .machine-name { color: #0a0a0a; }
+
+html.mid .machine-name { color: rgba(210,205,255,0.55); text-shadow: 0 1px 14px rgba(0,0,0,0.95); }
+html.mid .machine-enter { color: rgba(180,170,255,0.25); text-shadow: 0 1px 8px rgba(0,0,0,0.9); }
+html.mid .machine:hover .machine-name { color: rgba(215,210,255,0.95); }
 
 /* ============================================================
    SCREEN VISUALS
