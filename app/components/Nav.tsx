@@ -11,7 +11,7 @@ const LINKS = [
 ];
 
 export default function Nav() {
-  const path = usePathname();
+  const path = usePathname() ?? "";
   const onConcept = path.startsWith("/concept-");
 
   return (
