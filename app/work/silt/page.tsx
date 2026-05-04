@@ -9,7 +9,6 @@ const LOOKS = [
     sub: "Oversized linen duster",
     price: 380,
     sizes: ["XS", "S", "M", "L", "XL"],
-    img: "/prints/print31.webp",
     desc: "Stone-washed linen. Unstructured. Draped collar. Drops to ankle. Season-less.",
     colorway: "NATURAL · OBSIDIAN · DUSK",
   },
@@ -19,7 +18,6 @@ const LOOKS = [
     sub: "Wide-leg relaxed fit",
     price: 220,
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-    img: "/prints/print17.webp",
     desc: "80% wool, 20% linen blend. Pleated front. Elastic waist. Deep side pockets.",
     colorway: "CHARCOAL · ECRU · CLAY",
   },
@@ -29,7 +27,6 @@ const LOOKS = [
     sub: "Oversized utility shirt",
     price: 165,
     sizes: ["S", "M", "L", "XL"],
-    img: "/prints/print4.webp",
     desc: "Washed cotton-twill. Four pockets. Raw hem. Boxy, forward.",
     colorway: "SAND · BLACK · OLIVE",
   },
@@ -39,7 +36,6 @@ const LOOKS = [
     sub: "Bias-cut dress",
     price: 295,
     sizes: ["XS", "S", "M", "L"],
-    img: "/prints/print8.webp",
     desc: "Silk charmeuse. Barely there. Asymmetric hem. Moves like water.",
     colorway: "IVORY · SLATE · RUST",
   },
@@ -49,7 +45,6 @@ const LOOKS = [
     sub: "Flat leather pull-on",
     price: 450,
     sizes: ["36", "37", "38", "39", "40", "41", "42"],
-    img: "/prints/print21.webp",
     desc: "Full-grain leather. Pull-on silhouette. Flat heel. 16\" shaft. Lasting.",
     colorway: "TAN · BLACK · BROWN",
   },
@@ -59,7 +54,6 @@ const LOOKS = [
     sub: "Ribbed turtleneck",
     price: 185,
     sizes: ["XS", "S", "M", "L", "XL"],
-    img: "/prints/print2.webp",
     desc: "100% merino. Dense rib. High neck. Intentionally heavy.",
     colorway: "CREAM · CHARCOAL · RUST",
   },
@@ -121,8 +115,9 @@ export default function Silt() {
         {/* Main image */}
         <div>
           <div style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", background: "#050505", marginBottom: "1px" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={look.img} alt={look.name} style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(20%) brightness(0.85)", transition: "filter 0.6s" }} />
+            <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+              <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+            </div>
             <div style={{
               position: "absolute", top: "1.5rem", left: "1.5rem",
               fontFamily: "monospace", fontSize: "0.48rem",
@@ -142,12 +137,9 @@ export default function Silt() {
                 outline: selected === i ? "1px solid #fff" : "none",
                 zIndex: selected === i ? 1 : 0,
               }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={l.img} alt={l.name} style={{
-                  width: "100%", height: "100%", objectFit: "cover",
-                  filter: selected === i ? "brightness(0.9)" : "brightness(0.35) grayscale(50%)",
-                  transition: "filter 0.3s",
-                }} />
+                <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+                  <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+                </div>
               </button>
             ))}
           </div>
@@ -246,8 +238,9 @@ export default function Silt() {
               return (
                 <div key={id} style={{ borderTop: "1px solid #111", paddingTop: "1rem", display: "flex", gap: "1rem", alignItems: "center" }}>
                   <div style={{ width: 60, height: 80, overflow: "hidden", flexShrink: 0 }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={item.img} alt={item.name} style={{ width: "100%", height: "100%", objectFit: "cover", filter: "brightness(0.7)" }} />
+                    <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+                      <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+                    </div>
                   </div>
                   <div style={{ flex: 1 }}>
                     <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "0.7rem", color: "#fff", margin: "0 0 0.2rem" }}>{item.name}</p>

@@ -37,6 +37,7 @@ const PROJECTS = [
   { slug: "frequency",    name: "FREQUENCY",     year: "2023", cls: "m-frequency", file: "frequency.gif"    },
   { slug: "silt",         name: "SILT",          year: "2022", cls: "m-silt",      file: "silt.png"         },
   { slug: "unavoide",     name: "UNAVOIDE",      year: "2018", cls: "m-unavoide",  file: "unavoide.mp4"     },
+  { slug: "ui-packs",    name: "UI PACKS",      year: "2025", cls: "m-uipacks",   file: "ui-packs.zip"     },
 ];
 
 const MARQUEE_TEXT = Array(6).fill(
@@ -59,7 +60,7 @@ export default function Home() {
 
       {/* ── HEADER ── */}
       <header className="home-header">
-        <h1 className="home-wordmark">ACADIA</h1>
+        <h1 className="home-wordmark">acadia berry</h1>
         <p className="home-tagline">Digital Designer · Artist · Brooklyn, NY</p>
       </header>
 
@@ -140,7 +141,7 @@ export default function Home() {
           paddingLeft: "1.5rem",
           margin: 0,
         }}>
-          &ldquo;Appreciator of life. I notice things. I make things. Sometimes they&apos;re the same thing.&rdquo;
+          &ldquo;Design is how I pay attention.&rdquo;
         </p>
         <div style={{ marginTop: "2rem" }}>
           <Link href="/about" style={{

@@ -12,6 +12,18 @@ const LINKS = [
   { href: "/contact", label: "CONTACT" },
 ];
 
+function HomeGlyph() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <rect x="1" y="1" width="20" height="20" rx="1" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="5" y="5" width="5" height="5" fill="currentColor" />
+      <rect x="12" y="5" width="5" height="5" fill="currentColor" />
+      <rect x="5" y="12" width="5" height="5" fill="currentColor" />
+      <rect x="12" y="12" width="5" height="5" fill="currentColor" opacity="0.35" />
+    </svg>
+  );
+}
+
 function MoonIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -94,15 +106,16 @@ export default function Nav() {
       borderBottom: theme !== "dark" ? `1px solid ${c.border}` : "none",
       transition: "background 0.3s ease",
     }}>
-      <Link href="/" style={{
-        fontSize: "0.85rem",
-        fontWeight: 700,
-        letterSpacing: "0.25em",
-        color: c.text,
-        textDecoration: "none",
-        textTransform: "uppercase",
+      <Link href="/" aria-label="Home" style={{
+        color: c.dim,
+        display: "flex",
+        alignItems: "center",
         transition: "color 0.2s",
-      }}>ACADIA</Link>
+      }}
+      onMouseEnter={e => (e.currentTarget.style.color = c.accent)}
+      onMouseLeave={e => (e.currentTarget.style.color = c.dim)}>
+        <HomeGlyph />
+      </Link>
 
       <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
         {LINKS.map(({ href, label }) => (

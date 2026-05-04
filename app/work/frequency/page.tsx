@@ -2,12 +2,12 @@
 import Link from "next/link";
 
 const PRINTS = [
-  { src: "/prints/print3.webp",  title: "FREQUENCY 01", sub: "First transmission",  year: "2024" },
-  { src: "/prints/print4.webp",  title: "RADIAL 01",    sub: "Signal expanding",    year: "2024" },
-  { src: "/prints/print5.webp",  title: "PULSE",        sub: "Standing wave",       year: "2024" },
-  { src: "/prints/print8.webp",  title: "FREQUENCY 02", sub: "Interference pattern", year: "2025" },
-  { src: "/prints/print20.webp", title: "MANDALA SYS",  sub: "Rotational field",    year: "2025" },
-  { src: "/prints/print31.webp", title: "CARRIER WAVE", sub: "Final transmission",  year: "2025" },
+  { title: "FREQUENCY 01", sub: "First transmission",  year: "2024" },
+  { title: "RADIAL 01",    sub: "Signal expanding",    year: "2024" },
+  { title: "PULSE",        sub: "Standing wave",       year: "2024" },
+  { title: "FREQUENCY 02", sub: "Interference pattern", year: "2025" },
+  { title: "MANDALA SYS",  sub: "Rotational field",    year: "2025" },
+  { title: "CARRIER WAVE", sub: "Final transmission",  year: "2025" },
 ];
 
 export default function Frequency() {
@@ -32,14 +32,9 @@ export default function Frequency() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", background: "#111", marginBottom: "1px" }}>
           {/* Large featured */}
           <div style={{ position: "relative", aspectRatio: "1", overflow: "hidden", background: "#000", gridRow: "1 / 3" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={PRINTS[0].src} alt={PRINTS[0].title} style={{
-              width: "100%", height: "100%", objectFit: "cover",
-              filter: "brightness(0.8) saturate(1.3)",
-              transition: "filter 0.5s, transform 0.5s",
-            }}
-            onMouseEnter={e => { e.currentTarget.style.filter = "brightness(1) saturate(1.5)"; e.currentTarget.style.transform = "scale(1.02)"; }}
-            onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0.8) saturate(1.3)"; e.currentTarget.style.transform = "scale(1)"; }} />
+            <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+              <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+            </div>
             <div style={{ position: "absolute", bottom: "1.5rem", left: "1.5rem", pointerEvents: "none" }}>
               <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "1rem", fontWeight: 900, color: "#fff", margin: 0 }}>{PRINTS[0].title}</p>
               <p style={{ fontFamily: "monospace", fontSize: "0.48rem", color: "rgba(255,255,255,0.4)", margin: 0, letterSpacing: "0.1em" }}>{PRINTS[0].sub}</p>
@@ -49,14 +44,9 @@ export default function Frequency() {
           {/* Stacked right */}
           {PRINTS.slice(1, 3).map(p => (
             <div key={p.title} style={{ position: "relative", aspectRatio: "2/1", overflow: "hidden", background: "#000" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.src} alt={p.title} style={{
-                width: "100%", height: "100%", objectFit: "cover",
-                filter: "brightness(0.65) saturate(1.2)",
-                transition: "filter 0.4s",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0.9) saturate(1.4)"; }}
-              onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0.65) saturate(1.2)"; }} />
+              <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+                <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+              </div>
               <div style={{ position: "absolute", bottom: "0.8rem", left: "1rem", pointerEvents: "none" }}>
                 <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "0.75rem", fontWeight: 900, color: "#fff", margin: 0 }}>{p.title}</p>
               </div>
@@ -68,14 +58,9 @@ export default function Frequency() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1px", background: "#111" }}>
           {PRINTS.slice(3).map(p => (
             <div key={p.title} style={{ position: "relative", aspectRatio: "1", overflow: "hidden", background: "#000" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.src} alt={p.title} style={{
-                width: "100%", height: "100%", objectFit: "cover",
-                filter: "brightness(0.6) saturate(1.1)",
-                transition: "filter 0.4s, transform 0.4s",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0.9) saturate(1.4)"; e.currentTarget.style.transform = "scale(1.04)"; }}
-              onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0.6) saturate(1.1)"; e.currentTarget.style.transform = "scale(1)"; }} />
+              <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+                <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+              </div>
               <div style={{ position: "absolute", bottom: "0.8rem", left: "0.8rem", pointerEvents: "none" }}>
                 <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "0.65rem", fontWeight: 900, color: "#fff", margin: 0 }}>{p.title}</p>
                 <p style={{ fontFamily: "monospace", fontSize: "0.42rem", color: "rgba(255,255,255,0.35)", margin: 0, letterSpacing: "0.08em" }}>{p.sub}</p>

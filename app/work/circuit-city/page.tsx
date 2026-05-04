@@ -2,12 +2,12 @@
 import Link from "next/link";
 
 const PRINTS = [
-  { src: "/prints/print2.webp",  title: "GRID BLEED",    year: "2023", loc: "Brooklyn" },
-  { src: "/prints/print5.webp",  title: "OVERPASS",      year: "2023", loc: "Manhattan" },
-  { src: "/prints/print11.webp", title: "CIRCUIT #1",    year: "2024", loc: "The Bronx" },
-  { src: "/prints/print17.webp", title: "LONG ISLAND CITY", year: "2023", loc: "Queens" },
-  { src: "/prints/print20.webp", title: "ROOFTOP STACK", year: "2024", loc: "Brooklyn" },
-  { src: "/prints/print21.webp", title: "CIRCUIT #2",    year: "2024", loc: "Newark" },
+  { title: "GRID BLEED",    year: "2023", loc: "Brooklyn" },
+  { title: "OVERPASS",      year: "2023", loc: "Manhattan" },
+  { title: "CIRCUIT #1",    year: "2024", loc: "The Bronx" },
+  { title: "LONG ISLAND CITY", year: "2023", loc: "Queens" },
+  { title: "ROOFTOP STACK", year: "2024", loc: "Brooklyn" },
+  { title: "CIRCUIT #2",    year: "2024", loc: "Newark" },
 ];
 
 export default function CircuitCity() {
@@ -30,11 +30,9 @@ export default function CircuitCity() {
 
         {/* Full-width hero */}
         <div style={{ position: "relative", aspectRatio: "21/9", overflow: "hidden", background: "#050505", marginBottom: "1px" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/prints/print2.webp" alt="Grid Bleed" style={{
-            width: "100%", height: "100%", objectFit: "cover",
-            filter: "brightness(0.65) hue-rotate(10deg)",
-          }} />
+          <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+            <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+          </div>
           <div style={{
             position: "absolute", inset: 0,
             background: "linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 50%)",
@@ -51,14 +49,9 @@ export default function CircuitCity() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "1px", background: "#111" }}>
           {PRINTS.slice(1).map(p => (
             <div key={p.title} style={{ position: "relative", aspectRatio: "1", overflow: "hidden", background: "#000" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.src} alt={p.title} style={{
-                width: "100%", height: "100%", objectFit: "cover",
-                filter: "brightness(0.6) hue-rotate(5deg)",
-                transition: "filter 0.4s, transform 0.4s",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0.9) hue-rotate(5deg)"; e.currentTarget.style.transform = "scale(1.04)"; }}
-              onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0.6) hue-rotate(5deg)"; e.currentTarget.style.transform = "scale(1)"; }} />
+              <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+                <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+              </div>
               <div style={{
                 position: "absolute", bottom: "1rem", left: "1rem", pointerEvents: "none",
               }}>

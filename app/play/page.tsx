@@ -7,56 +7,48 @@ const TOOLS = [
     desc: "Symmetrical pattern generator. Move your mouse. Watch physics become art.",
     href: "https://spacescape.vercel.app/kaleidoscope",
     tag: "visual · generative",
-    img: "/prints/print3.webp",
   },
   {
     name: "GENERATIVE ART",
     desc: "Algorithmic canvas. Every refresh is a new world that never existed before.",
     href: "https://spacescape.vercel.app/generative-art",
     tag: "visual · algorithmic",
-    img: "/prints/print4.webp",
   },
   {
     name: "PIXEL EDITOR",
     desc: "Low-fi pixel art tool built from scratch. Old internet energy.",
     href: "https://spacescape.vercel.app/pixel-editor",
     tag: "visual · tool",
-    img: "/prints/print5.webp",
   },
   {
     name: "GIF MAKER",
     desc: "Make animated GIFs in the browser. No installs. No sign-up. Just go.",
     href: "https://spacescape.vercel.app/gif-maker",
     tag: "animation · tool",
-    img: "/prints/print21.webp",
   },
   {
     name: "WALLPAPER GENERATOR",
     desc: "Generate desktop wallpapers using generative patterns. Infinite variety.",
     href: "https://spacescape.vercel.app/wallpaper-generator",
     tag: "visual · generative",
-    img: "/prints/print8.webp",
   },
   {
     name: "DIGITAL RAIN",
     desc: "Matrix-style falling code. Hypnotic. Based on the original.",
     href: "https://spacescape.vercel.app/digital-rain",
     tag: "visual · ambient",
-    img: "/prints/print2.webp",
   },
   {
     name: "ASCII CONVERTER",
     desc: "Turn any image into ASCII art. Old school rendering, new school browser.",
     href: "https://spacescape.vercel.app/ascii-converter",
     tag: "image · tool",
-    img: "/prints/print17.webp",
   },
   {
     name: "GALLERY WALK",
     desc: "A virtual gallery built from community-submitted art. You're the curator.",
     href: "https://spacescape.vercel.app/gallery-walk",
     tag: "community · gallery",
-    img: "/prints/print11.webp",
   },
 ];
 
@@ -92,14 +84,9 @@ export default function Play() {
 
               {/* Image */}
               <div style={{ aspectRatio: "4/3", overflow: "hidden" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={tool.img} alt="" style={{
-                  width: "100%", height: "100%", objectFit: "cover",
-                  filter: "brightness(0.5) saturate(0.6)",
-                  transition: "filter 0.4s, transform 0.4s",
-                }}
-                onMouseEnter={e => { e.currentTarget.style.filter = "brightness(0.8) saturate(1)"; e.currentTarget.style.transform = "scale(1.04)"; }}
-                onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0.5) saturate(0.6)"; e.currentTarget.style.transform = "scale(1)"; }} />
+                <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+                  <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+                </div>
               </div>
 
               <div style={{ padding: "1.2rem", display: "flex", flexDirection: "column", gap: "0.5rem", flex: 1 }}>

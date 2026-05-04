@@ -40,10 +40,10 @@ html.mid {
 }
 
 body {
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   overflow-x: hidden;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 /* ── Page-level background overrides ───────────────────────── */
@@ -72,14 +72,16 @@ html.mid   main h3 { color: var(--text); }
    HOME — ARCADE FLOOR
    ============================================================ */
 
-.home-wrap { background: var(--bg); color: var(--text); min-height: 100vh; transition: background 0.3s ease; }
+.home-wrap { background: rgba(5,5,8,0.55); color: var(--text); min-height: 100vh; transition: background 0.3s ease; position: relative; z-index: 1; }
+html.light .home-wrap { background: rgba(249,247,244,0.6); }
+html.mid   .home-wrap { background: rgba(18,8,42,0.55); }
 
 .home-header { text-align: center; padding: 4rem 1rem 2rem; }
 
 .home-wordmark {
-  font-family: "Zen Dots", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: clamp(3.5rem, 11vw, 8rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.04em;
   color: var(--text);
   margin: 0 0 0.6rem;
@@ -187,6 +189,7 @@ html.mid   .window-titlebar { background: #b8f500; }
 .win-6 { top: 53%; left: 18%; width: 20%; }
 .win-7 { top: 57%; left: 59%; width: 19%; }
 .win-8 { top: 71%; left: 7%;  width: 24%; }
+.win-9 { top: 42%; left: 38%; width: 20%; }
 
 .win-2 .window-screen { height: 180px; }
 .win-4 .window-screen { height: 165px; }
@@ -496,6 +499,41 @@ html.mid   .work-row:hover { background: #ffaa00; color: #12082a; }
   to   { transform: rotate(360deg); }
 }
 
+/* UI PACKS — 5 theme palette stripes cycling */
+.m-uipacks .screen { background: #0a0a0a; overflow: hidden; }
+.m-uipacks .screen::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    #4db8ff 0%, #4db8ff 20%,
+    #e8e8e8 20%, #e8e8e8 40%,
+    #2d4a2d 40%, #2d4a2d 60%,
+    #12082a 60%, #12082a 80%,
+    #111111 80%, #111111 100%
+  );
+  animation: uipacks-slide 4s steps(1) infinite;
+}
+.m-uipacks .screen::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0%, transparent 30%,
+    rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 31%,
+    transparent 31%, transparent 65%,
+    rgba(255,255,255,0.05) 65%, rgba(255,255,255,0.05) 66%,
+    transparent 66%, transparent 100%
+  );
+}
+@keyframes uipacks-slide {
+  0%   { transform: translateY(0); }
+  20%  { transform: translateY(-20%); }
+  40%  { transform: translateY(-40%); }
+  60%  { transform: translateY(-60%); }
+  80%  { transform: translateY(-80%); }
+  100% { transform: translateY(0); }
+}
+
 @media (max-width: 768px) {
   .main-grid {
     display: flex;
@@ -533,7 +571,7 @@ html.mid   .work-row:hover { background: #ffaa00; color: #12082a; }
   .window-screen { height: 120px !important; }
 
   .win-1, .win-2, .win-3, .win-4,
-  .win-5, .win-6, .win-7, .win-8 {
+  .win-5, .win-6, .win-7, .win-8, .win-9 {
     top: auto !important;
     left: auto !important;
     width: 100% !important;

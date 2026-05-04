@@ -2,12 +2,12 @@
 import Link from "next/link";
 
 const PRINTS = [
-  { src: "/prints/print4.webp",  title: "MYCELIUM I",   year: "2024" },
-  { src: "/prints/print8.webp",  title: "NERVE NET",    year: "2024" },
-  { src: "/prints/print11.webp", title: "BLOOM STATE",  year: "2025" },
-  { src: "/prints/print3.webp",  title: "SPORE FIELD",  year: "2024" },
-  { src: "/prints/print17.webp", title: "MYCELIUM II",  year: "2025" },
-  { src: "/prints/print21.webp", title: "ROOT SIGNAL",  year: "2025" },
+  { title: "MYCELIUM I",   year: "2024" },
+  { title: "NERVE NET",    year: "2024" },
+  { title: "BLOOM STATE",  year: "2025" },
+  { title: "SPORE FIELD",  year: "2024" },
+  { title: "MYCELIUM II",  year: "2025" },
+  { title: "ROOT SIGNAL",  year: "2025" },
 ];
 
 export default function Biome() {
@@ -44,14 +44,9 @@ export default function Biome() {
               background: "#000",
               gridRow: i === 0 ? "1 / 3" : i === 5 ? "2 / 4" : "auto",
             }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.src} alt={p.title} style={{
-                width: "100%", height: "100%", objectFit: "cover",
-                filter: "brightness(0.75) saturate(1.2)",
-                transition: "filter 0.5s, transform 0.5s",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.filter = "brightness(1) saturate(1.4)"; e.currentTarget.style.transform = "scale(1.03)"; }}
-              onMouseLeave={e => { e.currentTarget.style.filter = "brightness(0.75) saturate(1.2)"; e.currentTarget.style.transform = "scale(1)"; }} />
+              <div style={{ width: "100%", height: "100%", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", border: "1px dashed rgba(255,255,255,0.06)" }}>
+                <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: "rgba(255,255,255,0.1)", textTransform: "uppercase" }}>TBD</span>
+              </div>
               <div style={{
                 position: "absolute", bottom: "1rem", left: "1rem",
                 pointerEvents: "none",
