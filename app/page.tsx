@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useTheme, type Theme } from "./theme";
 
@@ -29,17 +29,15 @@ function pageColors(theme: Theme) {
 }
 
 const PROJECTS = [
-  { slug: "signal-fm",    name: "SIGNAL FM",    sub: "Radio identity",      tag: "branding", size: "large",  cls: "m-signal"   },
-  { slug: "vanta",        name: "VANTA",         sub: "Nightclub brand",     tag: "branding", size: "tall",   cls: "m-vanta"    },
-  { slug: "hollow",       name: "HOLLOW",        sub: "Cold brew café",      tag: "branding", size: "normal", cls: "m-hollow"   },
-  { slug: "biome",        name: "BIOME",         sub: "Organic neon series", tag: "art",      size: "wide",   cls: "m-biome"    },
-  { slug: "circuit-city", name: "CIRCUIT CITY",  sub: "Urban manipulation",  tag: "art",      size: "tall",   cls: "m-circuit"  },
-  { slug: "frequency",    name: "FREQUENCY",     sub: "Radial transmission", tag: "art",      size: "normal", cls: "m-frequency"},
-  { slug: "silt",         name: "SILT",          sub: "Fashion label",       tag: "branding", size: "normal", cls: "m-silt"     },
-  { slug: "unavoide",     name: "UNAVOIDE",      sub: "Tools platform",      tag: "tools",    size: "wide",   cls: "m-unavoide" },
+  { slug: "signal-fm",    name: "SIGNAL FM",    year: "2024", cls: "m-signal",    file: "signal-fm.mp4"    },
+  { slug: "vanta",        name: "VANTA",         year: "2024", cls: "m-vanta",     file: "vanta.mp4"        },
+  { slug: "hollow",       name: "HOLLOW",        year: "2024", cls: "m-hollow",    file: "hollow.png"       },
+  { slug: "biome",        name: "BIOME",         year: "2023", cls: "m-biome",     file: "biome.gif"        },
+  { slug: "circuit-city", name: "CIRCUIT CITY",  year: "2023", cls: "m-circuit",   file: "circuit-city.jpg" },
+  { slug: "frequency",    name: "FREQUENCY",     year: "2023", cls: "m-frequency", file: "frequency.gif"    },
+  { slug: "silt",         name: "SILT",          year: "2022", cls: "m-silt",      file: "silt.png"         },
+  { slug: "unavoide",     name: "UNAVOIDE",      year: "2018", cls: "m-unavoide",  file: "unavoide.mp4"     },
 ];
-
-const TABS = ["ALL", "ART", "BRANDING", "TOOLS"];
 
 const MARQUEE_TEXT = Array(6).fill(
   "UI Design · Creative Direction · Digital Art · Brand Identity · Photography · Generative AI · Web Development · Brooklyn NY · Available for Hire · ✹ "
@@ -48,19 +46,13 @@ const MARQUEE_TEXT = Array(6).fill(
 export default function Home() {
   const { theme } = useTheme();
   const c = pageColors(theme);
-  const [tab, setTab] = useState("ALL");
-  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
-    const check = () => setMobile(window.innerWidth < 600);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const els = document.querySelectorAll<HTMLElement>(".browser-window");
+    els.forEach((el, i) => {
+      setTimeout(() => el.classList.add("loaded"), 80 + i * 110);
+    });
   }, []);
-
-  const visible = tab === "ALL"
-    ? PROJECTS
-    : PROJECTS.filter(p => p.tag === tab.toLowerCase());
 
   return (
     <div className="home-wrap">
@@ -71,38 +63,42 @@ export default function Home() {
         <p className="home-tagline">Digital Designer · Artist · Brooklyn, NY</p>
       </header>
 
-      {/* ── TABS ── */}
-      <div style={{ display: "flex", justifyContent: "center", marginBottom: "2rem" }}>
-        <div className="home-tabs">
-          {TABS.map(t => (
-            <button
-              key={t}
-              className={`home-tab${tab === t ? " active" : ""}`}
-              onClick={() => setTab(t)}
-            >
-              {t}
-            </button>
-          ))}
+      {/* ── MAIN GRID ── */}
+      <div className="main-grid">
+        <div className="collage-area">
+          <div className="browser-collage">
+            {PROJECTS.map((p, i) => (
+              <Link
+                key={p.slug}
+                href={`/work/${p.slug}`}
+                className={`browser-window win-${i + 1}`}
+              >
+                <div className="window-titlebar">{p.file}</div>
+                <div className={`window-screen ${p.cls}`}>
+                  <div className="screen" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* ── FLOOR ── */}
-      <div className="floor-wrap">
-        <div className="floor">
-          {visible.map(p => (
-            <Link
-              key={p.slug}
-              href={`/work/${p.slug}`}
-              className={`machine ${p.cls} size-${p.size}`}
-            >
-              <div className="screen" />
-              <div className="nameplate">
-                <span className="machine-name">{p.name}</span>
-                <span className="machine-enter">enter →</span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <aside className="index-area">
+          <div className="work-index">
+            <div className="index-label">[INDEX]</div>
+            {PROJECTS.map((p, i) => (
+              <Link
+                key={p.slug}
+                href={`/work/${p.slug}`}
+                className="work-row"
+                style={{ animationDelay: `${0.2 + i * 0.07}s` }}
+              >
+                <span className="row-num">{String(i + 1).padStart(2, "0")}.</span>
+                <span className="row-name">{p.name}</span>
+                <span className="row-year">{p.year}</span>
+              </Link>
+            ))}
+          </div>
+        </aside>
       </div>
 
       {/* ── MARQUEE ── */}
@@ -129,13 +125,13 @@ export default function Home() {
 
       {/* ── STATEMENT ── */}
       <section style={{
-        padding: mobile ? "3rem 1.5rem" : "5rem 3rem",
+        padding: "5rem 3rem",
         maxWidth: 900,
         margin: "0 auto",
       }}>
         <p style={{
           fontFamily: "Georgia, serif",
-          fontSize: mobile ? "clamp(1.2rem, 5vw, 1.8rem)" : "clamp(1.4rem, 2.4vw, 2.2rem)",
+          fontSize: "clamp(1.4rem, 2.4vw, 2.2rem)",
           lineHeight: 1.55,
           color: c.textDim,
           fontStyle: "italic",
@@ -144,7 +140,7 @@ export default function Home() {
           paddingLeft: "1.5rem",
           margin: 0,
         }}>
-          "Appreciator of life. I notice things. I make things. Sometimes they&apos;re the same thing."
+          &ldquo;Appreciator of life. I notice things. I make things. Sometimes they&apos;re the same thing.&rdquo;
         </p>
         <div style={{ marginTop: "2rem" }}>
           <Link href="/about" style={{
@@ -167,12 +163,11 @@ export default function Home() {
       <section style={{
         borderTop: `1px solid ${c.border}`,
         display: "grid",
-        gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
+        gridTemplateColumns: "1fr 1fr",
       }}>
         <div style={{
-          padding: mobile ? "2.5rem 1.5rem" : "3.5rem 3rem",
-          borderRight: mobile ? "none" : `1px solid ${c.border}`,
-          borderBottom: mobile ? `1px solid ${c.border}` : "none",
+          padding: "3.5rem 3rem",
+          borderRight: `1px solid ${c.border}`,
         }}>
           <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "uppercase", marginBottom: "1rem" }}>Play</p>
           <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
@@ -194,7 +189,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div style={{ padding: mobile ? "2.5rem 1.5rem" : "3.5rem 3rem" }}>
+        <div style={{ padding: "3.5rem 3rem" }}>
           <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "uppercase", marginBottom: "1rem" }}>Shop</p>
           <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             PRINTS + BOOKS
@@ -219,7 +214,7 @@ export default function Home() {
       {/* ── FOOTER ── */}
       <footer style={{
         borderTop: `1px solid ${c.border}`,
-        padding: mobile ? "1.8rem 1.5rem" : "1.8rem 3rem",
+        padding: "1.8rem 3rem",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
