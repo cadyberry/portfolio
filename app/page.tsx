@@ -30,13 +30,13 @@ function pageColors(theme: Theme) {
 
 const PROJECTS = [
   { slug: "signal-fm",    name: "SIGNAL FM",    sub: "Radio identity",      tag: "branding", size: "large",  cls: "m-signal"   },
-  { slug: "vanta",        name: "VANTA",         sub: "Nightclub brand",     tag: "branding", size: "normal", cls: "m-vanta"    },
+  { slug: "vanta",        name: "VANTA",         sub: "Nightclub brand",     tag: "branding", size: "tall",   cls: "m-vanta"    },
   { slug: "hollow",       name: "HOLLOW",        sub: "Cold brew café",      tag: "branding", size: "normal", cls: "m-hollow"   },
   { slug: "biome",        name: "BIOME",         sub: "Organic neon series", tag: "art",      size: "wide",   cls: "m-biome"    },
   { slug: "circuit-city", name: "CIRCUIT CITY",  sub: "Urban manipulation",  tag: "art",      size: "tall",   cls: "m-circuit"  },
   { slug: "frequency",    name: "FREQUENCY",     sub: "Radial transmission", tag: "art",      size: "normal", cls: "m-frequency"},
   { slug: "silt",         name: "SILT",          sub: "Fashion label",       tag: "branding", size: "normal", cls: "m-silt"     },
-  { slug: "unavoide",     name: "UNAVOIDE",      sub: "Tools platform",      tag: "tools",    size: "normal", cls: "m-unavoide" },
+  { slug: "unavoide",     name: "UNAVOIDE",      sub: "Tools platform",      tag: "tools",    size: "wide",   cls: "m-unavoide" },
 ];
 
 const TABS = ["ALL", "ART", "BRANDING", "TOOLS"];
