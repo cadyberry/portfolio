@@ -147,6 +147,40 @@ export default function About() {
         </div>
 
 
+        {/* ── SERVICES ── */}
+        <div style={{ marginBottom: "5rem", borderTop: `1px solid ${c.border}`, borderBottom: `1px solid ${c.border}`, padding: "2.5rem 0" }}>
+          <span style={label}>Services</span>
+          <p style={{
+            fontFamily: "Georgia, serif",
+            fontSize: "clamp(1rem, 2.2vw, 1.3rem)",
+            lineHeight: 2,
+            color: c.dim,
+            margin: 0,
+          }}>
+            {[
+              "Poster Design",
+              "Websites",
+              "Mobile Apps",
+              "Logo & Identity",
+              "Social Media Planning",
+              "Creative Consulting",
+              "UI / UX",
+              "Brand Systems",
+              "Digital Art",
+              "Generative AI",
+              "Photography",
+              "Art Direction",
+            ].map((s, i, arr) => (
+              <span key={s}>
+                {s}
+                {i < arr.length - 1 && (
+                  <span style={{ color: c.accent, margin: "0 0.6em", opacity: 0.7 }}>·</span>
+                )}
+              </span>
+            ))}
+          </p>
+        </div>
+
         {/* ── SKILLS ── */}
         <div style={{ marginBottom: "5rem" }}>
           <span style={label}>Disciplines</span>
