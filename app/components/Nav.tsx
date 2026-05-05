@@ -5,12 +5,8 @@ import { usePathname } from "next/navigation";
 import { useTheme, type Theme } from "../theme";
 
 const LINKS = [
-  { href: "/work",                         label: "WORK"        },
-  { href: "https://unafield.vercel.app",   label: "CREATE",      external: true },
-  { href: "https://unavoide.com",          label: "SHOP",        external: true },
-  { href: "/photographs",                  label: "PHOTOGRAPHS" },
-  { href: "/about",                        label: "ABOUT"       },
-  { href: "/contact",                      label: "CONTACT"     },
+  { href: "/about",   label: "ABOUT"   },
+  { href: "/contact", label: "CONTACT" },
 ];
 
 function HomeGlyph() {

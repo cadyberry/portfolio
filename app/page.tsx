@@ -29,14 +29,14 @@ function pageColors(theme: Theme) {
 }
 
 const PROJECTS = [
-  { slug: "signal-fm",  name: "SIGNAL FM",  year: "2025", cls: "m-signal",    file: "signal-fm.mp4"   },
-  { slug: "vanta",      name: "VANTA",      year: "2025", cls: "m-vanta",     file: "vanta.mp4"       },
-  { slug: "hollow",     name: "HOLLOW",     year: "2024", cls: "m-hollow",    file: "hollow.png"      },
-  { slug: "silt",       name: "SILT",       year: "2025", cls: "m-silt",      file: "silt.css"        },
-  { slug: "biome",      name: "BIOME",      year: "2024", cls: "m-biome",     file: "biome.gif"       },
-  { slug: "ui-packs",   name: "UI PACKS",   year: "2025", cls: "m-uipacks",   file: "ui-packs.zip"    },
-  { slug: "unavoide",   name: "UNAVOIDE",   year: "2018", cls: "m-unavoide",  file: "unavoide.mp4"    },
-  { slug: "templates",  name: "TEMPLATES",  year: "2025", cls: "m-templates", file: "templates.zip"   },
+  { slug: "themes",        name: "THEMES",        year: "2025", cls: "m-uipacks",   file: "themes.zip"       },
+  { slug: "packs",         name: "PACKS",         year: "2025", cls: "m-silt",      file: "packs.zip"        },
+  { slug: "gen-ai-tools",  name: "GEN AI TOOLS",  year: "2024", cls: "m-signal",    file: "gen-ai.mp4"       },
+  { slug: "animation",     name: "ANIMATION",     year: "2025", cls: "m-vanta",     file: "animation.mp4"    },
+  { slug: "design-tools",  name: "DESIGN TOOLS",  year: "2025", cls: "m-biome",     file: "design-tools.zip" },
+  { slug: "ui-packs",      name: "UI PACKS",      year: "2025", cls: "m-uipacks",   file: "ui-packs.zip"     },
+  { slug: "github",        name: "GITHUB",        year: "2018–", cls: "m-plugins",  file: "github.com",      href: "https://github.com/cadyberry" },
+  { slug: "shop",          name: "SHOP",          year: "2025", cls: "m-unavoide",  file: "unavoide.com",    href: "https://unavoide.com" },
 ];
 
 const MARQUEE_TEXT = Array(6).fill(
@@ -67,36 +67,37 @@ export default function Home() {
       <div className="main-grid">
         <div className="collage-area">
           <div className="browser-collage">
-            {PROJECTS.map((p, i) => (
-              <Link
-                key={p.slug}
-                href={`/work/${p.slug}`}
-                className={`browser-window win-${i + 1}`}
-              >
+            {PROJECTS.map((p, i) => {
+              const dest = (p as {href?: string}).href ?? `/work/${p.slug}`;
+              const external = !!(p as {href?: string}).href;
+              const cls = `browser-window win-${i + 1}`;
+              const inner = <>
                 <div className="window-titlebar">{p.file}</div>
-                <div className={`window-screen ${p.cls}`}>
-                  <div className="screen" />
-                </div>
-              </Link>
-            ))}
+                <div className={`window-screen ${p.cls}`}><div className="screen" /></div>
+              </>;
+              return external
+                ? <a key={p.slug} href={dest} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
+                : <Link key={p.slug} href={dest} className={cls}>{inner}</Link>;
+            })}
           </div>
         </div>
 
         <aside className="index-area">
           <div className="work-index">
             <div className="index-label">[INDEX]</div>
-            {PROJECTS.map((p, i) => (
-              <Link
-                key={p.slug}
-                href={`/work/${p.slug}`}
-                className="work-row"
-                style={{ animationDelay: `${0.2 + i * 0.07}s` }}
-              >
+            {PROJECTS.map((p, i) => {
+              const dest = (p as {href?: string}).href ?? `/work/${p.slug}`;
+              const external = !!(p as {href?: string}).href;
+              const rowStyle = { animationDelay: `${0.2 + i * 0.07}s` };
+              const inner = <>
                 <span className="row-num">{String(i + 1).padStart(2, "0")}.</span>
                 <span className="row-name">{p.name}</span>
                 <span className="row-year">{p.year}</span>
-              </Link>
-            ))}
+              </>;
+              return external
+                ? <a key={p.slug} href={dest} target="_blank" rel="noopener noreferrer" className="work-row" style={rowStyle}>{inner}</a>
+                : <Link key={p.slug} href={dest} className="work-row" style={rowStyle}>{inner}</Link>;
+            })}
           </div>
         </aside>
       </div>
