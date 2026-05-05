@@ -29,14 +29,7 @@ const TECH = [
   "Adobe CC", "Framer", "Vercel", "OpenAI API",
 ];
 
-const SERVICES = [
-  "Poster Design", "Websites", "Mobile Apps",
-  "Logo & Identity", "Social Media Planning", "Creative Consulting",
-  "UI / UX", "Brand Systems", "Digital Art",
-  "Generative AI", "Photography", "Art Direction",
-  "Motion Design", "Illustration", "Print & Book Design",
-  "Web Apps", "Prompt Engineering", "Data Visualization",
-];
+
 
 
 export default function About() {
@@ -145,29 +138,11 @@ export default function About() {
           <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
             <span style={label}>The Work</span>
             <p style={body}>
-              The output spans generative AI tools, neon digital art, UI systems, photography, and software built from scratch. Running since 2018 — tools that didn&apos;t exist yet, prints that don&apos;t look like anyone else&apos;s. The technical background (ML engineering, clinical AI, data science at scale) means the work isn&apos;t just aesthetic. It ships.
+              Acadia&apos;s work spans generative AI tools, digital art, UI systems, photography, audio engineering, and software built from scratch. Running since 2018 — tools that didn&apos;t exist yet, prints that don&apos;t look like anyone else&apos;s. The technical background (ML engineering, clinical AI, data science at scale) means the work isn&apos;t just aesthetic. It ships.
             </p>
           </div>
         </div>
 
-
-        {/* ── SERVICES ── */}
-        <div style={{ marginBottom: "5rem" }}>
-          <span style={label}>Services</span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
-            {SERVICES.map(s => (
-              <span key={s} style={{
-                fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.1em",
-                color: c.dim, border: `1px solid ${c.border}`,
-                background: c.glass,
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                padding: "0.4rem 0.8rem", textTransform: "uppercase",
-                transition: "color 0.3s, border-color 0.3s",
-              }}>{s}</span>
-            ))}
-          </div>
-        </div>
 
         {/* ── TECH ── */}
         <div style={{ marginBottom: "5rem" }}>
