@@ -24,9 +24,9 @@ function colors(theme: Theme) {
 }
 
 const SERVICES = [
-  "Poster Design", "Websites", "Mobile Apps",
+  "UI / UX", "Websites", "Mobile Apps",
   "Logo & Identity", "Social Media Planning", "Creative Consulting",
-  "UI / UX", "Brand Systems", "Digital Art",
+  "Poster Design", "Brand Systems", "Digital Art",
   "Generative AI", "Photography", "Art Direction",
   "Motion Design", "Illustration", "Print & Book Design",
   "Web Apps", "Prompt Engineering", "Data Visualization",
@@ -64,7 +64,7 @@ export default function About() {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "3rem 2rem 6rem" }}>
 
         {/* ── HEADER ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center", marginBottom: "5rem" }}>
+        <div className="about-header" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center", marginBottom: "5rem" }}>
           <div>
             <h1 style={{
               fontFamily: "Inter, sans-serif",
@@ -95,49 +95,47 @@ export default function About() {
           </div>
 
           {/* Venn diagram */}
-          <svg viewBox="0 0 460 420" style={{ width: "100%", maxWidth: 500, overflow: "visible" }} aria-hidden="true">
+          <svg viewBox="0 0 520 480" style={{ width: "100%", maxWidth: 560, overflow: "visible" }} aria-hidden="true">
             <defs>
               <style>{`.vc { mix-blend-mode: screen; }`}</style>
             </defs>
 
-            {/* Filled circles — centered in viewBox with room for labels */}
-            <circle className="vc" cx="170" cy="200" r="105" fill={c.accent} opacity="0.14"/>
-            <circle className="vc" cx="290" cy="200" r="105" fill={c.accent} opacity="0.14"/>
-            <circle className="vc" cx="230" cy="282" r="105" fill={c.accent} opacity="0.14"/>
+            {/* Filled circles */}
+            <circle className="vc" cx="185" cy="220" r="118" fill={c.accent} opacity="0.14"/>
+            <circle className="vc" cx="335" cy="220" r="118" fill={c.accent} opacity="0.14"/>
+            <circle className="vc" cx="260" cy="318" r="118" fill={c.accent} opacity="0.14"/>
 
             {/* Outlines */}
-            <circle cx="170" cy="200" r="105" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
-            <circle cx="290" cy="200" r="105" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
-            <circle cx="230" cy="282" r="105" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
+            <circle cx="185" cy="220" r="118" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
+            <circle cx="335" cy="220" r="118" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
+            <circle cx="260" cy="318" r="118" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
 
-            {/* ART — label sits above-left, anchored to circle's upper-left edge */}
-            <text x="98" y="72" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600" textDecoration="none">ART</text>
-            <text x="98" y="84" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>illustration · prints</text>
-            <text x="98" y="94" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>photography</text>
+            {/* ART — above left */}
+            <text x="105" y="74" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">ART</text>
+            <text x="105" y="87" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>illustration · prints</text>
+            <text x="105" y="98" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>photography</text>
+            <line x1="105" y1="102" x2="128" y2="118" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
 
-            {/* TECH — label sits above-right */}
-            <text x="362" y="72" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">TECH</text>
-            <text x="362" y="84" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>ml · data science</text>
-            <text x="362" y="94" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>web dev · typescript</text>
+            {/* TECH — above right */}
+            <text x="415" y="74" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">TECH</text>
+            <text x="415" y="87" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>ml · data science</text>
+            <text x="415" y="98" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>web dev · apis</text>
+            <line x1="415" y1="102" x2="392" y2="118" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
 
-            {/* DESIGN — label sits below the bottom circle */}
-            <text x="230" y="404" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">DESIGN</text>
-            <text x="230" y="392" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>ui/ux · brand · motion</text>
+            {/* DESIGN — below */}
+            <text x="260" y="454" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">DESIGN</text>
+            <text x="260" y="441" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>ui/ux · brand · motion</text>
+            <line x1="260" y1="436" x2="260" y2="424" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
 
-            {/* Short tick lines from labels to circle edges */}
-            <line x1="98" y1="98" x2="115" y2="112" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
-            <line x1="362" y1="98" x2="345" y2="112" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
-            <line x1="230" y1="387" x2="230" y2="374" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
-
-            {/* Intersection labels */}
-            <text x="230" y="172" textAnchor="middle" fontFamily="monospace" fontSize="6.5" letterSpacing="1" fill={c.dim} opacity="0.65">generative ai</text>
-            <text x="163" y="268" textAnchor="middle" fontFamily="monospace" fontSize="6.5" letterSpacing="1" fill={c.dim} opacity="0.65">art direction</text>
-            <text x="297" y="268" textAnchor="middle" fontFamily="monospace" fontSize="6.5" letterSpacing="1" fill={c.dim} opacity="0.65">product design</text>
+            {/* Intersection labels — inside the overlapping zones */}
+            <text x="260" y="188" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="1" fill={c.dim} opacity="0.75">generative ai</text>
+            <text x="185" y="300" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="1" fill={c.dim} opacity="0.75">art direction</text>
+            <text x="335" y="300" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="1" fill={c.dim} opacity="0.75">product design</text>
           </svg>
         </div>
 
         {/* ── BIO ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", marginBottom: "5rem" }}>
+        <div className="about-bio" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", marginBottom: "5rem" }}>
           <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
             <span style={label}>The Person</span>
             <p style={body}>
@@ -185,7 +183,7 @@ export default function About() {
         </div>
 
         {/* ── CURRENTLY ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1px", background: c.border, marginBottom: "5rem" }}>
+        <div className="about-currently" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1px", background: c.border, marginBottom: "5rem" }}>
           {[
             {
               label: "Building",
@@ -254,6 +252,13 @@ export default function About() {
         .venn-sub { font-family:monospace; font-size:0.46rem; color:rgba(255,255,255,0.28); line-height:1.7; letter-spacing:0.04em; text-align:center; }
         .venn-developer .venn-sub { text-align:left; }
         .venn-ux .venn-sub { text-align:right; }
+      `}</style>
+      <style>{`
+        @media (max-width: 700px) {
+          .about-header { grid-template-columns: 1fr !important; }
+          .about-bio    { grid-template-columns: 1fr !important; }
+          .about-currently { grid-template-columns: 1fr !important; gap: 0 !important; }
+        }
       `}</style>
     </main>
   );
