@@ -26,7 +26,7 @@ function colors(theme: Theme) {
 function Block({ block, c }: { block: NoteBlock; c: ReturnType<typeof colors> }) {
   if (block.type === "p") {
     return (
-      <p style={{ fontFamily: "Georgia, serif", fontSize: "1rem", lineHeight: 1.85, color: c.dim, margin: "0 0 1.5rem" }}>
+      <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", lineHeight: 1.85, color: c.dim, margin: "0 0 1.5rem" }}>
         {block.text}
       </p>
     );
@@ -34,7 +34,7 @@ function Block({ block, c }: { block: NoteBlock; c: ReturnType<typeof colors> })
 
   if (block.type === "signoff") {
     return (
-      <p style={{ fontFamily: "Georgia, serif", fontSize: "1rem", lineHeight: 1.85, color: c.dim, margin: "2.5rem 0 0", fontStyle: "italic" }}>
+      <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1rem", lineHeight: 1.85, color: c.dim, margin: "2.5rem 0 0", fontStyle: "italic" }}>
         {block.text}
       </p>
     );
@@ -60,7 +60,7 @@ function Block({ block, c }: { block: NoteBlock; c: ReturnType<typeof colors> })
               <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", fontWeight: 600, color: c.text, margin: 0, letterSpacing: "-0.01em", lineHeight: 1.4 }}>
                 {item.name}
               </p>
-              <p style={{ fontFamily: "Georgia, serif", fontSize: "0.88rem", color: c.dim, margin: 0, lineHeight: 1.75 }}>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.88rem", color: c.dim, margin: 0, lineHeight: 1.75 }}>
                 {item.body}
               </p>
             </div>

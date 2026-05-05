@@ -37,7 +37,7 @@ export default function Notes() {
         </h1>
 
         {NOTES.length === 0 && (
-          <p style={{ fontFamily: "Georgia, serif", fontSize: "0.9rem", color: c.faint, fontStyle: "italic" }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: c.faint, fontStyle: "italic" }}>
             Coming soon.
           </p>
         )}
@@ -67,7 +67,7 @@ export default function Notes() {
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "1.1rem", fontWeight: 600, color: c.text, margin: "0 0 0.4rem", letterSpacing: "-0.02em" }}>
                   {note.title}
                 </p>
-                <p style={{ fontFamily: "Georgia, serif", fontSize: "0.85rem", color: c.dim, lineHeight: 1.6, margin: 0 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: c.dim, lineHeight: 1.6, margin: 0 }}>
                   {note.excerpt}
                 </p>
               </div>

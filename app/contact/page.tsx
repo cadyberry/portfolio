@@ -135,8 +135,8 @@ export default function Contact() {
               ))}
             </div>
 
-            <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: c.faint, lineHeight: 1.75, fontStyle: "italic", transition: "color 0.3s" }}>
-              Commissions from $20. Projects from $500. I take on a small number of clients at a time so the work is actually good.
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.faint, lineHeight: 1.75, fontStyle: "italic", transition: "color 0.3s" }}>
+              Commissions from $20. Projects from $500.
             </p>
           </div>
 
@@ -248,7 +248,7 @@ export default function Contact() {
                   color: c.text, margin: "0 0 0.8rem", lineHeight: 1,
                   transition: "color 0.3s",
                 }}>Got it.</h2>
-                <p style={{ fontFamily: "Georgia, serif", fontSize: "0.9rem", color: c.dim, lineHeight: 1.8, transition: "color 0.3s" }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: c.dim, lineHeight: 1.8, transition: "color 0.3s" }}>
                   I&apos;ll be in touch soon, {form.name.split(" ")[0]}.<br />
                   Check your inbox — usually within 48 hours.
                 </p>

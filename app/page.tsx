@@ -148,7 +148,7 @@ export default function Home() {
           <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             8 FREE TOOLS
           </p>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
             Kaleidoscope, pixel editor, generative art, digital rain — all browser-based, all free, built from scratch since 2018.
           </p>
           <a href="https://unafield.vercel.app" target="_blank" rel="noopener noreferrer" style={{
@@ -169,7 +169,7 @@ export default function Home() {
           <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             PRINTS + BOOKS
           </p>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
             60+ digital art prints. Three books in production — travel photography, coloring book, print collection.
           </p>
           <a href="https://unavoide.com" target="_blank" rel="noopener noreferrer" style={{

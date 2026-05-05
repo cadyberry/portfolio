@@ -26,7 +26,7 @@ export default function Play() {
           fontWeight: 700, letterSpacing: "-0.04em",
           margin: "0 0 1.5rem", lineHeight: 0.88, color: "#fff",
         }}>8 free<br />tools.</h1>
-        <p style={{ fontFamily: "Georgia, serif", fontSize: "clamp(1rem, 2.5vw, 1.2rem)", color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: 480, margin: "0 0 3rem", fontStyle: "italic" }}>
+        <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(1rem, 2.5vw, 1.2rem)", color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: 480, margin: "0 0 3rem", fontStyle: "italic" }}>
           Built from scratch since 2018. Kaleidoscopes, pixel editors, generative art, digital rain — all living on Spacescape.
         </p>
 

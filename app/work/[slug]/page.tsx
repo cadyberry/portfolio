@@ -64,7 +64,7 @@ export default function WorkPage({ params }: { params: Promise<{ slug: string }>
             {project.name}
           </h1>
           <p style={{
-            fontFamily: "Georgia, serif",
+            fontFamily: "Inter, sans-serif",
             fontSize: "clamp(1rem, 2.5vw, 1.2rem)",
             color: c.dim, margin: 0, lineHeight: 1.6,
             borderLeft: `2px solid ${c.accent}`,
@@ -79,7 +79,7 @@ export default function WorkPage({ params }: { params: Promise<{ slug: string }>
         <div style={{ borderTop: `1px solid ${c.border}`, paddingTop: "2.5rem", marginBottom: "3.5rem" }}>
           {project.description.map((para, i) => (
             <p key={i} style={{
-              fontFamily: "Georgia, serif", fontSize: "1rem",
+              fontFamily: "Inter, sans-serif", fontSize: "1rem",
               lineHeight: 1.85, color: c.dim, margin: "0 0 1.4rem",
             }}>
               {para}

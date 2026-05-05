@@ -53,7 +53,7 @@ export default function About() {
   };
 
   const body: React.CSSProperties = {
-    fontFamily: "Georgia, serif",
+    fontFamily: "Inter, sans-serif",
     fontSize: "clamp(0.875rem, 2vw, 1rem)",
     lineHeight: 1.85, color: c.dim,
     margin: 0, transition: "color 0.3s",
@@ -165,7 +165,7 @@ export default function About() {
               <span style={label}>{col.label}</span>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 {col.items.map(item => (
-                  <li key={item} style={{ fontFamily: "Georgia, serif", fontSize: "0.85rem", color: c.dim, lineHeight: 1.5, paddingLeft: "0.8rem", position: "relative", transition: "color 0.3s" }}>
+                  <li key={item} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: c.dim, lineHeight: 1.5, paddingLeft: "0.8rem", position: "relative", transition: "color 0.3s" }}>
                     <span style={{ position: "absolute", left: 0, color: c.accent, transition: "color 0.3s" }}>·</span>
                     {item}
                   </li>

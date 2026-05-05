@@ -150,7 +150,7 @@ export default function Photographs() {
 
         {/* Footer note */}
         <p style={{
-          fontFamily: "Georgia, serif", fontSize: "0.8rem", fontStyle: "italic",
+          fontFamily: "Inter, sans-serif", fontSize: "0.8rem", fontStyle: "italic",
           color: c.faint, textAlign: "center", marginTop: "4rem",
           transition: "color 0.3s",
         }}>

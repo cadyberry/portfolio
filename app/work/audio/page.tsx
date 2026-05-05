@@ -40,7 +40,7 @@ export default function AudioPage() {
         <h1 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(2.5rem, 8vw, 5rem)", fontWeight: 700, letterSpacing: "-0.04em", color: c.text, margin: "0 0 1rem", lineHeight: 0.95 }}>
           Audio
         </h1>
-        <p style={{ fontFamily: "Georgia, serif", fontSize: "clamp(1rem, 2.5vw, 1.15rem)", color: c.dim, margin: 0, lineHeight: 1.6, borderLeft: `2px solid ${c.accent}`, paddingLeft: "1.2rem", maxWidth: 520 }}>
+        <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(1rem, 2.5vw, 1.15rem)", color: c.dim, margin: 0, lineHeight: 1.6, borderLeft: `2px solid ${c.accent}`, paddingLeft: "1.2rem", maxWidth: 520 }}>
           Original music — produced in FL Studio. Electronic, experimental, and somewhere in between.
         </p>
 

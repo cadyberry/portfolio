@@ -74,10 +74,10 @@ export default function DesignToolsPage() {
           <h1 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(2.5rem, 8vw, 5rem)", fontWeight: 700, letterSpacing: "-0.04em", color: c.text, margin: "0 0 1rem", lineHeight: 0.95 }}>
             Design Tools
           </h1>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: "clamp(1rem, 2.5vw, 1.15rem)", color: c.dim, margin: "0 0 0.8rem", lineHeight: 1.6, borderLeft: `2px solid ${c.accent}`, paddingLeft: "1.2rem", maxWidth: 560 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(1rem, 2.5vw, 1.15rem)", color: c.dim, margin: "0 0 0.8rem", lineHeight: 1.6, borderLeft: `2px solid ${c.accent}`, paddingLeft: "1.2rem", maxWidth: 560 }}>
             Browser-based creative tools built from scratch — no install, no account, all free.
           </p>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: "0.9rem", color: c.faint, margin: "1rem 0 0", lineHeight: 1.7, maxWidth: 560 }}>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: c.faint, margin: "1rem 0 0", lineHeight: 1.7, maxWidth: 560 }}>
             Everything here was built because the right version didn&apos;t exist yet. Runs entirely in the browser.
           </p>
         </div>
@@ -137,7 +137,7 @@ export default function DesignToolsPage() {
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", fontWeight: 600, color: c.text, margin: "0 0 0.4rem", letterSpacing: "-0.01em" }}>
                   {tool.name}
                 </p>
-                <p style={{ fontFamily: "Georgia, serif", fontSize: "0.8rem", color: c.dim, margin: 0, lineHeight: 1.6 }}>
+                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.8rem", color: c.dim, margin: 0, lineHeight: 1.6 }}>
                   {tool.desc}
                 </p>
               </div>
