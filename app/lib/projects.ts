@@ -91,11 +91,8 @@ export const PROJECTS: Project[] = [
     slug: "github",
     name: "GitHub",
     year: "2018–",
-    tagline: "Open source tools, experiments, and the work behind the work.",
-    description: [
-      "Seven years of commits — production apps, creative tools, data pipelines, generative experiments, and everything in between. The GitHub profile is where the process lives.",
-      "Includes the source for several tools listed here, plus smaller experiments that never needed their own page.",
-    ],
+    tagline: "",
+    description: [],
     tags: ["Open Source", "TypeScript", "Python", "Angular", "React"],
     cta: { label: "View on GitHub", href: "https://github.com/cadyberry" },
   },
