@@ -145,7 +145,7 @@ export default function About() {
           <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
             <span style={label}>The Work</span>
             <p style={body}>
-              Designer, technologist and artist — Acadia&apos;s goal is to help clients define their online presence and creative direction. That means building brand systems that are visually distinctive and technically sound, from the first spark of a concept through to the shipped product, designed and built by the same hand.
+              The output spans generative AI tools, neon digital art, UI systems, photography, and software built from scratch. Running since 2018 — tools that didn&apos;t exist yet, prints that don&apos;t look like anyone else&apos;s. The technical background (ML engineering, clinical AI, data science at scale) means the work isn&apos;t just aesthetic. It ships.
             </p>
           </div>
         </div>
