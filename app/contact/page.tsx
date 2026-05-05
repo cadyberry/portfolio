@@ -96,7 +96,7 @@ export default function Contact() {
   };
 
   return (
-    <main style={{ background: c.bg, minHeight: "100vh", paddingTop: "5rem", color: c.text, transition: "background 0.3s, color 0.3s" }}>
+    <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "5rem", color: c.text, transition: "color 0.3s" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "3rem 2rem 6rem" }}>
 
         <div style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: "6rem", alignItems: "start" }}>

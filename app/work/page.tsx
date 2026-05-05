@@ -59,7 +59,7 @@ export default function Work() {
   const filtered = active === "all" ? PROJECTS : PROJECTS.filter(p => p.cat === active);
 
   return (
-    <main style={{ background: c.bg, minHeight: "100vh", paddingTop: "6rem", paddingBottom: "4rem", transition: "background 0.3s" }}>
+    <main style={{ minHeight: "100vh", paddingTop: "6rem", paddingBottom: "4rem" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem" }}>
 
         <div style={{ marginBottom: "3rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1.5rem" }}>

@@ -38,7 +38,7 @@ const PRINT_PREVIEWS = [
 
 export default function Shop() {
   return (
-    <main style={{ background: "#000", minHeight: "100vh", paddingTop: "5rem", color: "#fff" }}>
+    <main style={{ minHeight: "100vh", paddingTop: "5rem", color: "#fff" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "3rem 1.5rem 6rem" }}>
 
         <h1 style={{

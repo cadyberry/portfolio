@@ -50,7 +50,7 @@ export default function About() {
   };
 
   return (
-    <main style={{ background: c.bg, minHeight: "100vh", paddingTop: "5rem", color: c.text, transition: "background 0.3s, color 0.3s" }}>
+    <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "5rem", color: c.text, transition: "color 0.3s" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "3rem 2rem 6rem" }}>
 
         {/* ── HEADER ── */}
@@ -150,6 +150,36 @@ export default function About() {
               <span className="venn-sub">motion.dev<br />interaction<br />responsive</span>
             </div>
           </div>
+        </div>
+
+        {/* ── VENN DIAGRAM ── */}
+        <div style={{ marginBottom: "5rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <span style={label}>where it all overlaps</span>
+          <svg viewBox="0 0 420 300" style={{ width: "100%", maxWidth: 520, overflow: "visible" }} aria-hidden="true">
+            <defs>
+              <style>{`
+                .venn-circle { mix-blend-mode: screen; }
+              `}</style>
+            </defs>
+
+            {/* Three circles */}
+            <circle className="venn-circle" cx="175" cy="130" r="110" fill={c.accent} opacity="0.18"/>
+            <circle className="venn-circle" cx="245" cy="130" r="110" fill={c.accent} opacity="0.18"/>
+            <circle className="venn-circle" cx="210" cy="195" r="110" fill={c.accent} opacity="0.18"/>
+
+            {/* Circle outlines */}
+            <circle cx="175" cy="130" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
+            <circle cx="245" cy="130" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
+            <circle cx="210" cy="195" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
+
+            {/* Labels — outer */}
+            <text x="100" y="72" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim} textDecoration="none" style={{ textTransform: "uppercase" }}>ART</text>
+            <text x="320" y="72" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>TECH</text>
+            <text x="210" y="295" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>DESIGN</text>
+
+            {/* Center label */}
+            <text x="210" y="168" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="13" fontWeight="700" letterSpacing="-0.5" fill={c.text}>acadia</text>
+          </svg>
         </div>
 
         {/* ── SKILLS ── */}

@@ -54,7 +54,7 @@ export default function Photographs() {
   const filtered = active === "all" ? PHOTOS : PHOTOS.filter(p => p.cat === active);
 
   return (
-    <main style={{ background: c.bg, minHeight: "100vh", paddingTop: "6rem", paddingBottom: "6rem", transition: "background 0.3s" }}>
+    <main style={{ minHeight: "100vh", paddingTop: "6rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 1300, margin: "0 auto", padding: "0 2rem" }}>
 
         {/* Header */}

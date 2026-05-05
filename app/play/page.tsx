@@ -13,7 +13,7 @@ const TOOLS = [
 
 export default function Play() {
   return (
-    <main style={{ background: "#000", minHeight: "100vh", paddingTop: "5rem", color: "#fff" }}>
+    <main style={{ minHeight: "100vh", paddingTop: "5rem", color: "#fff" }}>
       <div style={{ maxWidth: 760, margin: "0 auto", padding: "4rem 2rem 6rem" }}>
 
         {/* Hero */}
