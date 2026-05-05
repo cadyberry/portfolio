@@ -30,6 +30,13 @@ const SKILLS = [
   "Illustration", "Art Direction", "Prompt Engineering",
 ];
 
+const SERVICES = [
+  "Poster Design", "Websites", "Mobile Apps",
+  "Logo & Identity", "Social Media Planning", "Creative Consulting",
+  "UI / UX", "Brand Systems", "Digital Art",
+  "Generative AI", "Photography", "Art Direction",
+];
+
 
 export default function About() {
   const { theme } = useTheme();
@@ -147,45 +154,29 @@ export default function About() {
         </div>
 
 
-        {/* ── SERVICES ── */}
-        <div style={{ marginBottom: "5rem", borderTop: `1px solid ${c.border}`, borderBottom: `1px solid ${c.border}`, padding: "2.5rem 0" }}>
-          <span style={label}>Services</span>
-          <p style={{
-            fontFamily: "Georgia, serif",
-            fontSize: "clamp(1rem, 2.2vw, 1.3rem)",
-            lineHeight: 2,
-            color: c.dim,
-            margin: 0,
-          }}>
-            {[
-              "Poster Design",
-              "Websites",
-              "Mobile Apps",
-              "Logo & Identity",
-              "Social Media Planning",
-              "Creative Consulting",
-              "UI / UX",
-              "Brand Systems",
-              "Digital Art",
-              "Generative AI",
-              "Photography",
-              "Art Direction",
-            ].map((s, i, arr) => (
-              <span key={s}>
-                {s}
-                {i < arr.length - 1 && (
-                  <span style={{ color: c.accent, margin: "0 0.6em", opacity: 0.7 }}>·</span>
-                )}
-              </span>
-            ))}
-          </p>
-        </div>
-
         {/* ── SKILLS ── */}
         <div style={{ marginBottom: "5rem" }}>
           <span style={label}>Disciplines</span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
             {SKILLS.map(s => (
+              <span key={s} style={{
+                fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.1em",
+                color: c.dim, border: `1px solid ${c.border}`,
+                background: c.glass,
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                padding: "0.4rem 0.8rem", textTransform: "uppercase",
+                transition: "color 0.3s, border-color 0.3s",
+              }}>{s}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* ── SERVICES ── */}
+        <div style={{ marginBottom: "5rem" }}>
+          <span style={label}>Services</span>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+            {SERVICES.map(s => (
               <span key={s} style={{
                 fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.1em",
                 color: c.dim, border: `1px solid ${c.border}`,
