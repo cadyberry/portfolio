@@ -152,29 +152,20 @@ export default function Nav() {
       </Link>
 
       <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
-        {LINKS.map(({ href, label, external }) => {
-          const linkStyle: React.CSSProperties = {
+        {LINKS.map(({ href, label }) => (
+          <Link key={href} href={href} style={{
             fontSize: "0.6rem",
             letterSpacing: "0.2em",
-            color: !external && path.startsWith(href) ? c.accent : c.dim,
+            color: path.startsWith(href) ? c.accent : c.dim,
             textDecoration: "none",
             textTransform: "uppercase",
             transition: "color 0.2s",
-          };
-          return external ? (
-            <a key={href} href={href} target="_blank" rel="noopener noreferrer" style={linkStyle}
-              onMouseEnter={e => (e.currentTarget.style.color = c.text)}
-              onMouseLeave={e => (e.currentTarget.style.color = c.dim)}>
-              {label}
-            </a>
-          ) : (
-            <Link key={href} href={href} style={linkStyle}
-              onMouseEnter={e => (e.currentTarget.style.color = c.text)}
-              onMouseLeave={e => (e.currentTarget.style.color = path.startsWith(href) ? c.accent : c.dim)}>
-              {label}
-            </Link>
-          );
-        })}
+          }}
+          onMouseEnter={e => (e.currentTarget.style.color = c.text)}
+          onMouseLeave={e => (e.currentTarget.style.color = path.startsWith(href) ? c.accent : c.dim)}>
+            {label}
+          </Link>
+        ))}
 
         {/* Theme toggle */}
         <button
