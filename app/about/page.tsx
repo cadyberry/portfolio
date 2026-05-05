@@ -64,7 +64,7 @@ export default function About() {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "3rem 2rem 6rem" }}>
 
         {/* ── HEADER ── */}
-        <div className="about-header" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center", marginBottom: "5rem" }}>
+        <div className="about-header" style={{ marginBottom: "5rem" }}>
           <div>
             <h1 style={{
               fontFamily: "Inter, sans-serif",
@@ -94,44 +94,7 @@ export default function About() {
             </div>
           </div>
 
-          {/* Venn diagram */}
-          <svg viewBox="0 0 520 480" style={{ width: "100%", maxWidth: 560, overflow: "visible" }} aria-hidden="true">
-            <defs>
-              <style>{`.vc { mix-blend-mode: screen; }`}</style>
-            </defs>
-
-            {/* Filled circles */}
-            <circle className="vc" cx="185" cy="220" r="118" fill={c.accent} opacity="0.14"/>
-            <circle className="vc" cx="335" cy="220" r="118" fill={c.accent} opacity="0.14"/>
-            <circle className="vc" cx="260" cy="318" r="118" fill={c.accent} opacity="0.14"/>
-
-            {/* Outlines */}
-            <circle cx="185" cy="220" r="118" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
-            <circle cx="335" cy="220" r="118" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
-            <circle cx="260" cy="318" r="118" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
-
-            {/* ART — above left */}
-            <text x="105" y="74" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">ART</text>
-            <text x="105" y="87" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>illustration · prints</text>
-            <text x="105" y="98" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>photography</text>
-            <line x1="105" y1="102" x2="128" y2="118" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
-
-            {/* TECH — above right */}
-            <text x="415" y="74" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">TECH</text>
-            <text x="415" y="87" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>ml · data science</text>
-            <text x="415" y="98" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>web dev · apis</text>
-            <line x1="415" y1="102" x2="392" y2="118" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
-
-            {/* DESIGN — below */}
-            <text x="260" y="454" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">DESIGN</text>
-            <text x="260" y="441" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>ui/ux · brand · motion</text>
-            <line x1="260" y1="436" x2="260" y2="424" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
-
-            {/* Intersection labels — inside the overlapping zones */}
-            <text x="260" y="188" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="1" fill={c.dim} opacity="0.75">generative ai</text>
-            <text x="185" y="300" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="1" fill={c.dim} opacity="0.75">art direction</text>
-            <text x="335" y="300" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="1" fill={c.dim} opacity="0.75">product design</text>
-          </svg>
+          {/* Venn diagram — temporarily removed */}
         </div>
 
         {/* ── BIO ── */}
@@ -145,7 +108,7 @@ export default function About() {
           <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
             <span style={label}>The Work</span>
             <p style={body}>
-              Acadia&apos;s work spans generative AI tools, digital art, UI systems, photography, audio engineering, and software built from scratch. Running since 2018 — tools that didn&apos;t exist yet, prints that don&apos;t look like anyone else&apos;s. The technical background (ML engineering, clinical AI, data science at scale) means the work isn&apos;t just aesthetic. It ships.
+              Acadia&apos;s work spans generative AI tools, digital art, UI systems, photography, audio engineering, and software built from scratch.
             </p>
           </div>
         </div>
