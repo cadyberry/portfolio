@@ -172,19 +172,14 @@ export default function About() {
         {/* ── TECH ── */}
         <div style={{ marginBottom: "5rem" }}>
           <span style={label}>Technical</span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
-            {TECH.map(s => (
-              <span key={s} style={{
-                fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.1em",
-                color: c.dim, border: `1px solid ${c.border}`,
-                background: c.glass,
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                padding: "0.4rem 0.8rem", textTransform: "uppercase",
-                transition: "color 0.3s, border-color 0.3s",
-              }}>{s}</span>
+          <p style={{ margin: 0, lineHeight: 2.2 }}>
+            {TECH.map((s, i) => (
+              <span key={s}>
+                <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.12em", color: c.faint, textTransform: "uppercase" }}>{s}</span>
+                {i < TECH.length - 1 && <span style={{ color: c.border, margin: "0 0.5em" }}>·</span>}
+              </span>
             ))}
-          </div>
+          </p>
         </div>
 
         {/* ── CURRENTLY ── */}
