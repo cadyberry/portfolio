@@ -23,18 +23,13 @@ function colors(theme: Theme) {
   };
 }
 
-const SKILLS = [
-  "UI Design", "Creative Direction", "Brand Identity",
-  "Web Development", "Digital Art", "Photography",
-  "Generative AI", "Data Science", "ML Engineering",
-  "Illustration", "Art Direction", "Prompt Engineering",
-];
-
 const SERVICES = [
   "Poster Design", "Websites", "Mobile Apps",
   "Logo & Identity", "Social Media Planning", "Creative Consulting",
   "UI / UX", "Brand Systems", "Digital Art",
   "Generative AI", "Photography", "Art Direction",
+  "Motion Design", "Illustration", "Print & Book Design",
+  "Web Apps", "Prompt Engineering", "Data Visualization",
 ];
 
 
@@ -153,24 +148,6 @@ export default function About() {
           </div>
         </div>
 
-
-        {/* ── SKILLS ── */}
-        <div style={{ marginBottom: "5rem" }}>
-          <span style={label}>Disciplines</span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
-            {SKILLS.map(s => (
-              <span key={s} style={{
-                fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.1em",
-                color: c.dim, border: `1px solid ${c.border}`,
-                background: c.glass,
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                padding: "0.4rem 0.8rem", textTransform: "uppercase",
-                transition: "color 0.3s, border-color 0.3s",
-              }}>{s}</span>
-            ))}
-          </div>
-        </div>
 
         {/* ── SERVICES ── */}
         <div style={{ marginBottom: "5rem" }}>
