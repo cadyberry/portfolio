@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "./components/Nav";
-import UnicornBg from "./components/UnicornBg";
 import { ThemeProvider } from "./theme";
 
 export const metadata: Metadata = {
@@ -20,11 +19,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme')||'light';if(t!=='dark')document.documentElement.classList.add(t);}catch(e){document.documentElement.classList.add('light');}})()`}} />
       </head>
       <body>
-        <UnicornBg />
-        <div aria-hidden="true" style={{
-          position: "fixed", inset: 0, zIndex: 2, pointerEvents: "none",
-          background: "linear-gradient(to bottom, rgba(68,0,255,0.55) 0%, transparent 18%, transparent 82%, rgba(68,0,255,0.55) 100%)",
-        }} />
         <ThemeProvider>
           <Nav />
           {children}

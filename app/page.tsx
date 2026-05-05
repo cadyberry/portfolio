@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { useTheme, type Theme } from "./theme";
+import UnicornWindow from "./components/UnicornWindow";
 
 function pageColors(theme: Theme) {
   if (theme === "light") return {
@@ -32,7 +33,7 @@ const PROJECTS = [
   { slug: "themes",        name: "THEMES",        year: "2025", cls: "m-uipacks",   file: "themes.zip"       },
   { slug: "packs",         name: "PACKS",         year: "2025", cls: "m-silt",      file: "packs.zip"        },
   { slug: "gen-ai-tools",  name: "GEN AI TOOLS",  year: "2024", cls: "m-signal",    file: "gen-ai.mp4"       },
-  { slug: "animation",     name: "ANIMATION",     year: "2025", cls: "m-vanta",     file: "animation.mp4"    },
+  { slug: "animation",     name: "ANIMATION",     year: "2025", cls: "m-vanta",     file: "animation.mp4",   unicorn: true },
   { slug: "design-tools",  name: "DESIGN TOOLS",  year: "2025", cls: "m-biome",     file: "design-tools.zip" },
   { slug: "ui-packs",      name: "UI PACKS",      year: "2025", cls: "m-uipacks",   file: "ui-packs.zip"     },
   { slug: "github",        name: "GITHUB",        year: "2018–", cls: "m-plugins",  file: "github.com",      href: "https://github.com/cadyberry" },
@@ -71,9 +72,12 @@ export default function Home() {
               const dest = (p as {href?: string}).href ?? `/work/${p.slug}`;
               const external = !!(p as {href?: string}).href;
               const cls = `browser-window win-${i + 1}`;
+              const isUnicorn = !!(p as { unicorn?: boolean }).unicorn;
               const inner = <>
                 <div className="window-titlebar">{p.file}</div>
-                <div className={`window-screen ${p.cls}`}><div className="screen" /></div>
+                <div className={`window-screen ${p.cls}`}>
+                  {isUnicorn ? <UnicornWindow /> : <div className="screen" />}
+                </div>
               </>;
               return external
                 ? <a key={p.slug} href={dest} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
