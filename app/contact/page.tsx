@@ -4,27 +4,27 @@ import { useTheme, type Theme } from "../theme";
 
 function colors(theme: Theme) {
   if (theme === "light") return {
-    bg: "#f9f7f4", text: "#111111", dim: "rgba(17,17,17,0.45)",
-    faint: "rgba(17,17,17,0.18)", accent: "#e8003d",
-    border: "rgba(0,0,0,0.09)", borderHot: "rgba(17,17,17,0.45)",
+    bg: "#f9f7f4", text: "#111111", dim: "rgba(17,17,17,0.72)",
+    faint: "rgba(17,17,17,0.5)", accent: "#e8003d",
+    border: "rgba(0,0,0,0.09)", borderHot: "rgba(17,17,17,0.7)",
     surface: "rgba(0,0,0,0.03)", chipBg: "rgba(0,0,0,0.05)",
     chipActive: "#111111", chipActiveText: "#f9f7f4",
     btnBg: "#111111", btnText: "#f9f7f4",
     glass: "rgba(255,255,255,0.55)", glassBorder: "rgba(255,255,255,0.85)",
   };
   if (theme === "mid") return {
-    bg: "#12082a", text: "rgba(255,232,185,0.92)", dim: "rgba(255,195,120,0.45)",
-    faint: "rgba(255,180,80,0.16)", accent: "#ffaa00",
-    border: "rgba(180,120,255,0.18)", borderHot: "rgba(255,195,120,0.6)",
+    bg: "#12082a", text: "rgba(255,232,185,0.92)", dim: "rgba(255,210,140,0.85)",
+    faint: "rgba(255,195,120,0.65)", accent: "#ffaa00",
+    border: "rgba(180,120,255,0.18)", borderHot: "rgba(255,195,120,0.8)",
     surface: "rgba(180,120,255,0.06)", chipBg: "rgba(180,120,255,0.06)",
     chipActive: "#ffaa00", chipActiveText: "#12082a",
     btnBg: "#ffaa00", btnText: "#12082a",
     glass: "rgba(140,80,255,0.08)", glassBorder: "rgba(180,120,255,0.2)",
   };
   return {
-    bg: "#050508", text: "#ffffff", dim: "rgba(255,255,255,0.35)",
-    faint: "rgba(255,255,255,0.1)", accent: "#ff00aa",
-    border: "rgba(255,255,255,0.06)", borderHot: "rgba(255,255,255,0.5)",
+    bg: "#050508", text: "#ffffff", dim: "rgba(255,255,255,0.75)",
+    faint: "rgba(255,255,255,0.5)", accent: "#ff00aa",
+    border: "rgba(255,255,255,0.06)", borderHot: "rgba(255,255,255,0.7)",
     surface: "rgba(255,255,255,0.03)", chipBg: "rgba(255,255,255,0.04)",
     chipActive: "#ffffff", chipActiveText: "#050508",
     btnBg: "#ffffff", btnText: "#050508",
