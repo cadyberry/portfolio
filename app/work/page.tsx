@@ -63,7 +63,7 @@ export default function Work() {
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem" }}>
 
         <div style={{ marginBottom: "3rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1.5rem" }}>
-          <h1 style={{ fontFamily: "'Courier New', monospace", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 700, letterSpacing: "0.1em", color: c.text, margin: 0, transition: "color 0.3s" }}>
+          <h1 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 700, letterSpacing: "0.1em", color: c.text, margin: 0, transition: "color 0.3s" }}>
             WORK
           </h1>
 

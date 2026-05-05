@@ -133,7 +133,7 @@ export default function Nav() {
       alignItems: "center",
       justifyContent: "space-between",
       padding: "1.2rem 2rem",
-      fontFamily: "'Courier New', monospace",
+      fontFamily: "Inter, sans-serif",
       background: "transparent",
       transition: "background 0.3s ease",
     }}>
