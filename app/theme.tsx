@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export type Theme = "dark" | "light" | "mid";
 
-const ORDER: Theme[] = ["dark", "light", "mid"];
+const ORDER: Theme[] = ["light", "mid", "dark"];
 
 interface ThemeCtx {
   theme: Theme;
