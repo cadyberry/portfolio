@@ -36,6 +36,12 @@ export default function Notes() {
           Notes
         </h1>
 
+        {NOTES.length === 0 && (
+          <p style={{ fontFamily: "Georgia, serif", fontSize: "0.9rem", color: c.faint, fontStyle: "italic" }}>
+            Coming soon.
+          </p>
+        )}
+
         <div style={{ display: "flex", flexDirection: "column", gap: "0px" }}>
           {NOTES.map((note, i) => (
             <Link
