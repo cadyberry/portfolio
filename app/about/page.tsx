@@ -191,7 +191,7 @@ export default function About() {
             },
             {
               label: "Available For",
-              items: ["UI / product design", "Brand identity", "Creative direction", "Generative AI consulting", "Digital art commissions"],
+              items: ["Freelance projects", "Contract engagements", "Long-term retainers", "Art commissions", "Consulting"],
             },
             {
               label: "Based In",
