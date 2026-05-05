@@ -131,7 +131,7 @@ export default function About() {
           <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
             <span style={label}>The Person</span>
             <p style={body}>
-              Grew up in Connecticut. Moved to Brooklyn. Started making things with acrylic and resin because I needed something physical to hold. Switched to digital when I realized I didn't have to stop at the edge of the frame. The work is neon and biomorphic and psychedelic and I've never seen anyone else make stuff that looks like it. That's the point.
+              Acadia is a Brooklyn-based designer and technologist. She helps clients build a complete online presence — from brand and identity through to the interfaces and websites themselves. The goal is cohesion: every part of how a brand shows up online, designed and built by the same hand.
             </p>
           </div>
           <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
