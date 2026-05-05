@@ -95,7 +95,7 @@ const ICONS: Record<Theme, React.ReactNode> = {
 function themeColors(theme: Theme) {
   if (theme === "light") return {
     nav:     "transparent",
-    glassBg: "rgba(249,247,244,0.75)",
+    glassBg: "transparent",
     text:    "#111111",
     dim:     "rgba(17,17,17,0.38)",
     accent:  "#e8003d",
@@ -103,7 +103,7 @@ function themeColors(theme: Theme) {
   };
   if (theme === "mid") return {
     nav:     "transparent",
-    glassBg: "rgba(18,8,42,0.72)",
+    glassBg: "transparent",
     text:    "rgba(255,232,185,0.92)",
     dim:     "rgba(255,195,120,0.42)",
     accent:  "#ffaa00",
@@ -111,7 +111,7 @@ function themeColors(theme: Theme) {
   };
   return {
     nav:     "transparent",
-    glassBg: "rgba(5,5,8,0.70)",
+    glassBg: "transparent",
     text:    "#ffffff",
     dim:     "rgba(255,255,255,0.42)",
     accent:  "#ff00aa",
