@@ -85,20 +85,39 @@ export default function About() {
           </div>
 
           {/* Venn diagram */}
-          <svg viewBox="0 0 420 300" style={{ width: "100%", maxWidth: 480, overflow: "visible" }} aria-hidden="true">
+          <svg viewBox="0 0 440 380" style={{ width: "100%", maxWidth: 500, overflow: "visible" }} aria-hidden="true">
             <defs>
-              <style>{`.venn-circle { mix-blend-mode: screen; }`}</style>
+              <style>{`.vc { mix-blend-mode: screen; }`}</style>
             </defs>
-            <circle className="venn-circle" cx="175" cy="130" r="110" fill={c.accent} opacity="0.18"/>
-            <circle className="venn-circle" cx="245" cy="130" r="110" fill={c.accent} opacity="0.18"/>
-            <circle className="venn-circle" cx="210" cy="195" r="110" fill={c.accent} opacity="0.18"/>
-            <circle cx="175" cy="130" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
-            <circle cx="245" cy="130" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
-            <circle cx="210" cy="195" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
-            <text x="100" y="72" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>ART</text>
-            <text x="320" y="72" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>TECH</text>
-            <text x="210" y="295" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>DESIGN</text>
-            <text x="210" y="168" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="13" fontWeight="700" letterSpacing="-0.5" fill={c.text}>acadia</text>
+
+            {/* Filled circles */}
+            <circle className="vc" cx="158" cy="168" r="100" fill={c.accent} opacity="0.15"/>
+            <circle className="vc" cx="282" cy="168" r="100" fill={c.accent} opacity="0.15"/>
+            <circle className="vc" cx="220" cy="248" r="100" fill={c.accent} opacity="0.15"/>
+
+            {/* Outlines */}
+            <circle cx="158" cy="168" r="100" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.4"/>
+            <circle cx="282" cy="168" r="100" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.4"/>
+            <circle cx="220" cy="248" r="100" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.4"/>
+
+            {/* ART — top left */}
+            <text x="82" y="46" textAnchor="middle" fontFamily="monospace" fontSize="10" letterSpacing="3" fill={c.text} fontWeight="600">ART</text>
+            <text x="82" y="60" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>illustration</text>
+            <text x="82" y="71" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>photography · prints</text>
+
+            {/* TECH — top right */}
+            <text x="358" y="46" textAnchor="middle" fontFamily="monospace" fontSize="10" letterSpacing="3" fill={c.text} fontWeight="600">TECH</text>
+            <text x="358" y="60" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>ml · data science</text>
+            <text x="358" y="71" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>web dev · typescript</text>
+
+            {/* DESIGN — bottom */}
+            <text x="220" y="372" textAnchor="middle" fontFamily="monospace" fontSize="10" letterSpacing="3" fill={c.text} fontWeight="600">DESIGN</text>
+            <text x="220" y="358" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>ui/ux · brand identity · motion</text>
+
+            {/* Intersection labels */}
+            <text x="220" y="148" textAnchor="middle" fontFamily="monospace" fontSize="7" letterSpacing="1" fill={c.dim} opacity="0.7">generative ai</text>
+            <text x="153" y="238" textAnchor="middle" fontFamily="monospace" fontSize="7" letterSpacing="1" fill={c.dim} opacity="0.7">art direction</text>
+            <text x="287" y="238" textAnchor="middle" fontFamily="monospace" fontSize="7" letterSpacing="1" fill={c.dim} opacity="0.7">product design</text>
           </svg>
         </div>
 
