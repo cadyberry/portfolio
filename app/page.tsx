@@ -35,7 +35,7 @@ const PROJECTS = [
   { slug: "gen-ai-tools",  name: "GEN AI TOOLS",  year: "2024", cls: "m-signal",    file: "gen-ai.mp4"       },
   { slug: "animation",     name: "ANIMATION",     year: "2025", cls: "m-vanta",     file: "animation.mp4",   unicorn: true },
   { slug: "design-tools",  name: "DESIGN TOOLS",  year: "2025", cls: "m-biome",     file: "design-tools.zip" },
-  { slug: "ui-packs",      name: "UI PACKS",      year: "2025", cls: "m-uipacks",   file: "ui-packs.zip"     },
+  { slug: "audio",         name: "AUDIO",         year: "2025", cls: "m-signal",    file: "47c4dy"           },
   { slug: "github",        name: "GITHUB",        year: "2018–", cls: "m-plugins",  file: "github.com"      },
   { slug: "shop",          name: "SHOP",          year: "2025", cls: "m-unavoide",  file: "unavoide.com"    },
 ];

@@ -77,6 +77,17 @@ export const PROJECTS: Project[] = [
     tags: ["UI Components", "Figma", "HTML", "CSS", "Design Systems"],
   },
   {
+    slug: "audio",
+    name: "Audio",
+    year: "2025",
+    tagline: "Original music produced in FL Studio.",
+    description: [
+      "Electronic and experimental music — produced entirely in FL Studio. The same sensibility that runs through the visual work: layered, textured, nothing quite where you expect it.",
+    ],
+    tags: ["FL Studio", "Electronic", "Experimental", "Audio Engineering"],
+    cta: { label: "Listen on SoundCloud", href: "https://soundcloud.com/47c4dy" },
+  },
+  {
     slug: "github",
     name: "GitHub",
     year: "2018–",
