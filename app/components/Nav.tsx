@@ -145,7 +145,7 @@ export default function Nav() {
       }}
       onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
       onMouseLeave={e => (e.currentTarget.style.opacity = "0.85")}>
-        <img src="/blackberry.png" alt="" width={44} height={44} style={{ objectFit: "contain" }} />
+        <img src="/blackberry.png" alt="" width={30} height={30} style={{ objectFit: "contain" }} />
       </Link>
 
       <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>

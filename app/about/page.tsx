@@ -85,39 +85,44 @@ export default function About() {
           </div>
 
           {/* Venn diagram */}
-          <svg viewBox="0 0 440 380" style={{ width: "100%", maxWidth: 500, overflow: "visible" }} aria-hidden="true">
+          <svg viewBox="0 0 460 420" style={{ width: "100%", maxWidth: 500, overflow: "visible" }} aria-hidden="true">
             <defs>
               <style>{`.vc { mix-blend-mode: screen; }`}</style>
             </defs>
 
-            {/* Filled circles */}
-            <circle className="vc" cx="158" cy="168" r="100" fill={c.accent} opacity="0.15"/>
-            <circle className="vc" cx="282" cy="168" r="100" fill={c.accent} opacity="0.15"/>
-            <circle className="vc" cx="220" cy="248" r="100" fill={c.accent} opacity="0.15"/>
+            {/* Filled circles — centered in viewBox with room for labels */}
+            <circle className="vc" cx="170" cy="200" r="105" fill={c.accent} opacity="0.14"/>
+            <circle className="vc" cx="290" cy="200" r="105" fill={c.accent} opacity="0.14"/>
+            <circle className="vc" cx="230" cy="282" r="105" fill={c.accent} opacity="0.14"/>
 
             {/* Outlines */}
-            <circle cx="158" cy="168" r="100" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.4"/>
-            <circle cx="282" cy="168" r="100" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.4"/>
-            <circle cx="220" cy="248" r="100" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.4"/>
+            <circle cx="170" cy="200" r="105" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
+            <circle cx="290" cy="200" r="105" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
+            <circle cx="230" cy="282" r="105" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.38"/>
 
-            {/* ART — top left */}
-            <text x="82" y="46" textAnchor="middle" fontFamily="monospace" fontSize="10" letterSpacing="3" fill={c.text} fontWeight="600">ART</text>
-            <text x="82" y="60" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>illustration</text>
-            <text x="82" y="71" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>photography · prints</text>
+            {/* ART — label sits above-left, anchored to circle's upper-left edge */}
+            <text x="98" y="72" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600" textDecoration="none">ART</text>
+            <text x="98" y="84" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>illustration · prints</text>
+            <text x="98" y="94" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>photography</text>
 
-            {/* TECH — top right */}
-            <text x="358" y="46" textAnchor="middle" fontFamily="monospace" fontSize="10" letterSpacing="3" fill={c.text} fontWeight="600">TECH</text>
-            <text x="358" y="60" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>ml · data science</text>
-            <text x="358" y="71" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>web dev · typescript</text>
+            {/* TECH — label sits above-right */}
+            <text x="362" y="72" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">TECH</text>
+            <text x="362" y="84" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>ml · data science</text>
+            <text x="362" y="94" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>web dev · typescript</text>
 
-            {/* DESIGN — bottom */}
-            <text x="220" y="372" textAnchor="middle" fontFamily="monospace" fontSize="10" letterSpacing="3" fill={c.text} fontWeight="600">DESIGN</text>
-            <text x="220" y="358" textAnchor="middle" fontFamily="monospace" fontSize="7.5" letterSpacing="0.5" fill={c.faint}>ui/ux · brand identity · motion</text>
+            {/* DESIGN — label sits below the bottom circle */}
+            <text x="230" y="404" textAnchor="middle" fontFamily="monospace" fontSize="9" letterSpacing="3" fill={c.text} fontWeight="600">DESIGN</text>
+            <text x="230" y="392" textAnchor="middle" fontFamily="monospace" fontSize="7" fill={c.faint}>ui/ux · brand · motion</text>
+
+            {/* Short tick lines from labels to circle edges */}
+            <line x1="98" y1="98" x2="115" y2="112" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
+            <line x1="362" y1="98" x2="345" y2="112" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
+            <line x1="230" y1="387" x2="230" y2="374" stroke={c.accent} strokeWidth="0.5" opacity="0.3"/>
 
             {/* Intersection labels */}
-            <text x="220" y="148" textAnchor="middle" fontFamily="monospace" fontSize="7" letterSpacing="1" fill={c.dim} opacity="0.7">generative ai</text>
-            <text x="153" y="238" textAnchor="middle" fontFamily="monospace" fontSize="7" letterSpacing="1" fill={c.dim} opacity="0.7">art direction</text>
-            <text x="287" y="238" textAnchor="middle" fontFamily="monospace" fontSize="7" letterSpacing="1" fill={c.dim} opacity="0.7">product design</text>
+            <text x="230" y="172" textAnchor="middle" fontFamily="monospace" fontSize="6.5" letterSpacing="1" fill={c.dim} opacity="0.65">generative ai</text>
+            <text x="163" y="268" textAnchor="middle" fontFamily="monospace" fontSize="6.5" letterSpacing="1" fill={c.dim} opacity="0.65">art direction</text>
+            <text x="297" y="268" textAnchor="middle" fontFamily="monospace" fontSize="6.5" letterSpacing="1" fill={c.dim} opacity="0.65">product design</text>
           </svg>
         </div>
 
