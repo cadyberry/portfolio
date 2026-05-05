@@ -145,11 +145,7 @@ export default function About() {
           <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
             <span style={label}>The Work</span>
             <p style={body}>
-              UI design. Creative direction. Photography. Digital art. I've spent years building AI systems at scale — clinical chatbots, document intelligence, things running in hospitals. That background means I can go from concept to shipped product without handing it off. Then I come home and make neon prints.
-            </p>
-            <br />
-            <p style={body}>
-              I also build tools because the tools that exist are never strange enough.
+              Designer, technologist and artist — Acadia&apos;s goal is to help clients define their online presence and creative direction. That means building brand systems that are visually distinctive and technically sound, from the first spark of a concept through to the shipped product, designed and built by the same hand.
             </p>
           </div>
         </div>
