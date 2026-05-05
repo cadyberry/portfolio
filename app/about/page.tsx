@@ -54,30 +54,17 @@ export default function About() {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "3rem 2rem 6rem" }}>
 
         {/* ── HEADER ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "start", marginBottom: "5rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center", marginBottom: "5rem" }}>
           <div>
-            <p style={{ fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.4em", color: c.faint, textTransform: "uppercase", margin: "0 0 0.8rem" }}>
-              Brooklyn, NY · Available for hire
-            </p>
             <h1 style={{
               fontFamily: "Inter, sans-serif",
               fontSize: "clamp(3rem, 10vw, 6rem)",
               fontWeight: 700, letterSpacing: "-0.04em",
-              color: c.text, margin: "0 0 1.5rem", lineHeight: 0.9,
+              color: c.text, margin: "0 0 0.6rem", lineHeight: 0.9,
               transition: "color 0.3s",
             }}>acadia<br />berry</h1>
-            <p style={{
-              fontFamily: "Georgia, serif",
-              fontSize: "clamp(1rem, 2.5vw, 1.2rem)",
-              lineHeight: 1.65, color: c.dim,
-              fontStyle: "italic",
-              borderLeft: `2px solid ${c.accent}`,
-              paddingLeft: "1.2rem",
-              margin: "0 0 2rem",
-              maxWidth: 420,
-              transition: "color 0.3s, border-color 0.3s",
-            }}>
-              Designer, artist, engineer. Something between all three, depending on the day.
+            <p style={{ fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.3em", color: c.faint, textTransform: "uppercase", margin: "0 0 2rem", transition: "color 0.3s" }}>
+              Brooklyn, NYC
             </p>
             <div style={{ display: "flex", gap: "0.8rem", flexWrap: "wrap" }}>
               <Link href="/contact" style={{
@@ -86,7 +73,7 @@ export default function About() {
                 padding: "0.8rem 1.5rem", textDecoration: "none",
                 textTransform: "uppercase", display: "inline-flex", alignItems: "center",
                 minHeight: 44, transition: "background 0.3s, color 0.3s",
-              }}>HIRE ME →</Link>
+              }}>WORK WITH ME →</Link>
               <Link href="/work" style={{
                 fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.18em",
                 color: c.dim, border: `1px solid ${c.border}`,
@@ -97,20 +84,22 @@ export default function About() {
             </div>
           </div>
 
-          {/* Photo TBD */}
-          <div style={{
-            aspectRatio: "3/4",
-            background: c.glass,
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            border: `1px solid ${c.glassBorder}`,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            flexDirection: "column", gap: "0.5rem",
-            transition: "background 0.3s, border-color 0.3s",
-          }}>
-            <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: c.faint, textTransform: "uppercase" }}>PHOTO</span>
-            <span style={{ fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.4em", color: c.faint, textTransform: "uppercase" }}>TBD</span>
-          </div>
+          {/* Venn diagram */}
+          <svg viewBox="0 0 420 300" style={{ width: "100%", maxWidth: 480, overflow: "visible" }} aria-hidden="true">
+            <defs>
+              <style>{`.venn-circle { mix-blend-mode: screen; }`}</style>
+            </defs>
+            <circle className="venn-circle" cx="175" cy="130" r="110" fill={c.accent} opacity="0.18"/>
+            <circle className="venn-circle" cx="245" cy="130" r="110" fill={c.accent} opacity="0.18"/>
+            <circle className="venn-circle" cx="210" cy="195" r="110" fill={c.accent} opacity="0.18"/>
+            <circle cx="175" cy="130" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
+            <circle cx="245" cy="130" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
+            <circle cx="210" cy="195" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
+            <text x="100" y="72" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>ART</text>
+            <text x="320" y="72" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>TECH</text>
+            <text x="210" y="295" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>DESIGN</text>
+            <text x="210" y="168" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="13" fontWeight="700" letterSpacing="-0.5" fill={c.text}>acadia</text>
+          </svg>
         </div>
 
         {/* ── BIO ── */}
@@ -133,54 +122,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* ── VENN ── */}
-        <div style={{ marginBottom: "5rem" }}>
-          <span style={label}>Roles</span>
-          <div style={{ position: "relative", width: 300, height: 260, margin: "2rem auto 0" }}>
-            <div className="venn-c venn-designer">
-              <span className="venn-title">designer</span>
-              <span className="venn-sub">prints · etsy<br />commissions<br />photography</span>
-            </div>
-            <div className="venn-c venn-developer">
-              <span className="venn-title">software<br />developer</span>
-              <span className="venn-sub">angular · node<br />typescript<br />github</span>
-            </div>
-            <div className="venn-c venn-ux">
-              <span className="venn-title">ui / ux</span>
-              <span className="venn-sub">motion.dev<br />interaction<br />responsive</span>
-            </div>
-          </div>
-        </div>
-
-        {/* ── VENN DIAGRAM ── */}
-        <div style={{ marginBottom: "5rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <span style={label}>where it all overlaps</span>
-          <svg viewBox="0 0 420 300" style={{ width: "100%", maxWidth: 520, overflow: "visible" }} aria-hidden="true">
-            <defs>
-              <style>{`
-                .venn-circle { mix-blend-mode: screen; }
-              `}</style>
-            </defs>
-
-            {/* Three circles */}
-            <circle className="venn-circle" cx="175" cy="130" r="110" fill={c.accent} opacity="0.18"/>
-            <circle className="venn-circle" cx="245" cy="130" r="110" fill={c.accent} opacity="0.18"/>
-            <circle className="venn-circle" cx="210" cy="195" r="110" fill={c.accent} opacity="0.18"/>
-
-            {/* Circle outlines */}
-            <circle cx="175" cy="130" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
-            <circle cx="245" cy="130" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
-            <circle cx="210" cy="195" r="110" fill="none" stroke={c.accent} strokeWidth="1" opacity="0.35"/>
-
-            {/* Labels — outer */}
-            <text x="100" y="72" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim} textDecoration="none" style={{ textTransform: "uppercase" }}>ART</text>
-            <text x="320" y="72" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>TECH</text>
-            <text x="210" y="295" textAnchor="middle" fontFamily="monospace" fontSize="11" letterSpacing="2" fill={c.dim}>DESIGN</text>
-
-            {/* Center label */}
-            <text x="210" y="168" textAnchor="middle" fontFamily="Inter, sans-serif" fontSize="13" fontWeight="700" letterSpacing="-0.5" fill={c.text}>acadia</text>
-          </svg>
-        </div>
 
         {/* ── SKILLS ── */}
         <div style={{ marginBottom: "5rem" }}>
