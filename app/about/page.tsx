@@ -150,8 +150,8 @@ export default function About() {
           <p style={{ margin: 0, lineHeight: 2.2 }}>
             {TECH.map((s, i) => (
               <span key={s}>
-                <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.12em", color: c.faint, textTransform: "uppercase" }}>{s}</span>
-                {i < TECH.length - 1 && <span style={{ color: c.border, margin: "0 0.5em" }}>·</span>}
+                <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.12em", color: c.dim, textTransform: "uppercase" }}>{s}</span>
+                {i < TECH.length - 1 && <span style={{ color: c.faint, margin: "0 0.5em" }}>·</span>}
               </span>
             ))}
           </p>
