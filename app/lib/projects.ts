@@ -33,7 +33,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "gen-ai-tools",
-    name: "Gen AI Tools",
+    name: "Generative Art Tools",
     year: "2024",
     tagline: "AI-powered tools built from the ground up.",
     description: [

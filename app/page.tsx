@@ -32,7 +32,7 @@ function pageColors(theme: Theme) {
 const PROJECTS = [
   { slug: "themes",        name: "THEMES",        year: "2025", cls: "m-uipacks",   file: "themes.zip"       },
   { slug: "packs",         name: "PACKS",         year: "2025", cls: "m-silt",      file: "packs.zip"        },
-  { slug: "gen-ai-tools",  name: "GEN AI TOOLS",  year: "2024", cls: "m-signal",    file: "gen-ai.mp4"       },
+  { slug: "gen-ai-tools",  name: "GEN ART TOOLS", year: "2024", cls: "m-signal",    file: "gen-ai.mp4"       },
   { slug: "animation",     name: "ANIMATION",     year: "2025", cls: "m-vanta",     file: "animation.mp4",   unicorn: true },
   { slug: "design-tools",  name: "DESIGN TOOLS",  year: "2025", cls: "m-biome",     file: "design-tools.zip" },
   { slug: "audio",         name: "AUDIO",         year: "2025", cls: "m-signal",    file: "47c4dy"           },
