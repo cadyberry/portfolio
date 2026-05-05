@@ -1,36 +1,26 @@
 "use client";
-import Script from "next/script";
+import UnicornScene from "unicornstudio-react";
 
 export default function UnicornBg() {
   return (
-    <>
-      <Script
-        src="https://cdn.unicorn.studio/v1.4.0/unicornStudio.umd.js"
-        strategy="afterInteractive"
-        onLoad={() => {
-          const w = window as unknown as {
-            UnicornStudio?: { addScene: (o: object) => void };
-          };
-          w.UnicornStudio?.addScene({
-            elementId: "unicorn-bg",
-            projectId: "lAv9VIcKSBIRuE0AbtY8",
-            fps: 60,
-            scale: 1,
-            dpi: 1.5,
-            interactivity: { mouse: { disableMobile: true } },
-          });
-        }}
+    <div
+      aria-hidden="true"
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: "none",
+        overflow: "hidden",
+      }}
+    >
+      <UnicornScene
+        projectId="RJ8AcNwMobjce9wv78c3"
+        width="100vw"
+        height="100vh"
+        scale={1}
+        dpi={1.5}
+        sdkUrl="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@2.1.11/dist/unicornStudio.umd.js"
       />
-      <div
-        id="unicorn-bg"
-        aria-hidden="true"
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
-      />
-    </>
+    </div>
   );
 }

@@ -10,6 +10,7 @@ function colors(theme: Theme) {
     surface: "rgba(0,0,0,0.03)", chipBg: "rgba(0,0,0,0.05)",
     chipActive: "#111111", chipActiveText: "#f9f7f4",
     btnBg: "#111111", btnText: "#f9f7f4",
+    glass: "rgba(255,255,255,0.55)", glassBorder: "rgba(255,255,255,0.85)",
   };
   if (theme === "mid") return {
     bg: "#12082a", text: "rgba(255,232,185,0.92)", dim: "rgba(255,195,120,0.45)",
@@ -18,6 +19,7 @@ function colors(theme: Theme) {
     surface: "rgba(180,120,255,0.06)", chipBg: "rgba(180,120,255,0.06)",
     chipActive: "#ffaa00", chipActiveText: "#12082a",
     btnBg: "#ffaa00", btnText: "#12082a",
+    glass: "rgba(140,80,255,0.08)", glassBorder: "rgba(180,120,255,0.2)",
   };
   return {
     bg: "#050508", text: "#ffffff", dim: "rgba(255,255,255,0.35)",
@@ -26,6 +28,7 @@ function colors(theme: Theme) {
     surface: "rgba(255,255,255,0.03)", chipBg: "rgba(255,255,255,0.04)",
     chipActive: "#ffffff", chipActiveText: "#050508",
     btnBg: "#ffffff", btnText: "#050508",
+    glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.1)",
   };
 }
 
@@ -99,7 +102,7 @@ export default function Contact() {
         <div style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: "6rem", alignItems: "start" }}>
 
           {/* ── LEFT: INFO ── */}
-          <div style={{ position: "sticky", top: "7rem" }}>
+          <div style={{ position: "sticky", top: "7rem", background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
             <p style={{ fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.4em", color: c.faint, textTransform: "uppercase", margin: "0 0 0.6rem", transition: "color 0.3s" }}>
               Get in touch
             </p>
@@ -138,7 +141,7 @@ export default function Contact() {
           </div>
 
           {/* ── RIGHT: FORM ── */}
-          <div>
+          <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2.5rem", borderRadius: 0 }}>
             {!sent ? (
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "2.2rem" }}>
 
@@ -177,6 +180,8 @@ export default function Contact() {
                           color: form.service === s ? c.chipActiveText : c.dim,
                           background: form.service === s ? c.chipActive : c.chipBg,
                           border: `1px solid ${form.service === s ? c.chipActive : c.border}`,
+                          backdropFilter: "blur(8px)",
+                          WebkitBackdropFilter: "blur(8px)",
                           padding: "0.5rem 0.9rem", cursor: "pointer", textTransform: "uppercase",
                           transition: "all 0.15s", minHeight: 44,
                         }}
@@ -190,13 +195,13 @@ export default function Contact() {
                     Budget — <span style={{ color: c.accent, transition: "color 0.3s" }}>${parseInt(form.budget).toLocaleString()}</span>
                   </label>
                   <input
-                    type="range" min={20} max={5000} step={10}
+                    type="range" min={20} max={10000} step={50}
                     value={form.budget}
                     onChange={e => set("budget", e.target.value)}
                     style={{ width: "100%", accentColor: c.accent, height: 44, cursor: "pointer", marginTop: "0.3rem" }}
                   />
                   <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "monospace", fontSize: "0.45rem", color: c.faint, marginTop: "0.2rem", transition: "color 0.3s" }}>
-                    <span>$20</span><span>$5,000+</span>
+                    <span>$20</span><span>$10,000+</span>
                   </div>
                 </div>
 

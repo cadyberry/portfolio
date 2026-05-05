@@ -7,16 +7,19 @@ function colors(theme: Theme) {
     bg: "#f9f7f4", text: "#111111", dim: "rgba(17,17,17,0.45)",
     faint: "rgba(17,17,17,0.18)", accent: "#e8003d",
     border: "rgba(0,0,0,0.09)", surface: "rgba(0,0,0,0.03)",
+    glass: "rgba(255,255,255,0.55)", glassBorder: "rgba(255,255,255,0.85)",
   };
   if (theme === "mid") return {
     bg: "#12082a", text: "rgba(255,232,185,0.92)", dim: "rgba(255,195,120,0.45)",
     faint: "rgba(255,180,80,0.16)", accent: "#ffaa00",
     border: "rgba(180,120,255,0.18)", surface: "rgba(180,120,255,0.06)",
+    glass: "rgba(140,80,255,0.08)", glassBorder: "rgba(180,120,255,0.2)",
   };
   return {
     bg: "#050508", text: "#ffffff", dim: "rgba(255,255,255,0.35)",
     faint: "rgba(255,255,255,0.1)", accent: "#ff00aa",
     border: "rgba(255,255,255,0.06)", surface: "rgba(255,255,255,0.03)",
+    glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.12)",
   };
 }
 
@@ -27,15 +30,6 @@ const SKILLS = [
   "Illustration", "Art Direction", "Prompt Engineering",
 ];
 
-const TIMELINE = [
-  { year: "2018", event: "Launched unavoide.com — first free tools platform" },
-  { year: "2020", event: "Transitioned from acrylic & resin to fully digital" },
-  { year: "2021", event: "B.A. Psychological Science, CCSU" },
-  { year: "2022", event: "First digital art prints — 60+ editions to date" },
-  { year: "2023", event: "M.S. Data Science, CCSU. Built clinical AI systems at scale" },
-  { year: "2024", event: "Spacescape launched. Three books in production" },
-  { year: "2025", event: "UI Packs, portfolio rebuild, and whatever's next" },
-];
 
 export default function About() {
   const { theme } = useTheme();
@@ -83,7 +77,7 @@ export default function About() {
               maxWidth: 420,
               transition: "color 0.3s, border-color 0.3s",
             }}>
-              Digital designer, artist, and software engineer. I build things that look like they were made by a person, not a template.
+              Designer, artist, engineer. Something between all three, depending on the day.
             </p>
             <div style={{ display: "flex", gap: "0.8rem", flexWrap: "wrap" }}>
               <Link href="/contact" style={{
@@ -106,8 +100,10 @@ export default function About() {
           {/* Photo TBD */}
           <div style={{
             aspectRatio: "3/4",
-            background: c.surface,
-            border: `1px solid ${c.border}`,
+            background: c.glass,
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            border: `1px solid ${c.glassBorder}`,
             display: "flex", alignItems: "center", justifyContent: "center",
             flexDirection: "column", gap: "0.5rem",
             transition: "background 0.3s, border-color 0.3s",
@@ -119,25 +115,40 @@ export default function About() {
 
         {/* ── BIO ── */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", marginBottom: "5rem" }}>
-          <div>
+          <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
             <span style={label}>The Person</span>
             <p style={body}>
-              Grew up in Connecticut. Made it to Brooklyn. The city has been an education — the density of it, the contradictions, a single block holding a bodega, a gallery, a construction site, a mural, and the best food you've ever had. All of that goes into the work.
-            </p>
-            <br />
-            <p style={body}>
-              Started with acrylic and resin. Switched to digital when I realized the canvas didn't have to stop at the edge of the frame. Five years in, the work is neon and biomorphic and psychedelic and unlike anything else. That's intentional.
+              Grew up in Connecticut. Moved to Brooklyn. Started making things with acrylic and resin because I needed something physical to hold. Switched to digital when I realized I didn't have to stop at the edge of the frame. The work is neon and biomorphic and psychedelic and I've never seen anyone else make stuff that looks like it. That's the point.
             </p>
           </div>
-          <div>
+          <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
             <span style={label}>The Work</span>
             <p style={body}>
-              Digital art. UI design. Creative direction. Photography. I build brands that have a heartbeat and websites that feel like places. I also build tools — actual software — because the tools that exist are never strange enough.
+              UI design. Creative direction. Photography. Digital art. I've spent years building AI systems at scale — clinical chatbots, document intelligence, things running in hospitals. That background means I can go from concept to shipped product without handing it off. Then I come home and make neon prints.
             </p>
             <br />
             <p style={body}>
-              The AI and data science background isn't separate from the creative work. It's why I can go from concept to shipped product without handing off to an engineer. I've built clinical chatbots, document intelligence systems, and generative AI tools at scale. Then I come home and make neon prints.
+              I also build tools because the tools that exist are never strange enough.
             </p>
+          </div>
+        </div>
+
+        {/* ── VENN ── */}
+        <div style={{ marginBottom: "5rem" }}>
+          <span style={label}>Roles</span>
+          <div style={{ position: "relative", width: 300, height: 260, margin: "2rem auto 0" }}>
+            <div className="venn-c venn-designer">
+              <span className="venn-title">designer</span>
+              <span className="venn-sub">prints · etsy<br />commissions<br />photography</span>
+            </div>
+            <div className="venn-c venn-developer">
+              <span className="venn-title">software<br />developer</span>
+              <span className="venn-sub">angular · node<br />typescript<br />github</span>
+            </div>
+            <div className="venn-c venn-ux">
+              <span className="venn-title">ui / ux</span>
+              <span className="venn-sub">motion.dev<br />interaction<br />responsive</span>
+            </div>
           </div>
         </div>
 
@@ -149,30 +160,12 @@ export default function About() {
               <span key={s} style={{
                 fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.1em",
                 color: c.dim, border: `1px solid ${c.border}`,
+                background: c.glass,
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
                 padding: "0.4rem 0.8rem", textTransform: "uppercase",
                 transition: "color 0.3s, border-color 0.3s",
               }}>{s}</span>
-            ))}
-          </div>
-        </div>
-
-        {/* ── TIMELINE ── */}
-        <div style={{ marginBottom: "5rem" }}>
-          <span style={label}>Timeline</span>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {TIMELINE.map((item, i) => (
-              <div key={item.year} style={{
-                display: "grid",
-                gridTemplateColumns: "4rem 1fr",
-                gap: "1.5rem",
-                padding: "0.9rem 0",
-                borderBottom: i < TIMELINE.length - 1 ? `1px solid ${c.border}` : "none",
-                alignItems: "baseline",
-                transition: "border-color 0.3s",
-              }}>
-                <span style={{ fontFamily: "monospace", fontSize: "0.52rem", color: c.accent, letterSpacing: "0.1em", transition: "color 0.3s" }}>{item.year}</span>
-                <span style={{ fontFamily: "Georgia, serif", fontSize: "0.875rem", color: c.dim, lineHeight: 1.6, transition: "color 0.3s" }}>{item.event}</span>
-              </div>
             ))}
           </div>
         </div>
@@ -193,7 +186,7 @@ export default function About() {
               items: ["Brooklyn, NY", "Remote-friendly", "Open to travel for the right project"],
             },
           ].map(col => (
-            <div key={col.label} style={{ padding: "2rem 1.5rem", background: c.bg, transition: "background 0.3s" }}>
+            <div key={col.label} style={{ padding: "2rem 1.5rem", background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", transition: "background 0.3s" }}>
               <span style={label}>{col.label}</span>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 {col.items.map(item => (
@@ -208,7 +201,7 @@ export default function About() {
         </div>
 
         {/* ── EDUCATION ── */}
-        <div style={{ borderTop: `1px solid ${c.border}`, paddingTop: "2.5rem", transition: "border-color 0.3s" }}>
+        <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2.5rem", transition: "background 0.3s, border-color 0.3s" }}>
           <span style={label}>Education</span>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>
             {[
@@ -227,6 +220,27 @@ export default function About() {
         </div>
 
       </div>
+      <style>{`
+        .venn-c {
+          position: absolute;
+          width: 170px; height: 170px;
+          border-radius: 50%;
+          border: 1px solid rgba(255,255,255,0.13);
+          background: rgba(255,255,255,0.025);
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        }
+        .venn-designer { left:65px; top:0; justify-content:flex-start; align-items:center; padding-top:20px; }
+        .venn-developer { left:0; top:90px; justify-content:flex-end; align-items:flex-start; padding:0 0 20px 20px; }
+        .venn-ux { left:130px; top:90px; justify-content:flex-end; align-items:flex-end; padding:0 20px 20px 0; }
+        .venn-title { font-family:monospace; font-size:0.55rem; font-weight:600; letter-spacing:0.08em; text-transform:lowercase; color:rgba(255,255,255,0.75); line-height:1.3; text-align:center; }
+        .venn-developer .venn-title { text-align:left; }
+        .venn-ux .venn-title { text-align:right; }
+        .venn-sub { font-family:monospace; font-size:0.46rem; color:rgba(255,255,255,0.28); line-height:1.7; letter-spacing:0.04em; text-align:center; }
+        .venn-developer .venn-sub { text-align:left; }
+        .venn-ux .venn-sub { text-align:right; }
+      `}</style>
     </main>
   );
 }

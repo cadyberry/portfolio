@@ -5,21 +5,55 @@ import { usePathname } from "next/navigation";
 import { useTheme, type Theme } from "../theme";
 
 const LINKS = [
-  { href: "/work",    label: "WORK"    },
-  { href: "/play",    label: "PLAY"    },
-  { href: "/shop",    label: "SHOP"    },
-  { href: "/about",   label: "ABOUT"   },
-  { href: "/contact", label: "CONTACT" },
+  { href: "/work",                         label: "WORK"        },
+  { href: "https://unafield.vercel.app",   label: "CREATE",      external: true },
+  { href: "https://unavoide.com",          label: "SHOP",        external: true },
+  { href: "/photographs",                  label: "PHOTOGRAPHS" },
+  { href: "/about",                        label: "ABOUT"       },
+  { href: "/contact",                      label: "CONTACT"     },
 ];
 
 function HomeGlyph() {
+  // hex-packed drupelets clipped to berry ellipse
+  const even = [8.5, 13, 17.5, 22];
+  const odd  = [11, 15.5, 20];
+  const rows = [
+    { y: 13,   xs: even },
+    { y: 17,   xs: odd  },
+    { y: 21,   xs: even },
+    { y: 25,   xs: odd  },
+    { y: 29,   xs: even },
+    { y: 33,   xs: odd  },
+  ];
   return (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-      <rect x="1" y="1" width="20" height="20" rx="1" stroke="currentColor" strokeWidth="1.5" />
-      <rect x="5" y="5" width="5" height="5" fill="currentColor" />
-      <rect x="12" y="5" width="5" height="5" fill="currentColor" />
-      <rect x="5" y="12" width="5" height="5" fill="currentColor" />
-      <rect x="12" y="12" width="5" height="5" fill="currentColor" opacity="0.35" />
+    <svg width="30" height="30" viewBox="0 0 30 34" fill="none" aria-hidden="true">
+      <defs>
+        <clipPath id="bc">
+          <ellipse cx="15" cy="23" rx="10.5" ry="11.5"/>
+        </clipPath>
+      </defs>
+
+      {/* stem */}
+      <path d="M15 12 C15 9.5 15.5 7 16.5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+      {/* calyx leaves */}
+      <path d="M15 13 C12 12 10.5 10 11.5 8.5 C12.5 7 14.5 9 15 12" fill="currentColor" opacity="0.6"/>
+      <path d="M15 13 C18 12 19.5 10 18.5 8.5 C17.5 7 15.5 9 15 12" fill="currentColor" opacity="0.6"/>
+      <path d="M15 13 C15 10.5 16 8.5 17.5 8 C19 7.5 18.5 10 15 13" fill="currentColor" opacity="0.35"/>
+
+      {/* berry base — dark fill between drupelets */}
+      <ellipse cx="15" cy="23" rx="10.5" ry="11.5" fill="currentColor" opacity="0.35"/>
+
+      {/* drupelets */}
+      <g clipPath="url(#bc)">
+        {rows.flatMap(({ y, xs }) =>
+          xs.map(x => (
+            <g key={`${x}-${y}`}>
+              <circle cx={x} cy={y} r="2.6" fill="currentColor"/>
+              <circle cx={x - 0.9} cy={y - 0.9} r="0.8" fill="white" opacity="0.28"/>
+            </g>
+          ))
+        )}
+      </g>
     </svg>
   );
 }
@@ -64,25 +98,28 @@ const ICONS: Record<Theme, React.ReactNode> = {
 
 function themeColors(theme: Theme) {
   if (theme === "light") return {
-    nav:    "rgba(249,247,244,0.96)",
-    text:   "#111111",
-    dim:    "rgba(17,17,17,0.38)",
-    accent: "#e8003d",
-    border: "rgba(0,0,0,0.1)",
+    nav:     "transparent",
+    glassBg: "rgba(249,247,244,0.75)",
+    text:    "#111111",
+    dim:     "rgba(17,17,17,0.38)",
+    accent:  "#e8003d",
+    border:  "rgba(0,0,0,0.1)",
   };
   if (theme === "mid") return {
-    nav:    "rgba(18,8,42,0.9)",
-    text:   "rgba(255,232,185,0.92)",
-    dim:    "rgba(255,195,120,0.42)",
-    accent: "#ffaa00",
-    border: "rgba(180,120,255,0.2)",
+    nav:     "transparent",
+    glassBg: "rgba(18,8,42,0.72)",
+    text:    "rgba(255,232,185,0.92)",
+    dim:     "rgba(255,195,120,0.42)",
+    accent:  "#ffaa00",
+    border:  "rgba(180,120,255,0.2)",
   };
   return {
-    nav:    "transparent",
-    text:   "#ffffff",
-    dim:    "#555",
-    accent: "#ff00aa",
-    border: "rgba(255,255,255,0.08)",
+    nav:     "transparent",
+    glassBg: "rgba(5,5,8,0.70)",
+    text:    "#ffffff",
+    dim:     "rgba(255,255,255,0.42)",
+    accent:  "#ff00aa",
+    border:  "rgba(255,255,255,0.08)",
   };
 }
 
@@ -101,9 +138,10 @@ export default function Nav() {
       justifyContent: "space-between",
       padding: "1.2rem 2rem",
       fontFamily: "'Courier New', monospace",
-      background: c.nav,
-      backdropFilter: theme !== "dark" ? "blur(12px)" : "none",
-      borderBottom: theme !== "dark" ? `1px solid ${c.border}` : "none",
+      background: c.glassBg,
+      backdropFilter: "blur(20px)",
+      WebkitBackdropFilter: "blur(20px)",
+      borderBottom: `1px solid ${c.border}`,
       transition: "background 0.3s ease",
     }}>
       <Link href="/" aria-label="Home" style={{
@@ -118,20 +156,29 @@ export default function Nav() {
       </Link>
 
       <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
-        {LINKS.map(({ href, label }) => (
-          <Link key={href} href={href} style={{
+        {LINKS.map(({ href, label, external }) => {
+          const linkStyle: React.CSSProperties = {
             fontSize: "0.6rem",
             letterSpacing: "0.2em",
-            color: path.startsWith(href) ? c.accent : c.dim,
+            color: !external && path.startsWith(href) ? c.accent : c.dim,
             textDecoration: "none",
             textTransform: "uppercase",
             transition: "color 0.2s",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.color = c.text)}
-          onMouseLeave={e => (e.currentTarget.style.color = path.startsWith(href) ? c.accent : c.dim)}>
-            {label}
-          </Link>
-        ))}
+          };
+          return external ? (
+            <a key={href} href={href} target="_blank" rel="noopener noreferrer" style={linkStyle}
+              onMouseEnter={e => (e.currentTarget.style.color = c.text)}
+              onMouseLeave={e => (e.currentTarget.style.color = c.dim)}>
+              {label}
+            </a>
+          ) : (
+            <Link key={href} href={href} style={linkStyle}
+              onMouseEnter={e => (e.currentTarget.style.color = c.text)}
+              onMouseLeave={e => (e.currentTarget.style.color = path.startsWith(href) ? c.accent : c.dim)}>
+              {label}
+            </Link>
+          );
+        })}
 
         {/* Theme toggle */}
         <button

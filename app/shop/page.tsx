@@ -55,9 +55,9 @@ export default function Shop() {
         {/* Books section */}
         <div style={{ marginBottom: "5rem" }}>
           <p style={{ fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.3em", color: "#ff00aa", textTransform: "uppercase", marginBottom: "1.5rem" }}>BOOKS — IN PRODUCTION</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1px", background: "#111" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "2rem" }}>
             {BOOKS.map(book => (
-              <div key={book.title} style={{ background: "#000", padding: "1.5rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <div key={book.title} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 {/* Book cover preview */}
                 <div style={{ position: "relative", aspectRatio: book.size === "8 × 11 in" ? "8.5/11" : book.size === "5 × 8 in" ? "5/8" : "4/3", overflow: "hidden", background: "#050505" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -89,7 +89,7 @@ export default function Shop() {
                   fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
                   color: "#333", background: "transparent", border: "1px solid #1a1a1a",
                   padding: "0.7rem 1rem", cursor: "not-allowed", textTransform: "uppercase",
-                  minHeight: 44,
+                  minHeight: 44, marginTop: "1.5rem",
                 }}>NOTIFY ME</button>
               </div>
             ))}

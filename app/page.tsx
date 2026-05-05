@@ -29,15 +29,14 @@ function pageColors(theme: Theme) {
 }
 
 const PROJECTS = [
-  { slug: "signal-fm",    name: "SIGNAL FM",    year: "2024", cls: "m-signal",    file: "signal-fm.mp4"    },
-  { slug: "vanta",        name: "VANTA",         year: "2024", cls: "m-vanta",     file: "vanta.mp4"        },
-  { slug: "hollow",       name: "HOLLOW",        year: "2024", cls: "m-hollow",    file: "hollow.png"       },
-  { slug: "biome",        name: "BIOME",         year: "2023", cls: "m-biome",     file: "biome.gif"        },
-  { slug: "circuit-city", name: "CIRCUIT CITY",  year: "2023", cls: "m-circuit",   file: "circuit-city.jpg" },
-  { slug: "frequency",    name: "FREQUENCY",     year: "2023", cls: "m-frequency", file: "frequency.gif"    },
-  { slug: "silt",         name: "SILT",          year: "2022", cls: "m-silt",      file: "silt.png"         },
-  { slug: "unavoide",     name: "UNAVOIDE",      year: "2018", cls: "m-unavoide",  file: "unavoide.mp4"     },
-  { slug: "ui-packs",    name: "UI PACKS",      year: "2025", cls: "m-uipacks",   file: "ui-packs.zip"     },
+  { slug: "signal-fm",  name: "SIGNAL FM",  year: "2025", cls: "m-signal",    file: "signal-fm.mp4"   },
+  { slug: "vanta",      name: "VANTA",      year: "2025", cls: "m-vanta",     file: "vanta.mp4"       },
+  { slug: "hollow",     name: "HOLLOW",     year: "2024", cls: "m-hollow",    file: "hollow.png"      },
+  { slug: "silt",       name: "SILT",       year: "2025", cls: "m-silt",      file: "silt.css"        },
+  { slug: "biome",      name: "BIOME",      year: "2024", cls: "m-biome",     file: "biome.gif"       },
+  { slug: "ui-packs",   name: "UI PACKS",   year: "2025", cls: "m-uipacks",   file: "ui-packs.zip"    },
+  { slug: "unavoide",   name: "UNAVOIDE",   year: "2018", cls: "m-unavoide",  file: "unavoide.mp4"    },
+  { slug: "templates",  name: "TEMPLATES",  year: "2025", cls: "m-templates", file: "templates.zip"   },
 ];
 
 const MARQUEE_TEXT = Array(6).fill(
@@ -61,7 +60,7 @@ export default function Home() {
       {/* ── HEADER ── */}
       <header className="home-header">
         <h1 className="home-wordmark">acadia berry</h1>
-        <p className="home-tagline">Digital Designer · Artist · Brooklyn, NY</p>
+        <p className="home-tagline">designer · artist · technologist · NYC</p>
       </header>
 
       {/* ── MAIN GRID ── */}
@@ -110,6 +109,9 @@ export default function Home() {
         whiteSpace: "nowrap",
         padding: "0.85rem 0",
         marginTop: "3rem",
+        background: "rgba(255,255,255,0.03)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
       }}>
         <div style={{
           display: "inline-block",
@@ -124,42 +126,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── STATEMENT ── */}
-      <section style={{
-        padding: "5rem 3rem",
-        maxWidth: 900,
-        margin: "0 auto",
-      }}>
-        <p style={{
-          fontFamily: "Georgia, serif",
-          fontSize: "clamp(1.4rem, 2.4vw, 2.2rem)",
-          lineHeight: 1.55,
-          color: c.textDim,
-          fontStyle: "italic",
-          maxWidth: 720,
-          borderLeft: `2px solid ${c.accent}`,
-          paddingLeft: "1.5rem",
-          margin: 0,
-        }}>
-          &ldquo;Design is how I pay attention.&rdquo;
-        </p>
-        <div style={{ marginTop: "2rem" }}>
-          <Link href="/about" style={{
-            fontFamily: "monospace",
-            fontSize: "0.52rem",
-            letterSpacing: "0.2em",
-            color: c.textDim,
-            textDecoration: "none",
-            textTransform: "uppercase",
-            transition: "color 0.2s",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.color = c.text)}
-          onMouseLeave={e => (e.currentTarget.style.color = c.textDim)}>
-            ABOUT ACADIA →
-          </Link>
-        </div>
-      </section>
-
       {/* ── PLAY + SHOP ── */}
       <section style={{
         borderTop: `1px solid ${c.border}`,
@@ -169,6 +135,9 @@ export default function Home() {
         <div style={{
           padding: "3.5rem 3rem",
           borderRight: `1px solid ${c.border}`,
+          background: "rgba(255,255,255,0.03)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
         }}>
           <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "uppercase", marginBottom: "1rem" }}>Play</p>
           <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
@@ -177,20 +146,20 @@ export default function Home() {
           <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
             Kaleidoscope, pixel editor, generative art, digital rain — all browser-based, all free, built from scratch since 2018.
           </p>
-          <Link href="/play" style={{
+          <a href="https://unafield.vercel.app" target="_blank" rel="noopener noreferrer" style={{
             fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
             color: c.textDim, textDecoration: "none", textTransform: "uppercase",
             border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
             display: "inline-flex", alignItems: "center", minHeight: 44,
             transition: "all 0.2s",
           }}
-          onMouseEnter={e => { e.currentTarget.style.color = c.text; e.currentTarget.style.borderColor = c.textDim; }}
-          onMouseLeave={e => { e.currentTarget.style.color = c.textDim; e.currentTarget.style.borderColor = c.border; }}>
+          onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = c.text; (e.currentTarget as HTMLAnchorElement).style.borderColor = c.textDim; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = c.textDim; (e.currentTarget as HTMLAnchorElement).style.borderColor = c.border; }}>
             EXPLORE TOOLS →
-          </Link>
+          </a>
         </div>
 
-        <div style={{ padding: "3.5rem 3rem" }}>
+        <div style={{ padding: "3.5rem 3rem", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)" }}>
           <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "uppercase", marginBottom: "1rem" }}>Shop</p>
           <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             PRINTS + BOOKS
@@ -198,17 +167,17 @@ export default function Home() {
           <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
             60+ digital art prints. Three books in production — travel photography, coloring book, print collection.
           </p>
-          <Link href="/shop" style={{
+          <a href="https://unavoide.com" target="_blank" rel="noopener noreferrer" style={{
             fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
             color: c.textDim, textDecoration: "none", textTransform: "uppercase",
             border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
             display: "inline-flex", alignItems: "center", minHeight: 44,
             transition: "all 0.2s",
           }}
-          onMouseEnter={e => { e.currentTarget.style.color = c.text; e.currentTarget.style.borderColor = c.textDim; }}
-          onMouseLeave={e => { e.currentTarget.style.color = c.textDim; e.currentTarget.style.borderColor = c.border; }}>
+          onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = c.text; (e.currentTarget as HTMLAnchorElement).style.borderColor = c.textDim; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = c.textDim; (e.currentTarget as HTMLAnchorElement).style.borderColor = c.border; }}>
             VISIT SHOP →
-          </Link>
+          </a>
         </div>
       </section>
 
@@ -221,6 +190,9 @@ export default function Home() {
         alignItems: "center",
         flexWrap: "wrap",
         gap: "1rem",
+        background: "rgba(255,255,255,0.03)",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
       }}>
         <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "uppercase" }}>
           © 2026 ACADIA · Brooklyn, NY
