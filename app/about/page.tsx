@@ -23,6 +23,12 @@ function colors(theme: Theme) {
   };
 }
 
+const TECH = [
+  "Figma", "Angular", "React", "Next.js", "TypeScript",
+  "Node.js", "Python", "TailwindCSS", "SQL", "Git",
+  "Adobe CC", "Framer", "Vercel", "OpenAI API",
+];
+
 const SERVICES = [
   "Poster Design", "Websites", "Mobile Apps",
   "Logo & Identity", "Social Media Planning", "Creative Consulting",
@@ -154,6 +160,24 @@ export default function About() {
           <span style={label}>Services</span>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
             {SERVICES.map(s => (
+              <span key={s} style={{
+                fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.1em",
+                color: c.dim, border: `1px solid ${c.border}`,
+                background: c.glass,
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                padding: "0.4rem 0.8rem", textTransform: "uppercase",
+                transition: "color 0.3s, border-color 0.3s",
+              }}>{s}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* ── TECH ── */}
+        <div style={{ marginBottom: "5rem" }}>
+          <span style={label}>Technical</span>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+            {TECH.map(s => (
               <span key={s} style={{
                 fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.1em",
                 color: c.dim, border: `1px solid ${c.border}`,
