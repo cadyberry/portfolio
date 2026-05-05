@@ -26,7 +26,7 @@ function colors(theme: Theme) {
 const TECH = [
   "Figma", "Angular", "React", "Next.js", "TypeScript",
   "Node.js", "Python", "TailwindCSS", "SQL", "Git",
-  "Adobe CC", "Framer", "Vercel", "OpenAI API",
+  "Adobe CC", "Framer", "Vercel", "OpenAI API", "FL Studio",
 ];
 
 
