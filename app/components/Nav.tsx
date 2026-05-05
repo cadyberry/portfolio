@@ -134,10 +134,7 @@ export default function Nav() {
       justifyContent: "space-between",
       padding: "1.2rem 2rem",
       fontFamily: "'Courier New', monospace",
-      background: c.glassBg,
-      backdropFilter: "blur(20px)",
-      WebkitBackdropFilter: "blur(20px)",
-      borderBottom: `1px solid ${c.border}`,
+      background: "transparent",
       transition: "background 0.3s ease",
     }}>
       <Link href="/" aria-label="Home" style={{
