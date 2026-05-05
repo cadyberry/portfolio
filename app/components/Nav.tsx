@@ -138,14 +138,14 @@ export default function Nav() {
       transition: "background 0.3s ease",
     }}>
       <Link href="/" aria-label="Home" style={{
-        color: c.dim,
         display: "flex",
         alignItems: "center",
-        transition: "color 0.2s",
+        opacity: 0.85,
+        transition: "opacity 0.2s",
       }}
-      onMouseEnter={e => (e.currentTarget.style.color = c.accent)}
-      onMouseLeave={e => (e.currentTarget.style.color = c.dim)}>
-        <HomeGlyph />
+      onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
+      onMouseLeave={e => (e.currentTarget.style.opacity = "0.85")}>
+        <img src="/blackberry.jpeg" alt="" width={32} height={32} style={{ borderRadius: "50%", objectFit: "cover" }} />
       </Link>
 
       <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
