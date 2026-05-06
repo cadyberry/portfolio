@@ -107,7 +107,7 @@ export default function Contact() {
         .elsewhere-row:hover .arrow-span { color: ${c.accent} !important; transform: translate(3px,-3px); }
         @media (max-width: 880px) {
           .contact-hero { grid-template-columns: 1fr !important; gap: 2rem !important; align-items: start !important; }
-          .contact-pitch, .contact-form-grid, .contact-elsewhere { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+          .contact-form-grid, .contact-elsewhere { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
           .contact-details { grid-template-columns: 1fr !important; gap: 2rem !important; }
           .contact-row2 { grid-template-columns: 1fr !important; }
           .contact-sent { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
@@ -157,15 +157,6 @@ export default function Contact() {
         </header>
 
         {/* PITCH */}
-        <section className="contact-pitch" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "6rem" }}>
-          <div style={{ paddingTop: "0.35rem" }}><Label accent={c.accent}>Brief</Label></div>
-          <p style={{ fontFamily: "Fraunces, serif", fontWeight: 300, fontSize: "clamp(1.35rem, 2.4vw, 1.85rem)", lineHeight: 1.45, letterSpacing: "-0.012em", color: c.text, maxWidth: "38ch", margin: 0 }}>
-            Tell me <span style={{ color: c.accent, fontStyle: "italic" }}>what you&apos;re building</span>, who it&apos;s for, and where you&apos;re stuck.{" "}
-            <span style={{ fontStyle: "italic", color: c.dim }}>A few sentences is plenty.</span>{" "}
-            I&apos;ll write back with thoughts, scope, and a way forward.
-          </p>
-        </section>
-
         {/* FORM or SENT */}
         {sent ? (
           <section className="contact-sent" style={{
