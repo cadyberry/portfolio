@@ -1,263 +1,366 @@
 "use client";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
+import Nav from "../components/Nav";
 import { useTheme, type Theme } from "../theme";
 
-function colors(theme: Theme) {
+const SERVICES = [
+  "UI / UX","Websites","Mobile Apps","Logo & Identity",
+  "Brand Systems","Creative Consulting","Photography",
+  "Generative AI","Print & Books","Art Direction","Other",
+];
+const TIMELINES = ["ASAP","< 1 month","1–3 months","3+ months","Flexible"];
+
+function tokens(theme: Theme) {
   if (theme === "light") return {
-    bg: "#f9f7f4", text: "#111111", dim: "rgba(17,17,17,0.72)",
-    faint: "rgba(17,17,17,0.5)", accent: "#e8003d",
-    border: "rgba(0,0,0,0.09)", borderHot: "rgba(17,17,17,0.7)",
-    surface: "rgba(0,0,0,0.03)", chipBg: "rgba(0,0,0,0.05)",
-    chipActive: "#111111", chipActiveText: "#f9f7f4",
-    btnBg: "#111111", btnText: "#f9f7f4",
-    glass: "rgba(255,255,255,0.55)", glassBorder: "rgba(255,255,255,0.85)",
+    bg: "#f6f3ee", text: "#111111",
+    dim: "rgba(17,17,17,0.66)", faint: "rgba(17,17,17,0.38)",
+    hairline: "rgba(17,17,17,0.10)", rule: "rgba(17,17,17,0.16)",
+    accent: "#e8003d",
   };
   if (theme === "mid") return {
-    bg: "#12082a", text: "rgba(255,232,185,0.92)", dim: "rgba(255,210,140,0.85)",
-    faint: "rgba(255,195,120,0.65)", accent: "#ffaa00",
-    border: "rgba(180,120,255,0.18)", borderHot: "rgba(255,195,120,0.8)",
-    surface: "rgba(180,120,255,0.06)", chipBg: "rgba(180,120,255,0.06)",
-    chipActive: "#ffaa00", chipActiveText: "#12082a",
-    btnBg: "#ffaa00", btnText: "#12082a",
-    glass: "rgba(140,80,255,0.08)", glassBorder: "rgba(180,120,255,0.2)",
+    bg: "#12082a", text: "rgba(255,232,185,0.94)",
+    dim: "rgba(255,210,140,0.78)", faint: "rgba(255,195,120,0.45)",
+    hairline: "rgba(180,120,255,0.18)", rule: "rgba(180,120,255,0.30)",
+    accent: "#ffaa00",
   };
   return {
-    bg: "#050508", text: "#ffffff", dim: "rgba(255,255,255,0.75)",
-    faint: "rgba(255,255,255,0.5)", accent: "#ff00aa",
-    border: "rgba(255,255,255,0.06)", borderHot: "rgba(255,255,255,0.7)",
-    surface: "rgba(255,255,255,0.03)", chipBg: "rgba(255,255,255,0.04)",
-    chipActive: "#ffffff", chipActiveText: "#050508",
-    btnBg: "#ffffff", btnText: "#050508",
-    glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.1)",
+    bg: "#050508", text: "#ffffff",
+    dim: "rgba(255,255,255,0.62)", faint: "rgba(255,255,255,0.32)",
+    hairline: "rgba(255,255,255,0.06)", rule: "rgba(255,255,255,0.10)",
+    accent: "#ff00aa",
   };
 }
 
-const SERVICES = [
-  "UI Design", "Creative Direction", "Brand Identity",
-  "Web Design & Dev", "Digital Art Commission",
-  "Photography", "AI / Data Consulting", "Other",
-];
-
-const INFO = [
-  { label: "Email", value: "acadiaberry@gmail.com", href: "mailto:acadiaberry@gmail.com" },
-  { label: "Based", value: "Brooklyn, NY" },
-  { label: "Response", value: "Within 48 hours" },
-  { label: "Availability", value: "Open to new projects" },
-];
-
-export default function Contact() {
+export default function ContactPage() {
   const { theme } = useTheme();
-  const c = colors(theme);
+  const c = tokens(theme);
 
-  const [form, setForm] = useState({ name: "", email: "", service: "", budget: "500", message: "" });
-  const [sent, setSent] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [focused, setFocused] = useState<string | null>(null);
+  const [services, setServices] = useState<string[]>([]);
+  const [timeline, setTimeline] = useState<string>("");
+  const [sent, setSent] = useState<{ name: string } | null>(null);
+  const [busy, setBusy] = useState(false);
 
-  const set = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
+  function toggleService(s: string) {
+    setServices(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
+  }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSending(true);
+    const form = e.currentTarget;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    setBusy(true);
+
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      project: (form.elements.namedItem("project") as HTMLInputElement).value,
+      services,
+      timeline,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
     try {
       await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(data),
       });
-    } catch { /* logged server-side */ }
-    setSending(false);
-    setSent(true);
-  };
-
-  const inputBase: React.CSSProperties = {
-    width: "100%",
-    background: "transparent",
-    border: "none",
-    borderBottom: `1px solid ${c.border}`,
-    color: c.text,
-    fontFamily: "Inter, monospace",
-    fontSize: "0.9rem",
-    padding: "0.75rem 0",
-    outline: "none",
-    transition: "border-color 0.2s, color 0.3s",
-    letterSpacing: "0.01em",
-  };
-
-  const fieldLabel: React.CSSProperties = {
-    fontFamily: "monospace",
-    fontSize: "0.45rem",
-    letterSpacing: "0.32em",
-    color: c.faint,
-    textTransform: "uppercase",
-    display: "block",
-    marginBottom: "0.3rem",
-    transition: "color 0.3s",
-  };
+    } catch {}
+    setSent({ name: data.name.split(" ")[0] || "friend" });
+  }
 
   return (
-    <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "5rem", color: c.text, transition: "color 0.3s" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "3rem 2rem 6rem" }}>
+    <>
+      <Nav />
 
-        <div style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: "6rem", alignItems: "start" }}>
+      <main style={{
+        position: "relative",
+        padding: "7rem 2rem 8rem",
+        maxWidth: 1180,
+        margin: "0 auto",
+        color: c.text,
+      }}>
 
-          {/* ── LEFT: INFO ── */}
-          <div style={{ position: "sticky", top: "7rem", background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
-            <p style={{ fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.4em", color: c.faint, textTransform: "uppercase", margin: "0 0 0.6rem", transition: "color 0.3s" }}>
-              Get in touch
-            </p>
+        {/* HERO */}
+        <header style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 1.4fr) minmax(0, 1fr)",
+          gap: "5rem", alignItems: "end",
+          paddingBottom: "4rem", marginBottom: "5rem",
+          borderBottom: `1px solid ${c.hairline}`,
+        }}>
+          <div>
             <h1 style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "clamp(2.5rem, 6vw, 4rem)",
-              fontWeight: 700, letterSpacing: "-0.04em",
-              color: c.text, margin: "0 0 2rem", lineHeight: 0.9,
-              transition: "color 0.3s",
+              fontFamily: '"Inter", sans-serif',
+              fontWeight: 700,
+              fontSize: "clamp(3rem, 10vw, 6rem)",
+              letterSpacing: "-0.04em",
+              lineHeight: 0.9,
+              color: c.text,
             }}>
-              Let&apos;s<br />work.
+              say<br/>hello<span style={{ color: c.accent }}>.</span>
             </h1>
-
-            <div style={{ display: "flex", flexDirection: "column", marginBottom: "2.5rem" }}>
-              {INFO.map((row, i) => (
-                <div key={row.label} style={{
-                  display: "flex", justifyContent: "space-between", alignItems: "baseline",
-                  padding: "0.7rem 0",
-                  borderBottom: `1px solid ${c.border}`,
-                  borderTop: i === 0 ? `1px solid ${c.border}` : "none",
-                  transition: "border-color 0.3s",
-                }}>
-                  <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.2em", color: c.faint, textTransform: "uppercase", transition: "color 0.3s" }}>{row.label}</span>
-                  {row.href ? (
-                    <a href={row.href} style={{ fontFamily: "monospace", fontSize: "0.62rem", color: c.accent, textDecoration: "none", transition: "color 0.3s" }}>{row.value}</a>
-                  ) : (
-                    <span style={{ fontFamily: "monospace", fontSize: "0.62rem", color: c.dim, transition: "color 0.3s" }}>{row.value}</span>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.faint, lineHeight: 1.75, fontStyle: "italic", transition: "color 0.3s" }}>
-              Commissions from $20. Projects from $500.
-            </p>
+            <p style={{
+              marginTop: "1.4rem",
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: ".58rem", letterSpacing: ".3em", textTransform: "uppercase",
+              color: c.faint,
+            }}>acadiaberry@gmail.com</p>
           </div>
 
-          {/* ── RIGHT: FORM ── */}
-          <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2.5rem", borderRadius: 0 }}>
-            {!sent ? (
-              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "2.2rem" }}>
-
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
-                  <div>
-                    <label style={fieldLabel}>Name</label>
-                    <input
-                      required value={form.name}
-                      onChange={e => set("name", e.target.value)}
-                      onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
-                      placeholder="your name"
-                      style={{ ...inputBase, borderBottomColor: focused === "name" ? c.borderHot : c.border }}
-                    />
-                  </div>
-                  <div>
-                    <label style={fieldLabel}>Email</label>
-                    <input
-                      required type="email" value={form.email}
-                      onChange={e => set("email", e.target.value)}
-                      onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
-                      placeholder="you@example.com"
-                      style={{ ...inputBase, borderBottomColor: focused === "email" ? c.borderHot : c.border }}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label style={fieldLabel}>What do you need</label>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.6rem" }}>
-                    {SERVICES.map(s => (
-                      <button
-                        type="button" key={s}
-                        onClick={() => set("service", form.service === s ? "" : s)}
-                        style={{
-                          fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.1em",
-                          color: form.service === s ? c.chipActiveText : c.dim,
-                          background: form.service === s ? c.chipActive : c.chipBg,
-                          border: `1px solid ${form.service === s ? c.chipActive : c.border}`,
-                          backdropFilter: "blur(8px)",
-                          WebkitBackdropFilter: "blur(8px)",
-                          padding: "0.5rem 0.9rem", cursor: "pointer", textTransform: "uppercase",
-                          transition: "all 0.15s", minHeight: 44,
-                        }}
-                      >{s}</button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label style={fieldLabel}>
-                    Budget — <span style={{ color: c.accent, transition: "color 0.3s" }}>${parseInt(form.budget).toLocaleString()}</span>
-                  </label>
-                  <input
-                    type="range" min={20} max={10000} step={50}
-                    value={form.budget}
-                    onChange={e => set("budget", e.target.value)}
-                    style={{ width: "100%", accentColor: c.accent, height: 44, cursor: "pointer", marginTop: "0.3rem" }}
-                  />
-                  <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "monospace", fontSize: "0.45rem", color: c.faint, marginTop: "0.2rem", transition: "color 0.3s" }}>
-                    <span>$20</span><span>$10,000+</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label style={fieldLabel}>Message</label>
-                  <textarea
-                    required value={form.message}
-                    onChange={e => set("message", e.target.value)}
-                    onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
-                    rows={5} placeholder="tell me about the project"
-                    style={{
-                      ...inputBase,
-                      borderBottomColor: focused === "message" ? c.borderHot : c.border,
-                      resize: "none", display: "block",
-                    }}
-                  />
-                </div>
-
-                <div>
-                  <button
-                    type="submit" disabled={sending}
-                    style={{
-                      fontFamily: "monospace", fontSize: "0.6rem", letterSpacing: "0.2em",
-                      color: c.btnText, background: c.btnBg, border: "none",
-                      padding: "1rem 2rem", cursor: sending ? "wait" : "pointer",
-                      textTransform: "uppercase", transition: "opacity 0.2s",
-                      minHeight: 44, opacity: sending ? 0.6 : 1,
-                    }}
-                  >{sending ? "SENDING…" : "SEND IT →"}</button>
-                </div>
-
-              </form>
-            ) : (
-              <div style={{ paddingTop: "3rem" }}>
-                <div style={{
-                  width: 48, height: 48, background: c.accent,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontFamily: "monospace", fontSize: "1.2rem", color: c.bg,
-                  marginBottom: "1.5rem", transition: "background 0.3s, color 0.3s",
-                }}>✦</div>
-                <h2 style={{
-                  fontFamily: "Inter, sans-serif", fontSize: "clamp(2rem, 5vw, 3rem)",
-                  fontWeight: 700, letterSpacing: "-0.03em",
-                  color: c.text, margin: "0 0 0.8rem", lineHeight: 1,
-                  transition: "color 0.3s",
-                }}>Got it.</h2>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: c.dim, lineHeight: 1.8, transition: "color 0.3s" }}>
-                  I&apos;ll be in touch soon, {form.name.split(" ")[0]}.<br />
-                  Check your inbox — usually within 48 hours.
-                </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem", paddingBottom: ".4rem" }}>
+            {[
+              ["Email", <a key="e" href="mailto:acadiaberry@gmail.com" style={{ color: c.accent, textDecoration: "none" }}>acadiaberry@gmail.com</a>],
+              ["Based", <b key="b" style={{ color: c.text, fontWeight: 500 }}>Brooklyn, NY</b>],
+              ["Reply", <b key="r" style={{ color: c.text, fontWeight: 500 }}>Within 48 hours</b>],
+              ["Status", <b key="s" style={{ color: c.accent, fontWeight: 500 }}>Open, 2026</b>],
+            ].map(([k, v], i) => (
+              <div key={i} style={{
+                display: "flex", justifyContent: "space-between", gap: "1rem",
+                fontFamily: '"JetBrains Mono", monospace',
+                fontSize: ".55rem", letterSpacing: ".2em", textTransform: "uppercase",
+                color: c.faint,
+                paddingBottom: ".5rem",
+                borderBottom: `1px dashed ${c.hairline}`,
+              }}>
+                <span>{k}</span>{v}
               </div>
-            )}
+            ))}
           </div>
-        </div>
+        </header>
 
-      </div>
-    </main>
+        {/* PITCH */}
+        <Block label="Brief" c={c}>
+          <p style={{
+            fontFamily: '"Fraunces", serif', fontWeight: 300,
+            fontSize: "clamp(1.35rem, 2.4vw, 1.85rem)",
+            lineHeight: 1.45, letterSpacing: "-0.012em",
+            color: c.text, maxWidth: "38ch", textWrap: "pretty" as const,
+          }}>
+            Tell me <span style={{ color: c.accent, fontStyle: "italic" }}>what you&apos;re building</span>, who it&apos;s for, and where you&apos;re stuck.{" "}
+            <span style={{ fontStyle: "italic", color: c.dim }}>A few sentences is plenty.</span>{" "}
+            I&apos;ll write back with thoughts, scope, and a way forward.
+          </p>
+        </Block>
+
+        {/* FORM or SENT */}
+        {sent ? (
+          <section style={{
+            display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem",
+            padding: "3rem 0 6rem",
+            borderBottom: `1px solid ${c.hairline}`, marginBottom: "6rem",
+          }}>
+            <Label c={c}>Sent</Label>
+            <div>
+              <p style={{
+                fontFamily: '"Fraunces", serif', fontWeight: 300,
+                fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+                lineHeight: 1.15, letterSpacing: "-0.02em",
+                color: c.text, maxWidth: "22ch",
+              }}>
+                Got it, <em style={{ color: c.accent, fontStyle: "italic" }}>{sent.name}</em>.
+              </p>
+              <p style={{
+                marginTop: "1.2rem",
+                fontFamily: '"Fraunces", serif', fontStyle: "italic", fontWeight: 300,
+                fontSize: "1.1rem", color: c.dim, maxWidth: "36ch",
+              }}>I&apos;ll write back within 48 hours. Until then, go work on the thing.</p>
+              <button type="button" onClick={() => { setSent(null); setServices([]); setTimeline(""); }} style={{
+                marginTop: "2rem",
+                fontFamily: '"JetBrains Mono", monospace',
+                fontSize: ".55rem", letterSpacing: ".22em", textTransform: "uppercase",
+                color: c.faint, background: "none", border: "none",
+                borderBottom: `1px solid ${c.rule}`, padding: ".4rem 0", cursor: "pointer",
+              }}>← Send another</button>
+            </div>
+          </section>
+        ) : (
+          <section style={{
+            display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem",
+            marginBottom: "6rem",
+          }}>
+            <Label c={c}>Send a note</Label>
+            <form onSubmit={onSubmit} noValidate style={{
+              display: "flex", flexDirection: "column", gap: "2.4rem", maxWidth: 640,
+            }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+                <Field c={c} num="01" label="Name" htmlFor="f-name">
+                  <Input c={c} id="f-name" name="name" required autoComplete="name" placeholder="your name" />
+                </Field>
+                <Field c={c} num="02" label="Email" htmlFor="f-email">
+                  <Input c={c} id="f-email" name="email" type="email" required autoComplete="email" placeholder="you@somewhere.com" />
+                </Field>
+              </div>
+              <Field c={c} num="03" label="Project">
+                <Input c={c} id="f-project" name="project" placeholder="working title or company" />
+              </Field>
+
+              <Field c={c} num="04" label={<>What you need <span style={{ color: c.faint, marginLeft: ".5em", fontWeight: 400 }}>/ pick any</span></>}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: ".4rem" }}>
+                  {SERVICES.map(s => (
+                    <Chip key={s} active={services.includes(s)} onClick={() => toggleService(s)} c={c}>{s}</Chip>
+                  ))}
+                </div>
+              </Field>
+
+              <Field c={c} num="05" label="Timeline">
+                <div style={{ display: "flex", flexWrap: "wrap", gap: ".4rem" }}>
+                  {TIMELINES.map(t => (
+                    <Chip key={t} active={timeline === t} onClick={() => setTimeline(t === timeline ? "" : t)} c={c}>{t}</Chip>
+                  ))}
+                </div>
+              </Field>
+
+              <Field c={c} num="06" label="Tell me about it" htmlFor="f-message">
+                <textarea id="f-message" name="message" required rows={5} placeholder="what you're building, who it's for, where you're stuck"
+                  style={{
+                    width: "100%", background: "transparent", border: "none",
+                    borderBottom: `1px solid ${c.rule}`, color: c.text,
+                    fontFamily: '"Fraunces", serif', fontWeight: 300, fontSize: "1.15rem",
+                    padding: ".55rem 0", outline: "none", resize: "none", minHeight: "4.5rem", lineHeight: 1.5,
+                    letterSpacing: "-0.005em",
+                  }}
+                />
+              </Field>
+
+              <div style={{
+                display: "flex", alignItems: "center", justifyContent: "flex-end",
+                gap: "1.5rem", flexWrap: "wrap",
+                paddingTop: "1rem", borderTop: `1px solid ${c.hairline}`,
+              }}>
+                <button type="submit" disabled={busy} style={{
+                  fontFamily: '"JetBrains Mono", monospace',
+                  fontSize: ".55rem", letterSpacing: ".22em", textTransform: "uppercase",
+                  padding: ".95rem 1.6rem", minHeight: 44,
+                  background: c.accent, color: c.bg,
+                  border: `1px solid ${c.accent}`, cursor: busy ? "wait" : "pointer",
+                  opacity: busy ? 0.5 : 1,
+                }}>{busy ? "Sending…" : "Send it →"}</button>
+              </div>
+            </form>
+          </section>
+        )}
+
+        {/* DETAILS */}
+        <section style={{
+          display: "grid", gridTemplateColumns: "200px repeat(2, 1fr)", gap: "3rem",
+          borderTop: `1px solid ${c.hairline}`, paddingTop: "2.5rem", marginBottom: "5rem",
+        }}>
+          <Label c={c}>Notes</Label>
+          <Col c={c} h="What I take on">Brand identity, websites, UI systems, art direction, generative tools, photo commissions, prints &amp; books.</Col>
+          <Col c={c} h="What to send along">Anything that helps. A moodboard, a deck, a Figma link, the link to the thing that almost works. Files welcome by reply.</Col>
+        </section>
+
+        {/* ELSEWHERE */}
+        <section style={{
+          display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem",
+          borderTop: `1px solid ${c.hairline}`, paddingTop: "2.5rem",
+        }}>
+          <Label c={c}>Elsewhere</Label>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Row c={c} href="https://github.com/acadiaberry" platform="GitHub" handle="@acadiaberry" />
+            <Row c={c} href="https://unavoide.com" platform="Shop" handle="unavoide.com" />
+            <Row c={c} href="https://instagram.com/acadiaberry" platform="Instagram" handle="@acadiaberry" />
+          </div>
+        </section>
+
+      </main>
+    </>
+  );
+}
+
+function Block({ label, c, children }: { label: string; c: ReturnType<typeof tokens>; children: React.ReactNode }) {
+  return (
+    <section style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "6rem", padding: "1rem 0" }}>
+      <Label c={c}>{label}</Label>
+      {children}
+    </section>
+  );
+}
+
+function Label({ c, children }: { c: ReturnType<typeof tokens>; children: React.ReactNode }) {
+  return (
+    <div style={{ paddingTop: ".35rem" }}>
+      <span style={{
+        fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+        fontSize: ".5rem", letterSpacing: ".32em", textTransform: "uppercase",
+        color: c.accent, display: "inline-flex", alignItems: "center", gap: ".6rem",
+      }}>
+        <span style={{ display: "inline-block", width: 14, height: 1, background: "currentColor" }} />
+        {children}
+      </span>
+    </div>
+  );
+}
+
+function Field({ c, num, label, htmlFor, children }: { c: ReturnType<typeof tokens>; num: string; label: React.ReactNode; htmlFor?: string; children: React.ReactNode }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <label htmlFor={htmlFor} style={{
+        fontFamily: '"JetBrains Mono", monospace',
+        fontSize: ".48rem", letterSpacing: ".32em", textTransform: "uppercase",
+        color: c.faint, marginBottom: ".5rem",
+      }}>
+        <span style={{ color: c.accent, marginRight: ".8em", fontWeight: 500 }}>{num}</span>
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+function Input({ c, ...rest }: { c: ReturnType<typeof tokens> } & React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <input {...rest} style={{
+      width: "100%", background: "transparent", border: "none",
+      borderBottom: `1px solid ${c.rule}`, color: c.text,
+      fontFamily: '"Fraunces", serif', fontWeight: 300, fontSize: "1.15rem",
+      padding: ".55rem 0", outline: "none", letterSpacing: "-0.005em",
+    }} />
+  );
+}
+
+function Chip({ active, onClick, c, children }: { active: boolean; onClick: () => void; c: ReturnType<typeof tokens>; children: React.ReactNode }) {
+  return (
+    <button type="button" onClick={onClick} style={{
+      fontFamily: '"JetBrains Mono", monospace',
+      fontSize: ".5rem", letterSpacing: ".14em", textTransform: "uppercase",
+      color: active ? c.bg : c.dim,
+      background: active ? c.accent : "transparent",
+      border: `1px solid ${active ? c.accent : c.rule}`,
+      padding: ".55rem .9rem", cursor: "pointer", minHeight: 38,
+    }}>{children}</button>
+  );
+}
+
+function Col({ c, h, children }: { c: ReturnType<typeof tokens>; h: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h3 style={{
+        fontFamily: '"JetBrains Mono", monospace',
+        fontSize: ".55rem", letterSpacing: ".25em", textTransform: "uppercase",
+        color: c.text, marginBottom: "1rem", fontWeight: 500,
+      }}>{h}</h3>
+      <p style={{
+        fontFamily: '"Inter", sans-serif',
+        fontSize: ".85rem", lineHeight: 1.6, color: c.dim,
+      }}>{children}</p>
+    </div>
+  );
+}
+
+function Row({ c, href, platform, handle }: { c: ReturnType<typeof tokens>; href: string; platform: string; handle: string }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" style={{
+      display: "grid", gridTemplateColumns: "1fr 2fr 32px",
+      alignItems: "baseline", padding: "1.2rem 0",
+      borderBottom: `1px solid ${c.hairline}`,
+      textDecoration: "none", color: c.text,
+      fontFamily: '"Inter", sans-serif',
+    }}>
+      <span style={{ fontFamily: '"Fraunces", serif', fontStyle: "italic", fontWeight: 400, fontSize: "1.05rem" }}>{platform}</span>
+      <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: ".65rem", letterSpacing: ".12em", color: c.dim }}>{handle}</span>
+      <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: ".8rem", color: c.faint, textAlign: "right" }}>↗</span>
+    </a>
   );
 }
