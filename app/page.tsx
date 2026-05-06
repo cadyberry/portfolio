@@ -121,11 +121,11 @@ export default function Home() {
         <div style={{
           display: "inline-block",
           animation: "marquee 32s linear infinite",
-          fontFamily: "monospace",
+          fontFamily: "UnifrakturMaguntia, cursive",
           fontSize: "0.52rem",
           letterSpacing: "0.28em",
           color: c.textFaint,
-          textTransform: "uppercase",
+          textTransform: "lowercase" ,
         }}>
           {MARQUEE_TEXT}
         </div>
@@ -144,16 +144,16 @@ export default function Home() {
           backdropFilter: "blur(14px)",
           WebkitBackdropFilter: "blur(14px)",
         }}>
-          <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "uppercase", marginBottom: "1rem" }}>Play</p>
-          <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
+          <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "lowercase" , marginBottom: "1rem" }}>Play</p>
+          <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             8 FREE TOOLS
           </p>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
             Kaleidoscope, pixel editor, generative art, digital rain — all browser-based, all free, built from scratch since 2018.
           </p>
           <a href="https://unafield.vercel.app" target="_blank" rel="noopener noreferrer" style={{
-            fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
-            color: c.textDim, textDecoration: "none", textTransform: "uppercase",
+            fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.55rem", letterSpacing: "0.2em",
+            color: c.textDim, textDecoration: "none", textTransform: "lowercase" ,
             border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
             display: "inline-flex", alignItems: "center", minHeight: 44,
             transition: "all 0.2s",
@@ -165,16 +165,16 @@ export default function Home() {
         </div>
 
         <div style={{ padding: "3.5rem 3rem", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)" }}>
-          <p style={{ fontFamily: "monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "uppercase", marginBottom: "1rem" }}>Shop</p>
-          <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
+          <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "lowercase" , marginBottom: "1rem" }}>Shop</p>
+          <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             PRINTS + BOOKS
           </p>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
             60+ digital art prints. Three books in production — travel photography, coloring book, print collection.
           </p>
           <a href="https://unavoide.com" target="_blank" rel="noopener noreferrer" style={{
-            fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
-            color: c.textDim, textDecoration: "none", textTransform: "uppercase",
+            fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.55rem", letterSpacing: "0.2em",
+            color: c.textDim, textDecoration: "none", textTransform: "lowercase" ,
             border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
             display: "inline-flex", alignItems: "center", minHeight: 44,
             transition: "all 0.2s",
@@ -199,10 +199,10 @@ export default function Home() {
         backdropFilter: "blur(14px)",
         WebkitBackdropFilter: "blur(14px)",
       }}>
-        <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "uppercase" }}>
+        <span style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "lowercase"  }}>
           © 2026 ACADIA · Brooklyn, NY
         </span>
-        <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "uppercase" }}>
+        <span style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "lowercase"  }}>
           acadiaberry.com
         </span>
       </footer>
