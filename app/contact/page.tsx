@@ -4,258 +4,297 @@ import { useTheme, type Theme } from "../theme";
 
 function colors(theme: Theme) {
   if (theme === "light") return {
-    bg: "#f9f7f4", text: "#111111", dim: "rgba(17,17,17,0.72)",
-    faint: "rgba(17,17,17,0.5)", accent: "#e8003d",
-    border: "rgba(0,0,0,0.09)", borderHot: "rgba(17,17,17,0.7)",
-    surface: "rgba(0,0,0,0.03)", chipBg: "rgba(0,0,0,0.05)",
-    chipActive: "#111111", chipActiveText: "#f9f7f4",
-    btnBg: "#111111", btnText: "#f9f7f4",
-    glass: "rgba(255,255,255,0.55)", glassBorder: "rgba(255,255,255,0.85)",
+    bg: "#f6f3ee", text: "#111111", dim: "rgba(17,17,17,0.66)",
+    faint: "rgba(17,17,17,0.38)", accent: "#e8003d",
+    hairline: "rgba(17,17,17,0.10)", rule: "rgba(17,17,17,0.16)",
   };
   if (theme === "mid") return {
-    bg: "#12082a", text: "rgba(255,232,185,0.92)", dim: "rgba(255,210,140,0.85)",
-    faint: "rgba(255,195,120,0.65)", accent: "#ffaa00",
-    border: "rgba(180,120,255,0.18)", borderHot: "rgba(255,195,120,0.8)",
-    surface: "rgba(180,120,255,0.06)", chipBg: "rgba(180,120,255,0.06)",
-    chipActive: "#ffaa00", chipActiveText: "#12082a",
-    btnBg: "#ffaa00", btnText: "#12082a",
-    glass: "rgba(140,80,255,0.08)", glassBorder: "rgba(180,120,255,0.2)",
+    bg: "#12082a", text: "rgba(255,232,185,0.94)", dim: "rgba(255,210,140,0.78)",
+    faint: "rgba(255,195,120,0.45)", accent: "#ffaa00",
+    hairline: "rgba(180,120,255,0.18)", rule: "rgba(180,120,255,0.30)",
   };
   return {
-    bg: "#050508", text: "#ffffff", dim: "rgba(255,255,255,0.75)",
-    faint: "rgba(255,255,255,0.5)", accent: "#ff00aa",
-    border: "rgba(255,255,255,0.06)", borderHot: "rgba(255,255,255,0.7)",
-    surface: "rgba(255,255,255,0.03)", chipBg: "rgba(255,255,255,0.04)",
-    chipActive: "#ffffff", chipActiveText: "#050508",
-    btnBg: "#ffffff", btnText: "#050508",
-    glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.1)",
+    bg: "#050508", text: "#ffffff", dim: "rgba(255,255,255,0.62)",
+    faint: "rgba(255,255,255,0.32)", accent: "#ff00aa",
+    hairline: "rgba(255,255,255,0.06)", rule: "rgba(255,255,255,0.10)",
   };
 }
 
 const SERVICES = [
-  "UI Design", "Creative Direction", "Brand Identity",
-  "Web Design & Dev", "Digital Art Commission",
-  "Photography", "AI / Data Consulting", "Other",
+  "UI / UX", "Websites", "Mobile Apps", "Logo & Identity",
+  "Brand Systems", "Creative Consulting", "Photography",
+  "Generative AI", "Print & Books", "Art Direction", "Other",
 ];
+const TIMELINES = ["ASAP", "< 1 month", "1–3 months", "3+ months", "Flexible"];
 
-const INFO = [
-  { label: "Email", value: "acadiaberry@gmail.com", href: "mailto:acadiaberry@gmail.com" },
-  { label: "Based", value: "Brooklyn, NY" },
-  { label: "Response", value: "Within 48 hours" },
-  { label: "Availability", value: "Open to new projects" },
-];
+function Label({ children, accent }: { children: React.ReactNode; accent: string }) {
+  return (
+    <span style={{
+      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+      fontSize: "0.5rem", letterSpacing: "0.32em", textTransform: "uppercase" as const,
+      color: accent, display: "inline-flex", alignItems: "center", gap: "0.6rem",
+    }}>
+      <span style={{ display: "inline-block", width: 14, height: 1, background: "currentColor" }} />
+      {children}
+    </span>
+  );
+}
 
 export default function Contact() {
   const { theme } = useTheme();
   const c = colors(theme);
 
-  const [form, setForm] = useState({ name: "", email: "", service: "", budget: "500", message: "" });
-  const [sent, setSent] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [project, setProject] = useState("");
+  const [message, setMessage] = useState("");
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedTimeline, setSelectedTimeline] = useState("");
   const [sending, setSending] = useState(false);
-  const [focused, setFocused] = useState<string | null>(null);
+  const [sent, setSent] = useState(false);
 
-  const set = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
+  function toggleService(s: string) {
+    setSelectedServices(prev => prev.includes(s) ? prev.filter(x => x !== s) : [...prev, s]);
+  }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSending(true);
     try {
       await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ name, email, project, services: selectedServices, timeline: selectedTimeline, message }),
       });
-    } catch { /* logged server-side */ }
+    } catch (_) {}
     setSending(false);
     setSent(true);
+  }
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%", background: "transparent", border: "none",
+    borderBottom: `1px solid ${c.rule}`, color: c.text,
+    fontFamily: "Fraunces, serif", fontWeight: 300, fontSize: "1.15rem",
+    padding: "0.55rem 0", outline: "none", letterSpacing: "-0.005em",
   };
 
-  const inputBase: React.CSSProperties = {
-    width: "100%",
-    background: "transparent",
-    border: "none",
-    borderBottom: `1px solid ${c.border}`,
-    color: c.text,
-    fontFamily: "Inter, monospace",
-    fontSize: "0.9rem",
-    padding: "0.75rem 0",
-    outline: "none",
-    transition: "border-color 0.2s, color 0.3s",
-    letterSpacing: "0.01em",
+  const fieldLabelStyle: React.CSSProperties = {
+    fontFamily: "'JetBrains Mono', monospace", fontSize: "0.48rem",
+    letterSpacing: "0.32em", color: c.faint, textTransform: "uppercase",
+    marginBottom: "0.5rem", display: "block",
   };
 
-  const fieldLabel: React.CSSProperties = {
-    fontFamily: "monospace",
-    fontSize: "0.45rem",
-    letterSpacing: "0.32em",
-    color: c.faint,
-    textTransform: "uppercase",
-    display: "block",
-    marginBottom: "0.3rem",
-    transition: "color 0.3s",
-  };
+  const chipStyle = (active: boolean): React.CSSProperties => ({
+    fontFamily: "'JetBrains Mono', monospace", fontSize: "0.5rem",
+    letterSpacing: "0.14em", textTransform: "uppercase",
+    color: active ? c.bg : c.dim,
+    background: active ? c.accent : "transparent",
+    border: `1px solid ${active ? c.accent : c.rule}`,
+    padding: "0.55rem 0.9rem", cursor: "pointer", minHeight: 38,
+  });
+
+  const firstName = name.split(" ")[0] || "friend";
 
   return (
-    <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "5rem", color: c.text, transition: "color 0.3s" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "3rem 2rem 6rem" }}>
+    <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "7rem", color: c.text, transition: "color 0.3s" }}>
+      <style>{`
+        .contact-input::placeholder { color: ${c.faint}; font-style: italic; }
+        .contact-input:focus { border-bottom-color: ${c.accent} !important; }
+        .contact-textarea::placeholder { color: ${c.faint}; font-style: italic; }
+        .contact-textarea:focus { border-bottom-color: ${c.accent} !important; }
+        .elsewhere-row:hover { color: ${c.accent} !important; }
+        .elsewhere-row:hover .handle-span { color: ${c.accent} !important; }
+        .elsewhere-row:hover .arrow-span { color: ${c.accent} !important; transform: translate(3px,-3px); }
+        @media (max-width: 880px) {
+          .contact-hero { grid-template-columns: 1fr !important; gap: 2rem !important; align-items: start !important; }
+          .contact-pitch, .contact-form-grid, .contact-elsewhere { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+          .contact-details { grid-template-columns: 1fr !important; gap: 2rem !important; }
+          .contact-row2 { grid-template-columns: 1fr !important; }
+          .contact-sent { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+          .elsewhere-handle { display: none !important; }
+        }
+      `}</style>
 
-        <div style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: "6rem", alignItems: "start" }}>
+      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 2rem 8rem" }}>
 
-          {/* ── LEFT: INFO ── */}
-          <div style={{ position: "sticky", top: "7rem", background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2rem", borderRadius: 0 }}>
-            <p style={{ fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.4em", color: c.faint, textTransform: "uppercase", margin: "0 0 0.6rem", transition: "color 0.3s" }}>
-              Get in touch
-            </p>
+        {/* HERO */}
+        <header className="contact-hero" style={{
+          display: "grid", gridTemplateColumns: "minmax(0,1.4fr) minmax(0,1fr)",
+          gap: "5rem", alignItems: "end",
+          paddingBottom: "4rem", marginBottom: "5rem",
+          borderBottom: `1px solid ${c.hairline}`,
+        }}>
+          <div>
             <h1 style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "clamp(2.5rem, 6vw, 4rem)",
-              fontWeight: 700, letterSpacing: "-0.04em",
-              color: c.text, margin: "0 0 2rem", lineHeight: 0.9,
-              transition: "color 0.3s",
+              fontFamily: "Inter, sans-serif", fontWeight: 700,
+              fontSize: "clamp(3rem, 10vw, 6rem)", letterSpacing: "-0.04em",
+              lineHeight: 0.9, color: c.text, margin: "0 0 1.4rem",
             }}>
-              Let&apos;s<br />work.
+              say<br />hello<span style={{ color: c.accent }}>.</span>
             </h1>
-
-            <div style={{ display: "flex", flexDirection: "column", marginBottom: "2.5rem" }}>
-              {INFO.map((row, i) => (
-                <div key={row.label} style={{
-                  display: "flex", justifyContent: "space-between", alignItems: "baseline",
-                  padding: "0.7rem 0",
-                  borderBottom: `1px solid ${c.border}`,
-                  borderTop: i === 0 ? `1px solid ${c.border}` : "none",
-                  transition: "border-color 0.3s",
-                }}>
-                  <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.2em", color: c.faint, textTransform: "uppercase", transition: "color 0.3s" }}>{row.label}</span>
-                  {row.href ? (
-                    <a href={row.href} style={{ fontFamily: "monospace", fontSize: "0.62rem", color: c.accent, textDecoration: "none", transition: "color 0.3s" }}>{row.value}</a>
-                  ) : (
-                    <span style={{ fontFamily: "monospace", fontSize: "0.62rem", color: c.dim, transition: "color 0.3s" }}>{row.value}</span>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.faint, lineHeight: 1.75, fontStyle: "italic", transition: "color 0.3s" }}>
-              Commissions from $20. Projects from $500.
+            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: c.faint, margin: 0 }}>
+              acadiaberry@gmail.com
             </p>
           </div>
-
-          {/* ── RIGHT: FORM ── */}
-          <div style={{ background: c.glass, backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: `1px solid ${c.glassBorder}`, padding: "2.5rem", borderRadius: 0 }}>
-            {!sent ? (
-              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "2.2rem" }}>
-
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
-                  <div>
-                    <label style={fieldLabel}>Name</label>
-                    <input
-                      required value={form.name}
-                      onChange={e => set("name", e.target.value)}
-                      onFocus={() => setFocused("name")} onBlur={() => setFocused(null)}
-                      placeholder="your name"
-                      style={{ ...inputBase, borderBottomColor: focused === "name" ? c.borderHot : c.border }}
-                    />
-                  </div>
-                  <div>
-                    <label style={fieldLabel}>Email</label>
-                    <input
-                      required type="email" value={form.email}
-                      onChange={e => set("email", e.target.value)}
-                      onFocus={() => setFocused("email")} onBlur={() => setFocused(null)}
-                      placeholder="you@example.com"
-                      style={{ ...inputBase, borderBottomColor: focused === "email" ? c.borderHot : c.border }}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label style={fieldLabel}>What do you need</label>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.6rem" }}>
-                    {SERVICES.map(s => (
-                      <button
-                        type="button" key={s}
-                        onClick={() => set("service", form.service === s ? "" : s)}
-                        style={{
-                          fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.1em",
-                          color: form.service === s ? c.chipActiveText : c.dim,
-                          background: form.service === s ? c.chipActive : c.chipBg,
-                          border: `1px solid ${form.service === s ? c.chipActive : c.border}`,
-                          backdropFilter: "blur(8px)",
-                          WebkitBackdropFilter: "blur(8px)",
-                          padding: "0.5rem 0.9rem", cursor: "pointer", textTransform: "uppercase",
-                          transition: "all 0.15s", minHeight: 44,
-                        }}
-                      >{s}</button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label style={fieldLabel}>
-                    Budget — <span style={{ color: c.accent, transition: "color 0.3s" }}>${parseInt(form.budget).toLocaleString()}</span>
-                  </label>
-                  <input
-                    type="range" min={20} max={10000} step={50}
-                    value={form.budget}
-                    onChange={e => set("budget", e.target.value)}
-                    style={{ width: "100%", accentColor: c.accent, height: 44, cursor: "pointer", marginTop: "0.3rem" }}
-                  />
-                  <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "monospace", fontSize: "0.45rem", color: c.faint, marginTop: "0.2rem", transition: "color 0.3s" }}>
-                    <span>$20</span><span>$10,000+</span>
-                  </div>
-                </div>
-
-                <div>
-                  <label style={fieldLabel}>Message</label>
-                  <textarea
-                    required value={form.message}
-                    onChange={e => set("message", e.target.value)}
-                    onFocus={() => setFocused("message")} onBlur={() => setFocused(null)}
-                    rows={5} placeholder="tell me about the project"
-                    style={{
-                      ...inputBase,
-                      borderBottomColor: focused === "message" ? c.borderHot : c.border,
-                      resize: "none", display: "block",
-                    }}
-                  />
-                </div>
-
-                <div>
-                  <button
-                    type="submit" disabled={sending}
-                    style={{
-                      fontFamily: "monospace", fontSize: "0.6rem", letterSpacing: "0.2em",
-                      color: c.btnText, background: c.btnBg, border: "none",
-                      padding: "1rem 2rem", cursor: sending ? "wait" : "pointer",
-                      textTransform: "uppercase", transition: "opacity 0.2s",
-                      minHeight: 44, opacity: sending ? 0.6 : 1,
-                    }}
-                  >{sending ? "SENDING…" : "SEND IT →"}</button>
-                </div>
-
-              </form>
-            ) : (
-              <div style={{ paddingTop: "3rem" }}>
-                <div style={{
-                  width: 48, height: 48, background: c.accent,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontFamily: "monospace", fontSize: "1.2rem", color: c.bg,
-                  marginBottom: "1.5rem", transition: "background 0.3s, color 0.3s",
-                }}>✦</div>
-                <h2 style={{
-                  fontFamily: "Inter, sans-serif", fontSize: "clamp(2rem, 5vw, 3rem)",
-                  fontWeight: 700, letterSpacing: "-0.03em",
-                  color: c.text, margin: "0 0 0.8rem", lineHeight: 1,
-                  transition: "color 0.3s",
-                }}>Got it.</h2>
-                <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.9rem", color: c.dim, lineHeight: 1.8, transition: "color 0.3s" }}>
-                  I&apos;ll be in touch soon, {form.name.split(" ")[0]}.<br />
-                  Check your inbox — usually within 48 hours.
-                </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem", paddingBottom: "0.4rem" }}>
+            {[
+              ["Email",  <a key="e" href="mailto:acadiaberry@gmail.com" style={{ color: c.accent, textDecoration: "none" }}>acadiaberry@gmail.com</a>],
+              ["Based",  <b key="b" style={{ color: c.text, fontWeight: 500 }}>Brooklyn, NY</b>],
+              ["Reply",  <b key="r" style={{ color: c.text, fontWeight: 500 }}>Within 48 hours</b>],
+              ["Status", <b key="s" style={{ color: c.accent, fontWeight: 500 }}>Open, 2026</b>],
+            ].map(([k, v]) => (
+              <div key={String(k)} style={{
+                display: "flex", justifyContent: "space-between", gap: "1rem",
+                fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem",
+                letterSpacing: "0.2em", textTransform: "uppercase", color: c.faint,
+                paddingBottom: "0.5rem", borderBottom: `1px dashed ${c.hairline}`,
+              }}>
+                <span>{k}</span>
+                {v}
               </div>
-            )}
+            ))}
           </div>
-        </div>
+        </header>
+
+        {/* PITCH */}
+        <section className="contact-pitch" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "6rem" }}>
+          <div style={{ paddingTop: "0.35rem" }}><Label accent={c.accent}>Brief</Label></div>
+          <p style={{ fontFamily: "Fraunces, serif", fontWeight: 300, fontSize: "clamp(1.35rem, 2.4vw, 1.85rem)", lineHeight: 1.45, letterSpacing: "-0.012em", color: c.text, maxWidth: "38ch", margin: 0 }}>
+            Tell me <span style={{ color: c.accent, fontStyle: "italic" }}>what you&apos;re building</span>, who it&apos;s for, and where you&apos;re stuck.{" "}
+            <span style={{ fontStyle: "italic", color: c.dim }}>A few sentences is plenty.</span>{" "}
+            I&apos;ll write back with thoughts, scope, and a way forward.
+          </p>
+        </section>
+
+        {/* FORM or SENT */}
+        {sent ? (
+          <section className="contact-sent" style={{
+            display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem",
+            padding: "3rem 0 6rem", borderBottom: `1px solid ${c.hairline}`, marginBottom: "6rem",
+          }}>
+            <div style={{ paddingTop: "0.35rem" }}><Label accent={c.accent}>Sent</Label></div>
+            <div>
+              <p style={{ fontFamily: "Fraunces, serif", fontWeight: 300, fontSize: "clamp(1.8rem, 4vw, 2.8rem)", lineHeight: 1.15, letterSpacing: "-0.02em", color: c.text, maxWidth: "22ch" }}>
+                Got it, <em style={{ color: c.accent, fontStyle: "italic" }}>{firstName}</em>.
+              </p>
+              <p style={{ marginTop: "1.2rem", fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 300, fontSize: "1.1rem", color: c.dim, maxWidth: "36ch" }}>
+                I&apos;ll write back within 48 hours. Until then, go work on the thing.
+              </p>
+              <button onClick={() => { setSent(false); setName(""); setEmail(""); setProject(""); setMessage(""); setSelectedServices([]); setSelectedTimeline(""); }} style={{
+                marginTop: "2rem", fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "0.55rem", letterSpacing: "0.22em", textTransform: "uppercase",
+                color: c.faint, background: "none", border: "none",
+                borderBottom: `1px solid ${c.rule}`, padding: "0.4rem 0", cursor: "pointer",
+              }}>← Send another</button>
+            </div>
+          </section>
+        ) : (
+          <section className="contact-form-grid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "6rem" }}>
+            <div style={{ paddingTop: "0.35rem" }}><Label accent={c.accent}>Send a note</Label></div>
+            <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "2.4rem", maxWidth: 640 }}>
+
+              <div className="contact-row2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <label htmlFor="f-name" style={fieldLabelStyle}><span style={{ color: c.accent, marginRight: "0.8em", fontWeight: 500 }}>01</span>Name</label>
+                  <input id="f-name" className="contact-input" required value={name} onChange={e => setName(e.target.value)} placeholder="your name" autoComplete="name" style={inputStyle} />
+                </div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <label htmlFor="f-email" style={fieldLabelStyle}><span style={{ color: c.accent, marginRight: "0.8em", fontWeight: 500 }}>02</span>Email</label>
+                  <input id="f-email" className="contact-input" type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="you@somewhere.com" autoComplete="email" style={inputStyle} />
+                </div>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <label htmlFor="f-project" style={fieldLabelStyle}><span style={{ color: c.accent, marginRight: "0.8em", fontWeight: 500 }}>03</span>Project</label>
+                <input id="f-project" className="contact-input" value={project} onChange={e => setProject(e.target.value)} placeholder="working title or company" style={inputStyle} />
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span style={fieldLabelStyle}>
+                  <span style={{ color: c.accent, marginRight: "0.8em", fontWeight: 500 }}>04</span>
+                  What you need
+                  <span style={{ color: c.faint, marginLeft: "0.5em", fontWeight: 400 }}>/ pick any</span>
+                </span>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                  {SERVICES.map(s => (
+                    <button key={s} type="button" onClick={() => toggleService(s)} style={chipStyle(selectedServices.includes(s))}>{s}</button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span style={fieldLabelStyle}><span style={{ color: c.accent, marginRight: "0.8em", fontWeight: 500 }}>05</span>Timeline</span>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                  {TIMELINES.map(t => (
+                    <button key={t} type="button" onClick={() => setSelectedTimeline(prev => prev === t ? "" : t)} style={chipStyle(selectedTimeline === t)}>{t}</button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <label htmlFor="f-message" style={fieldLabelStyle}><span style={{ color: c.accent, marginRight: "0.8em", fontWeight: 500 }}>06</span>Tell me about it</label>
+                <textarea id="f-message" className="contact-textarea" required rows={5} value={message} onChange={e => setMessage(e.target.value)} placeholder="what you're building, who it's for, where you're stuck" style={{ ...inputStyle, resize: "none", minHeight: "4.5rem", lineHeight: 1.5 }} />
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1.5rem", flexWrap: "wrap", paddingTop: "1rem", borderTop: `1px solid ${c.hairline}` }}>
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.22em", textTransform: "uppercase", color: c.faint }}>
+                  {sending ? "Sending…" : ""}
+                </span>
+                <button type="submit" disabled={sending} style={{
+                  fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem",
+                  letterSpacing: "0.22em", textTransform: "uppercase",
+                  padding: "0.95rem 1.6rem", display: "inline-flex", alignItems: "center",
+                  gap: "0.8rem", minHeight: 44, background: c.accent, color: c.bg,
+                  border: `1px solid ${c.accent}`, cursor: sending ? "wait" : "pointer",
+                  opacity: sending ? 0.5 : 1,
+                }}>Send it →</button>
+              </div>
+
+            </form>
+          </section>
+        )}
+
+        {/* DETAILS */}
+        <section className="contact-details" style={{
+          display: "grid", gridTemplateColumns: "200px repeat(3, 1fr)",
+          gap: "3rem", borderTop: `1px solid ${c.hairline}`,
+          paddingTop: "2.5rem", marginBottom: "5rem",
+        }}>
+          <div><Label accent={c.accent}>Notes</Label></div>
+          {[
+            { title: "What I take on", body: "Brand identity, websites, UI systems, art direction, generative tools, photo commissions, prints & books." },
+            { title: "What to send along", body: "Anything that helps. A moodboard, a deck, a Figma link, the link to the thing that almost works. Files welcome by reply." },
+          ].map(col => (
+            <div key={col.title}>
+              <h3 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase", color: c.text, marginBottom: "1rem", fontWeight: 500 }}>{col.title}</h3>
+              <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", lineHeight: 1.6, color: c.dim }}>{col.body}</p>
+            </div>
+          ))}
+        </section>
+
+        {/* ELSEWHERE */}
+        <section className="contact-elsewhere" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", borderTop: `1px solid ${c.hairline}`, paddingTop: "2.5rem" }}>
+          <div><Label accent={c.accent}>Elsewhere</Label></div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {[
+              { platform: "GitHub",    handle: "@acadiaberry",  href: "https://github.com/cadyberry" },
+              { platform: "Shop",      handle: "unavoide.com",  href: "https://unavoide.com" },
+              { platform: "Instagram", handle: "@acadiaberry",  href: "https://instagram.com/acadiaberry" },
+            ].map(row => (
+              <a key={row.platform} className="elsewhere-row" href={row.href} target="_blank" rel="noopener noreferrer" style={{
+                display: "grid", gridTemplateColumns: "1fr 2fr 32px",
+                alignItems: "baseline", padding: "1.2rem 0",
+                borderBottom: `1px solid ${c.hairline}`,
+                textDecoration: "none", color: c.text,
+                fontFamily: "Inter, sans-serif", transition: "color 0.2s",
+              }}>
+                <span style={{ fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 400, fontSize: "1.05rem" }}>{row.platform}</span>
+                <span className="elsewhere-handle handle-span" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.12em", color: c.dim, transition: "color 0.2s" }}>{row.handle}</span>
+                <span className="arrow-span" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.8rem", color: c.faint, textAlign: "right", transition: "transform 0.25s, color 0.2s" }}>↗</span>
+              </a>
+            ))}
+          </div>
+        </section>
 
       </div>
     </main>
