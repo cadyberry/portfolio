@@ -180,7 +180,7 @@ export default function Contact() {
             </div>
           </section>
         ) : (
-          <section className="contact-form-grid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "6rem" }}>
+          <section className="contact-form-grid" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "6rem", borderTop: `1px solid ${c.hairline}`, paddingTop: "4rem" }}>
             <div style={{ paddingTop: "0.35rem" }}><Label accent={c.accent}>Send a note</Label></div>
             <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "2.4rem", maxWidth: 640 }}>
 
