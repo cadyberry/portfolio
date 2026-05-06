@@ -132,12 +132,12 @@ export default function Home() {
       </div>
 
       {/* ── PLAY + SHOP ── */}
-      <section style={{
+      <section className="home-play-shop" style={{
         borderTop: `1px solid ${c.border}`,
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
       }}>
-        <div style={{
+        <div className="home-play-card" style={{
           padding: "3.5rem 3rem",
           borderRight: `1px solid ${c.border}`,
           background: "rgba(255,255,255,0.03)",
@@ -164,7 +164,7 @@ export default function Home() {
           </a>
         </div>
 
-        <div style={{ padding: "3.5rem 3rem", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)" }}>
+        <div className="home-play-card" style={{ padding: "3.5rem 3rem", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)" }}>
           <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "lowercase" , marginBottom: "1rem" }}>Shop</p>
           <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             PRINTS + BOOKS
@@ -189,7 +189,7 @@ export default function Home() {
       {/* ── FOOTER ── */}
       <footer style={{
         borderTop: `1px solid ${c.border}`,
-        padding: "1.8rem 3rem",
+        padding: "1.8rem clamp(1rem, 4vw, 3rem)",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
