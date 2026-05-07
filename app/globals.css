@@ -601,7 +601,7 @@ html.mid   .work-row:hover { background: #ffaa00; color: #12082a; }
   .index-area {
     position: static;
     padding: 1rem;
-    order: -1;
+    order: 1;
   }
 
   .browser-collage {
