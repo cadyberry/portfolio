@@ -606,34 +606,30 @@ html.mid   .work-row:hover { background: #ffaa00; color: #12082a; }
 
   .browser-collage {
     position: relative;
-    height: 920px;
+    height: 880px;
     padding: 0;
   }
 
   .browser-window {
     position: absolute !important;
-    opacity: 0;
-    transform: translateY(16px) scale(0.97);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
-  .browser-window.loaded {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
+  .browser-window.loaded { opacity: 1 !important; transform: none !important; }
   .browser-window:hover { transform: none; animation: none; }
 
-  .window-screen { height: 100px !important; }
+  .window-screen { height: 90px !important; }
 
-  .win-1 { top: 2%;  left: 3%;  width: 50%; }
-  .win-2 { top: 6%;  left: 50%; width: 46%; }
-  .win-3 { top: 22%; left: 8%;  width: 52%; }
-  .win-4 { top: 30%; left: 44%; width: 50%; }
-  .win-5 { top: 46%; left: 4%;  width: 48%; }
-  .win-6 { top: 53%; left: 46%; width: 50%; }
-  .win-7 { top: 68%; left: 6%;  width: 52%; }
-  .win-8 { top: 75%; left: 44%; width: 48%; }
+  .win-1 { top: 10px;  left: 8px;   width: 52%; }
+  .win-2 { top: 30px;  left: 52%;   width: 44%; }
+  .win-3 { top: 185px; left: 20px;  width: 54%; }
+  .win-4 { top: 210px; left: 50%;   width: 46%; }
+  .win-5 { top: 370px; left: 6px;   width: 50%; }
+  .win-6 { top: 390px; left: 50%;   width: 46%; }
+  .win-7 { top: 560px; left: 14px;  width: 52%; }
+  .win-8 { top: 580px; left: 48%;   width: 46%; }
 
   .home-play-shop {
     grid-template-columns: 1fr !important;
