@@ -113,7 +113,7 @@ export default function Hollow() {
         <div style={{ display: "flex", borderBottom: "1px solid #111", marginBottom: "2rem", gap: 0 }}>
           {TABS.map(({ id, label }) => (
             <button key={id} onClick={() => setTab(id)} style={{
-              fontFamily: "monospace", fontSize: "0.6rem", letterSpacing: "0.25em",
+              fontFamily: "'Special Elite', monospace", fontSize: "0.75rem", letterSpacing: "0.15em",
               color: tab === id ? "#fff" : "#333",
               background: "transparent", border: "none",
               borderBottom: tab === id ? "1px solid #fff" : "1px solid transparent",
