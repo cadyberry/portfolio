@@ -258,17 +258,39 @@ export default function About() {
                 )}
 
                 {activeTab === "Stack" && (
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem 1.4rem" }}>
-                    {TECH.map(t => (
-                      <span key={t} style={{
-                        fontFamily: "'JetBrains Mono', monospace", fontSize: "0.52rem",
-                        letterSpacing: "0.1em", color: c.text,
-                        border: `1px solid ${c.accent}40`,
-                        background: `${c.accent}08`,
-                        padding: "0.4rem 0.8rem", textTransform: "uppercase",
-                        borderRadius: 4,
-                      }}>{t}</span>
-                    ))}
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "1.2rem 1.8rem", padding: "1rem 0.5rem" }}>
+                    {TECH.map((t, i) => {
+                      const rotations = [-3, 1.5, -1, 2.5, -2, 1, -3.5, 2, -1.5, 3, -2.5, 1, -2, 2.5, -1];
+                      const rot = rotations[i % rotations.length];
+                      const sizes = [0.58, 0.48, 0.62, 0.5, 0.55, 0.44, 0.6, 0.52, 0.46, 0.56, 0.5, 0.54, 0.48, 0.58, 0.52];
+                      const sz = sizes[i % sizes.length];
+                      return (
+                        <motion.span
+                          key={t}
+                          whileHover={{ rotate: 0, scale: 1.08, zIndex: 10 }}
+                          style={{
+                            fontFamily: "Special Elite, monospace",
+                            fontSize: `${sz}rem`,
+                            letterSpacing: "0.18em", color: c.text,
+                            textTransform: "uppercase",
+                            display: "inline-block",
+                            transform: `rotate(${rot}deg)`,
+                            transformOrigin: "center",
+                            opacity: 0.7 + (i % 3) * 0.1,
+                            cursor: "default",
+                            transition: "opacity 0.2s",
+                            position: "relative",
+                          }}
+                        >
+                          {t}
+                          <span style={{
+                            position: "absolute", bottom: -2, left: 0, right: 0,
+                            height: 1, background: c.accent,
+                            opacity: 0.3 + (i % 4) * 0.15,
+                          }} />
+                        </motion.span>
+                      );
+                    })}
                   </div>
                 )}
 
