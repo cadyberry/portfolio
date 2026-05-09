@@ -195,7 +195,7 @@ export default function About() {
 
                 {activeTab === "Offerings" && (
                   <div>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.5rem", justifyContent: "space-between" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem 1.4rem", marginBottom: "1.5rem" }}>
                       {SERVICES.map(s => (
                         <motion.button
                           key={s.label}
@@ -209,7 +209,7 @@ export default function About() {
                             border: `1px solid ${activeService === s.label ? c.accent : c.rule}`,
                             background: activeService === s.label ? `${c.accent}18` : "transparent",
                             color: activeService === s.label ? c.text : c.dim,
-                            borderRadius: 3, flex: "1 1 auto", textAlign: "center",
+                            borderRadius: 3,
                             transition: "border-color 0.15s, background 0.15s, color 0.15s",
                           }}
                         >
