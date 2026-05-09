@@ -195,50 +195,29 @@ export default function About() {
 
                 {activeTab === "Offerings" && (
                   <div>
-                    <div style={{ height: 440, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      {/* Venn */}
-                      <svg width="420" height="380" viewBox="0 0 420 380" style={{ overflow: "visible", position: "absolute" }}>
-                        <circle className="venn-c a" cx="210" cy="135" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
-                        <circle className="venn-c b" cx="140" cy="240" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
-                        <circle className="venn-c c" cx="280" cy="240" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
-                      </svg>
-
-                      {/* Services list in center intersection */}
-                      <div style={{
-                        position: "absolute",
-                        top: "50%", left: "50%",
-                        transform: "translate(-50%, -38%)",
-                        width: 220, maxHeight: 210,
-                        overflowY: "auto",
-                        display: "flex", flexWrap: "wrap", gap: "3px",
-                        justifyContent: "space-between",
-                        zIndex: 10,
-                        scrollbarWidth: "none",
-                      }}>
-                        {SERVICES.map(s => (
-                          <motion.button
-                            key={s.label}
-                            onClick={() => setActiveService(activeService === s.label ? null : s.label)}
-                            whileHover={{ scale: 1.04 }}
-                            whileTap={{ scale: 0.97 }}
-                            style={{
-                              fontFamily: "'JetBrains Mono', monospace", fontSize: "0.42rem",
-                              letterSpacing: "0.08em", textTransform: "uppercase",
-                              padding: "0.28rem 0.5rem", cursor: "pointer",
-                              border: `1px solid ${activeService === s.label ? c.accent : c.hairline}`,
-                              background: activeService === s.label ? `${c.accent}18` : "transparent",
-                              color: activeService === s.label ? c.text : c.dim,
-                              borderRadius: 2, flex: "1 1 auto", textAlign: "center",
-                              transition: "border-color 0.15s, background 0.15s, color 0.15s",
-                            }}
-                          >
-                            {s.label}
-                          </motion.button>
-                        ))}
-                      </div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.5rem", justifyContent: "space-between" }}>
+                      {SERVICES.map(s => (
+                        <motion.button
+                          key={s.label}
+                          onClick={() => setActiveService(activeService === s.label ? null : s.label)}
+                          whileHover={{ scale: 1.04 }}
+                          whileTap={{ scale: 0.97 }}
+                          style={{
+                            fontFamily: "'JetBrains Mono', monospace", fontSize: "0.52rem",
+                            letterSpacing: "0.1em", textTransform: "uppercase",
+                            padding: "0.4rem 0.8rem", cursor: "pointer",
+                            border: `1px solid ${activeService === s.label ? c.accent : c.rule}`,
+                            background: activeService === s.label ? `${c.accent}18` : "transparent",
+                            color: activeService === s.label ? c.text : c.dim,
+                            borderRadius: 3, flex: "1 1 auto", textAlign: "center",
+                            transition: "border-color 0.15s, background 0.15s, color 0.15s",
+                          }}
+                        >
+                          {s.label}
+                        </motion.button>
+                      ))}
                     </div>
 
-                    {/* Description zone */}
                     <div style={{ height: 72, borderTop: `1px solid ${c.hairline}`, paddingTop: "1rem" }}>
                       <AnimatePresence mode="wait">
                         {activeService && (() => {
