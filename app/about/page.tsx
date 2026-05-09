@@ -258,7 +258,7 @@ export default function About() {
                 )}
 
                 {activeTab === "Stack" && (
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", justifyContent: "space-between" }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem 1.4rem" }}>
                     {TECH.map(t => (
                       <span key={t} style={{
                         fontFamily: "'JetBrains Mono', monospace", fontSize: "0.52rem",
@@ -266,7 +266,7 @@ export default function About() {
                         border: `1px solid ${c.accent}40`,
                         background: `${c.accent}08`,
                         padding: "0.4rem 0.8rem", textTransform: "uppercase",
-                        borderRadius: 4, flex: "1 1 auto", textAlign: "center",
+                        borderRadius: 4,
                       }}>{t}</span>
                     ))}
                   </div>
