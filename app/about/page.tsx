@@ -1,5 +1,7 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "motion/react";
 import { useTheme, type Theme } from "../theme";
 
 function colors(theme: Theme) {
@@ -20,33 +22,45 @@ function colors(theme: Theme) {
   };
 }
 
-const SERVICES = [
-  "UI / UX", "Websites", "Mobile Apps",
-  "Logo & Identity", "Social Media Planning", "Creative Consulting",
-  "Poster Design", "Brand Systems", "Digital Art",
-  "Generative AI", "Photography", "Art Direction",
-  "Motion Design", "Illustration", "Print & Book Design",
-  "Web Apps", "Prompt Engineering", "Data Visualization",
+const SERVICES: { label: string; desc: string }[] = [
+  { label: "UI / UX",               desc: "Interface design and user experience — flows, wireframes, prototypes, and full design systems." },
+  { label: "Websites",              desc: "Design and development of web experiences, from portfolio sites to full product builds." },
+  { label: "Mobile Apps",           desc: "UI design for iOS and Android — native patterns, responsive layouts, interaction design." },
+  { label: "Logo & Identity",       desc: "Visual identity systems — logo, color, type, and the rules that hold a brand together." },
+  { label: "Social Media Planning", desc: "Content strategy, visual templates, and creative direction for social channels." },
+  { label: "Creative Consulting",   desc: "Strategic creative input on direction, aesthetics, and execution for projects or teams." },
+  { label: "Poster Design",         desc: "Print and digital poster work — event, editorial, and art-driven." },
+  { label: "Brand Systems",         desc: "Comprehensive brand guidelines, component libraries, and design tokens." },
+  { label: "Digital Art",           desc: "Original digital artwork — generative, illustrative, abstract, or print-ready." },
+  { label: "Generative AI",         desc: "Prompt engineering, AI-assisted creative workflows, and custom generative visual tools." },
+  { label: "Photography",           desc: "Portrait, travel, and documentary photography. Six years, multiple countries." },
+  { label: "Art Direction",         desc: "Creative leadership on visual projects — setting the aesthetic and guiding execution." },
+  { label: "Motion Design",         desc: "Animated UI, motion graphics, and interactive visual experiments." },
+  { label: "Illustration",          desc: "Custom illustration for digital and print — from icons to full editorial spreads." },
+  { label: "Print & Book Design",   desc: "Layout and design for physical publications — books, zines, and limited editions." },
+  { label: "Web Apps",              desc: "Full-stack web application design and development, from concept to deployment." },
+  { label: "Prompt Engineering",    desc: "Designing and refining prompts for LLMs — for products, creative tools, or internal workflows." },
+  { label: "Data Visualization",    desc: "Turning data into clear, beautiful visuals — dashboards, charts, and infographic systems." },
 ];
 
 const TECH = ["Figma","Angular","React","Next.js","TypeScript","Node.js","Python","TailwindCSS","SQL","Git","Adobe CC","Framer","Vercel","OpenAI API","FL Studio"];
 
-function Label({ children, accent }: { children: React.ReactNode; accent: string }) {
-  return (
-    <span style={{
-      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-      fontSize: "0.5rem", letterSpacing: "0.32em", textTransform: "uppercase" as const,
-      color: accent, display: "inline-flex", alignItems: "center", gap: "0.6rem",
-    }}>
-      <span style={{ display: "inline-block", width: 14, height: 1, background: "currentColor" }} />
-      {children}
-    </span>
-  );
-}
+const TIMELINE = [
+  { year: "2011",    label: "Photography",  sub: "started at 13",             color: "#00ffee" },
+  { year: "2018–20", label: "Pour Painting", sub: "physical · analog",        color: "#ff6600" },
+  { year: "2019",    label: "Music",         sub: "FL Studio · production",   color: "#ff00aa" },
+  { year: "2020",    label: "Digital Art",   sub: "first digital works",      color: "#ccff00" },
+  { year: "2021",    label: "Synthesis",     sub: "pour paintings → digital", color: "#b94dff" },
+];
+
+const TABS = ["Philosophy", "Disciplines", "Offerings", "Stack", "Work Together"] as const;
+type Tab = typeof TABS[number];
 
 export default function About() {
   const { theme } = useTheme();
   const c = colors(theme);
+  const [activeTab, setActiveTab] = useState<Tab>("Philosophy");
+  const [activeService, setActiveService] = useState<string | null>(null);
 
   return (
     <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "7rem", color: c.text, transition: "color 0.3s" }}>
@@ -58,21 +72,17 @@ export default function About() {
         .venn-c { animation: venn-breath 12s ease-in-out infinite; }
         .venn-c.b { animation-delay: -4s; }
         .venn-c.c { animation-delay: -8s; }
-        @media (max-width: 880px) {
-          .about-hero, .about-manifesto, .about-venn, .about-services,
-          .about-tech, .about-edu, .about-cta { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-          .about-currently { grid-template-columns: 1fr !important; }
-          .about-currently .spacer { display: none !important; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .venn-c { animation: none !important; }
+        @media (prefers-reduced-motion: reduce) { .venn-c { animation: none !important; } }
+        @media (max-width: 760px) {
+          .about-body { flex-direction: column !important; }
+          .about-tabs { flex-direction: row !important; flex-wrap: wrap; border-right: none !important; border-bottom: 1px solid; padding-right: 0 !important; padding-bottom: 1rem; margin-bottom: 2rem; }
         }
       `}</style>
 
       <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 2rem 8rem" }}>
 
         {/* HERO */}
-        <header className="about-hero" style={{
+        <header style={{
           display: "grid", gridTemplateColumns: "minmax(0,1.4fr) minmax(0,1fr)",
           gap: "5rem", alignItems: "end",
           paddingBottom: "4rem", marginBottom: "5rem",
@@ -109,170 +119,276 @@ export default function About() {
           </div>
         </header>
 
-        {/* MANIFESTO */}
-        <section className="about-manifesto" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "7rem" }}>
-          <div style={{ paddingTop: "0.35rem" }}><Label accent={c.accent}>Ethos</Label></div>
-          <p style={{
-            fontFamily: "Fraunces, serif", fontWeight: 300,
-            fontSize: "clamp(1.35rem, 2.4vw, 1.85rem)", lineHeight: 1.45,
-            letterSpacing: "-0.012em", color: c.text, maxWidth: "38ch", margin: 0,
+        {/* TABS + CONTENT */}
+        <div className="about-body" style={{ display: "flex", gap: "4rem", marginBottom: "8rem" }}>
+
+          {/* Vertical tab list */}
+          <nav className="about-tabs" style={{
+            display: "flex", flexDirection: "column", gap: "2px",
+            borderRight: `1px solid ${c.hairline}`,
+            paddingRight: "2rem", flexShrink: 0, width: 140,
           }}>
-            A <span style={{ color: c.accent, fontStyle: "italic" }}>generalist who thinks in form</span>.{" "}
-            Visual, audio, or code
-            <span style={{ fontStyle: "italic", color: c.dim }}> — design is the thread of what she does.</span>{" "}
-            Acadia is drawn to the{" "}
-            <span style={{ color: c.accent, fontStyle: "italic" }}>endless possibility of what can be expressed through computers</span>
-            <span style={{ fontStyle: "italic", color: c.dim }}> and how that shapes the way people see, feel, and connect</span>.
-          </p>
-        </section>
-
-        {/* VENN */}
-        <section className="about-venn" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "7rem" }}>
-          <div style={{ paddingTop: "0.35rem" }}><Label accent={c.accent}>Practice</Label></div>
-          <div style={{ height: 440, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }} aria-hidden="true">
-            <svg width="420" height="380" viewBox="0 0 420 380" style={{ overflow: "visible" }}>
-              <circle className="venn-c a" cx="210" cy="135" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
-              <circle className="venn-c b" cx="140" cy="240" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
-              <circle className="venn-c c" cx="280" cy="240" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
-            </svg>
-            {[
-              { label: "Designer", sub: "identity · ui · brand systems", style: { top: 0, left: "50%", transform: "translateX(-50%)" } },
-              { label: "Developer", sub: "web · tools · prototypes",    style: { bottom: 14, left: "14%", transform: "translateX(-50%)" } },
-              { label: "Artist",    sub: "generative · photo · print",  style: { bottom: 14, right: "14%", transform: "translateX(50%)" } },
-            ].map(({ label, sub, style }) => (
-              <div key={label} style={{ position: "absolute", textAlign: "center", ...style }}>
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.22em", textTransform: "uppercase", color: c.text }}>
-                  {label}
-                </span>
-                <small style={{ display: "block", marginTop: "0.35rem", fontSize: "0.48rem", letterSpacing: "0.2em", color: c.faint, lineHeight: 1.6, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" }}>
-                  {sub}
-                </small>
-              </div>
+            {TABS.map(tab => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "0.5rem", letterSpacing: "0.22em", textTransform: "uppercase",
+                  padding: "0.75rem 0.8rem", border: "none", cursor: "pointer",
+                  background: "none", textAlign: "left", width: "100%",
+                  color: activeTab === tab ? c.text : c.faint,
+                  borderRight: activeTab === tab ? `2px solid ${c.accent}` : "2px solid transparent",
+                  marginRight: -1,
+                  transition: "color 0.18s, border-color 0.18s",
+                }}
+              >
+                {tab}
+              </button>
             ))}
-          </div>
-        </section>
+          </nav>
 
-        {/* SERVICES */}
-        <section style={{ marginBottom: "7rem" }}>
-          <div className="about-services" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", alignItems: "start" }}>
-            <div><Label accent={c.accent}>Services</Label></div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
-              {SERVICES.map(s => (
-                <span key={s} style={{
-                  fontFamily: "'JetBrains Mono', monospace", fontSize: "0.52rem",
-                  letterSpacing: "0.1em", color: c.dim,
-                  border: `1px solid ${c.rule}`,
-                  padding: "0.4rem 0.8rem", textTransform: "uppercase",
-                }}>{s}</span>
-              ))}
+          {/* Panel */}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+              >
+
+                {activeTab === "Philosophy" && (
+                  <p style={{
+                    fontFamily: "Fraunces, serif", fontWeight: 300,
+                    fontSize: "clamp(1.35rem, 2.4vw, 1.85rem)", lineHeight: 1.45,
+                    letterSpacing: "-0.012em", color: c.text, maxWidth: "38ch", margin: 0,
+                  }}>
+                    Visual, audio, or code
+                    <span style={{ fontStyle: "italic", color: c.dim }}> — design is the thread of what she does.</span>{" "}
+                    Acadia is drawn to the{" "}
+                    <span style={{ color: c.accent, fontStyle: "italic" }}>endless possibility of what can be expressed through computers</span>
+                    <span style={{ fontStyle: "italic", color: c.dim }}> and how that shapes the way people see, feel, and connect</span>.
+                  </p>
+                )}
+
+                {activeTab === "Disciplines" && (
+                  <div style={{ height: 440, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg width="420" height="380" viewBox="0 0 420 380" style={{ overflow: "visible" }}>
+                      <circle className="venn-c a" cx="210" cy="135" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
+                      <circle className="venn-c b" cx="140" cy="240" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
+                      <circle className="venn-c c" cx="280" cy="240" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
+                    </svg>
+                    {[
+                      { label: "Designer",  sub: "identity · ui · brand systems", style: { top: 0,    left: "50%", transform: "translateX(-50%)" } },
+                      { label: "Developer", sub: "web · tools · prototypes",       style: { bottom: 14, left: "14%", transform: "translateX(-50%)" } },
+                      { label: "Artist",    sub: "generative · photo · print",     style: { bottom: 14, right: "14%", transform: "translateX(50%)" } },
+                    ].map(({ label, sub, style }) => (
+                      <div key={label} style={{ position: "absolute", textAlign: "center", ...style }}>
+                        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.22em", textTransform: "uppercase", color: c.text }}>{label}</span>
+                        <small style={{ display: "block", marginTop: "0.35rem", fontSize: "0.48rem", letterSpacing: "0.2em", color: c.faint, lineHeight: 1.6, fontFamily: "'JetBrains Mono', monospace", textTransform: "uppercase" }}>{sub}</small>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {activeTab === "Offerings" && (
+                  <div>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.5rem" }}>
+                      {SERVICES.map(s => (
+                        <motion.button
+                          key={s.label}
+                          onClick={() => setActiveService(activeService === s.label ? null : s.label)}
+                          whileHover={{ scale: 1.04 }}
+                          whileTap={{ scale: 0.97 }}
+                          style={{
+                            fontFamily: "'JetBrains Mono', monospace", fontSize: "0.52rem",
+                            letterSpacing: "0.1em", textTransform: "uppercase",
+                            padding: "0.4rem 0.8rem", cursor: "pointer",
+                            border: `1px solid ${activeService === s.label ? c.accent : c.rule}`,
+                            background: activeService === s.label ? `${c.accent}18` : "transparent",
+                            color: activeService === s.label ? c.text : c.dim,
+                            borderRadius: 3,
+                            transition: "border-color 0.15s, background 0.15s, color 0.15s",
+                          }}
+                        >
+                          {s.label}
+                        </motion.button>
+                      ))}
+                    </div>
+
+                    {/* Fixed-height description zone — always same position */}
+                    <div style={{ height: 72, borderTop: `1px solid ${c.hairline}`, paddingTop: "1rem" }}>
+                      <AnimatePresence mode="wait">
+                        {activeService && (() => {
+                          const svc = SERVICES.find(s => s.label === activeService);
+                          return svc ? (
+                            <motion.div
+                              key={activeService}
+                              initial={{ opacity: 0, x: -6 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              exit={{ opacity: 0, x: 4 }}
+                              transition={{ duration: 0.16, ease: "easeOut" }}
+                              style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}
+                            >
+                              <div style={{ borderLeft: `2px solid ${c.accent}`, paddingLeft: "0.8rem" }}>
+                                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.18em", textTransform: "uppercase", color: c.accent, marginBottom: "0.3rem" }}>
+                                  {svc.label}
+                                </div>
+                                <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.78rem", color: c.dim, lineHeight: 1.55 }}>
+                                  {svc.desc}
+                                </div>
+                              </div>
+                            </motion.div>
+                          ) : null;
+                        })()}
+                        {!activeService && (
+                          <motion.p
+                            key="hint"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.2em", color: c.faint, textTransform: "uppercase", margin: 0 }}
+                          >
+                            Click any offering to learn more
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === "Stack" && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                    {TECH.map(t => (
+                      <span key={t} style={{
+                        fontFamily: "'JetBrains Mono', monospace", fontSize: "0.52rem",
+                        letterSpacing: "0.1em", color: c.text,
+                        border: `1px solid ${c.accent}40`,
+                        background: `${c.accent}08`,
+                        padding: "0.4rem 0.8rem", textTransform: "uppercase",
+                        borderRadius: 4,
+                      }}>{t}</span>
+                    ))}
+                  </div>
+                )}
+
+                {activeTab === "Work Together" && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+                    <p style={{
+                      fontFamily: "Fraunces, serif", fontWeight: 300, fontStyle: "italic",
+                      fontSize: "clamp(1.4rem, 2.6vw, 2rem)", lineHeight: 1.25, color: c.text,
+                      maxWidth: "24ch", letterSpacing: "-0.012em", margin: 0,
+                    }}>
+                      Have something in mind?
+                    </p>
+                    <div style={{ display: "flex", gap: "0.8rem", flexWrap: "wrap" }}>
+                      <Link href="/contact" style={{
+                        fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem",
+                        letterSpacing: "0.22em", textTransform: "uppercase", textDecoration: "none",
+                        padding: "0.95rem 1.6rem", display: "inline-flex", alignItems: "center",
+                        gap: "0.8rem", minHeight: 44, background: c.accent, color: c.bg,
+                        border: `1px solid ${c.accent}`,
+                      }}>Contact →</Link>
+                      <Link href="/" style={{
+                        fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem",
+                        letterSpacing: "0.22em", textTransform: "uppercase", textDecoration: "none",
+                        padding: "0.95rem 1.6rem", display: "inline-flex", alignItems: "center",
+                        minHeight: 44, color: c.dim, border: `1px solid ${c.rule}`,
+                        background: "transparent",
+                      }}>See the work</Link>
+                    </div>
+                  </div>
+                )}
+
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* TIMELINE */}
+        <section style={{ borderTop: `1px solid ${c.hairline}`, paddingTop: "4rem" }}>
+          <div style={{ marginBottom: "2.5rem", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.32em", textTransform: "uppercase", color: c.accent, display: "flex", alignItems: "center", gap: "0.6rem" }}>
+            <span style={{ display: "inline-block", width: 14, height: 1, background: "currentColor" }} />
+            Timeline
+          </div>
+          <div style={{ overflowX: "auto", paddingBottom: "1rem" }}>
+            <div style={{ position: "relative", minWidth: 640, height: 300 }}>
+              <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }} preserveAspectRatio="none">
+                <line x1="0" y1="150" x2="100%" y2="150" stroke={c.rule} strokeWidth="1.5" strokeDasharray="6 5" />
+              </svg>
+
+              {TIMELINE.map((item, i) => {
+                const above = i % 2 === 0;
+                const xPct = 8 + i * 21;
+                const stemLen = 56;
+                const cardH = 92;
+                const midY = 150;
+
+                return (
+                  <motion.div
+                    key={item.year}
+                    style={{ position: "absolute", left: `${xPct}%`, top: 0, width: 0 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.3, delay: i * 0.1 }}
+                  >
+                    <motion.div
+                      initial={{ scaleY: 0 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.28, delay: i * 0.1 + 0.1 }}
+                      style={{
+                        position: "absolute", left: -1, width: 2,
+                        top: above ? midY - stemLen : midY,
+                        height: stemLen,
+                        background: item.color, opacity: 0.45,
+                        transformOrigin: above ? "bottom" : "top",
+                      }}
+                    />
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      whileHover={{ scale: 1.7 }}
+                      viewport={{ once: true }}
+                      transition={{ type: "spring", stiffness: 320, damping: 18, delay: i * 0.1 + 0.18 }}
+                      style={{
+                        position: "absolute", left: -7, top: midY - 7,
+                        width: 14, height: 14, borderRadius: "50%",
+                        background: item.color,
+                        boxShadow: `0 0 12px ${item.color}, 0 0 24px ${item.color}66`,
+                        zIndex: 2,
+                      }}
+                    />
+                    <motion.div
+                      initial={{ opacity: 0, y: above ? 10 : -10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      whileHover={{ y: above ? -4 : 4 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.36, delay: i * 0.1 + 0.22 }}
+                      style={{
+                        position: "absolute",
+                        top: above ? midY - stemLen - cardH : midY + stemLen,
+                        left: -72, width: 144,
+                        background: `${item.color}12`,
+                        border: `1px solid ${item.color}45`,
+                        borderRadius: 10,
+                        padding: "0.8rem 1rem",
+                        textAlign: "center",
+                        backdropFilter: "blur(14px)",
+                        WebkitBackdropFilter: "blur(14px)",
+                      }}
+                    >
+                      <div style={{ fontFamily: "Special Elite, monospace", fontSize: "0.6rem", color: item.color, marginBottom: "0.3rem" }}>{item.year}</div>
+                      <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "0.78rem", color: c.text, marginBottom: "0.2rem" }}>{item.label}</div>
+                      <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", color: c.faint, lineHeight: 1.4 }}>{item.sub}</div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
-          </div>
-        </section>
-
-        {/* TECH */}
-        <section className="about-tech" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "7rem" }}>
-          <div><Label accent={c.accent}>Technical</Label></div>
-          <p style={{ fontFamily: "Fraunces, serif", fontWeight: 300, fontSize: "clamp(1.05rem, 1.7vw, 1.3rem)", lineHeight: 1.9, color: c.dim, maxWidth: "60ch", margin: 0 }}>
-            {TECH.map((t, i) => (
-              <span key={t}>
-                <span style={{ color: c.text, fontStyle: "italic" }}>{t}</span>
-                {i < TECH.length - 1 && <span style={{ color: c.faint, margin: "0 0.35em" }}>·</span>}
-              </span>
-            ))}
-          </p>
-        </section>
-
-        {/* CURRENTLY */}
-        <section style={{ marginBottom: "7rem" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "2rem" }}>
-            <div><Label accent={c.accent}>Currently</Label></div>
-          </div>
-          <div className="about-currently" style={{ display: "grid", gridTemplateColumns: "200px repeat(3, 1fr)", gap: "3rem", borderTop: `1px solid ${c.hairline}`, paddingTop: "2.5rem" }}>
-            <div className="spacer" />
-            {[
-              {
-                title: "Building",
-                items: [
-                  <><b style={{ color: c.text, fontWeight: 500 }}>UI Packs</b> — five HTML/CSS theme systems</>,
-                  <><b style={{ color: c.text, fontWeight: 500 }}>Spacescape</b> — generative art tools</>,
-                  <><b style={{ color: c.text, fontWeight: 500 }}>Three books</b> — travel photo, coloring, prints</>,
-                ],
-              },
-              {
-                title: "Available For",
-                items: ["Freelance projects","Contract engagements","Long-term retainers","Art commissions","Creative consulting"],
-              },
-              {
-                title: "Listening / Reading",
-                items: ["Lo-fi mixes & FL Studio sessions","Computer Lib / Dream Machines","Old web archives, late-90s GeoCities"],
-              },
-            ].map(col => (
-              <div key={col.title}>
-                <h3 style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase", color: c.text, marginBottom: "1.2rem", fontWeight: 500 }}>{col.title}</h3>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.65rem" }}>
-                  {col.items.map((item, i) => (
-                    <li key={i} style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", lineHeight: 1.5, color: c.dim, paddingLeft: "1.1rem", position: "relative" }}>
-                      <span style={{ position: "absolute", left: 0, top: "-0.05em", color: c.accent, fontSize: "1.4em", lineHeight: 1 }}>·</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* EDUCATION */}
-        <section className="about-edu" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: "3rem", marginBottom: "6rem" }}>
-          <div><Label accent={c.accent}>Education</Label></div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            {[
-              { degree: "M.S. Data Science", school: "Central Connecticut State University", year: "2023" },
-              { degree: "B.A. Psychological Science", school: "Central Connecticut State University", year: "2021" },
-            ].map((e, i, arr) => (
-              <div key={e.degree} style={{
-                display: "grid", gridTemplateColumns: "1fr 2fr 80px", gap: "2rem",
-                alignItems: "baseline", padding: "1.4rem 0",
-                borderTop: `1px solid ${c.hairline}`,
-                ...(i === arr.length - 1 ? { borderBottom: `1px solid ${c.hairline}` } : {}),
-              }}>
-                <span style={{ fontFamily: "Fraunces, serif", fontStyle: "italic", fontWeight: 400, fontSize: "1.05rem", color: c.text }}>{e.degree}</span>
-                <span style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.dim }}>{e.school}</span>
-                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.18em", color: c.faint, textAlign: "right" }}>{e.year}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="about-cta" style={{
-          borderTop: `1px solid ${c.hairline}`, paddingTop: "4rem",
-          display: "grid", gridTemplateColumns: "200px 1fr auto",
-          gap: "3rem", alignItems: "center",
-        }}>
-          <div><Label accent={c.accent}>Get in touch</Label></div>
-          <p style={{
-            fontFamily: "Fraunces, serif", fontWeight: 300, fontStyle: "italic",
-            fontSize: "clamp(1.4rem, 2.6vw, 2rem)", lineHeight: 1.25, color: c.text,
-            maxWidth: "24ch", letterSpacing: "-0.012em", margin: 0,
-          }}>
-            Have something in mind?
-          </p>
-          <div style={{ display: "flex", gap: "0.8rem", flexWrap: "wrap" }}>
-            <Link href="/contact" style={{
-              fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem",
-              letterSpacing: "0.22em", textTransform: "uppercase", textDecoration: "none",
-              padding: "0.95rem 1.6rem", display: "inline-flex", alignItems: "center",
-              gap: "0.8rem", minHeight: 44, background: c.accent, color: c.bg,
-              border: `1px solid ${c.accent}`,
-            }}>Work with me →</Link>
-            <Link href="/work" style={{
-              fontFamily: "'JetBrains Mono', monospace", fontSize: "0.55rem",
-              letterSpacing: "0.22em", textTransform: "uppercase", textDecoration: "none",
-              padding: "0.95rem 1.6rem", display: "inline-flex", alignItems: "center",
-              minHeight: 44, color: c.dim, border: `1px solid ${c.rule}`,
-              background: "transparent",
-            }}>See the work</Link>
           </div>
         </section>
 

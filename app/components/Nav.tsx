@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useTheme, type Theme } from "../theme";
 
 const LINKS = [
+  { href: "/",        label: "HOME"    },
   { href: "/about",   label: "ABOUT"   },
   { href: "/contact", label: "CONTACT" },
 ];
@@ -153,13 +154,13 @@ export default function Nav() {
           <Link key={href} href={href} style={{
             fontSize: "0.6rem",
             letterSpacing: "0.2em",
-            color: path.startsWith(href) ? c.accent : c.dim,
+            color: (href === "/" ? path === "/" : path.startsWith(href)) ? c.accent : c.dim,
             textDecoration: "none",
             textTransform: "uppercase",
             transition: "color 0.2s",
           }}
           onMouseEnter={e => (e.currentTarget.style.color = c.text)}
-          onMouseLeave={e => (e.currentTarget.style.color = path.startsWith(href) ? c.accent : c.dim)}>
+          onMouseLeave={e => (e.currentTarget.style.color = (href === "/" ? path === "/" : path.startsWith(href)) ? c.accent : c.dim)}>
             {label}
           </Link>
         ))}

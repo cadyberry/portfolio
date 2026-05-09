@@ -79,7 +79,7 @@ html.light .home-wordmark { text-shadow: none; }
 html.mid   .home-wordmark { text-shadow: 0 0 80px rgba(255,150,0,0.25); }
 
 .home-tagline {
-  font-family: "UnifrakturMaguntia", cursive;
+  font-family: "Special Elite", monospace;
   font-size: 0.56rem;
   letter-spacing: 0.3em;
   color: var(--text-dim);
@@ -102,7 +102,7 @@ html.mid   .home-wordmark { text-shadow: 0 0 80px rgba(255,150,0,0.25); }
 .browser-collage {
   position: relative;
   width: 100%;
-  height: 200vh;
+  height: 100vh;
 }
 
 /* --- Browser Window --- */
@@ -156,7 +156,7 @@ html.mid   .home-wordmark { text-shadow: 0 0 80px rgba(255,150,0,0.25); }
 
 .window-screen {
   position: relative;
-  height: 140px;
+  height: 100px;
   overflow: hidden;
 }
 
@@ -166,19 +166,15 @@ html.mid   .home-wordmark { text-shadow: 0 0 80px rgba(255,150,0,0.25); }
   overflow: hidden;
 }
 
-/* Per-window sizes and positions */
-.win-1 { top: 4%;  left: 4%;  width: 23%; }
-.win-2 { top: 2%;  left: 54%; width: 20%; }
-.win-3 { top: 26%; left: 30%; width: 22%; }
-.win-4 { top: 36%; left: 2%;  width: 26%; }
-.win-5 { top: 28%; left: 63%; width: 23%; }
-.win-6 { top: 58%; left: 20%; width: 21%; }
-.win-7 { top: 52%; left: 58%; width: 20%; }
-.win-8 { top: 74%; left: 6%;  width: 25%; }
+/* Per-window sizes and positions — two staggered rows */
+.win-1 { top: 4%;  left: 2%;  width: 17%; }
+.win-2 { top: 2%;  left: 25%; width: 16%; }
+.win-3 { top: 5%;  left: 56%; width: 17%; }
+.win-4 { top: 38%; left: 6%;  width: 17%; }
+.win-5 { top: 34%; left: 48%; width: 16%; }
 
-.win-2 .window-screen { height: 180px; }
-.win-4 .window-screen { height: 165px; }
-.win-6 .window-screen { height: 150px; }
+.win-3 .window-screen { height: 115px; }
+.win-4 .window-screen { height: 108px; }
 
 /* --- Right Index --- */
 .index-area {
@@ -592,7 +588,7 @@ html.mid   .work-row:hover { background: #ffaa00; color: #12082a; }
   50%       { opacity: 0.2; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .main-grid {
     display: flex;
     flex-direction: column;
@@ -602,6 +598,11 @@ html.mid   .work-row:hover { background: #ffaa00; color: #12082a; }
     position: static;
     padding: 1rem;
     order: 1;
+  }
+
+  .collage-area {
+    min-height: 880px;
+    overflow: visible;
   }
 
   .browser-collage {

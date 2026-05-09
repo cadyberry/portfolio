@@ -96,7 +96,7 @@ export default function Contact() {
   const firstName = name.split(" ")[0] || "friend";
 
   return (
-    <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "7rem", color: c.text, transition: "color 0.3s" }}>
+    <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "2rem", color: c.text, transition: "color 0.3s" }}>
       <style>{`
         .contact-input::placeholder { color: ${c.faint}; font-style: italic; }
         .contact-input:focus { border-bottom-color: ${c.accent} !important; }

@@ -30,13 +30,10 @@ function pageColors(theme: Theme) {
 }
 
 const PROJECTS = [
-  { slug: "themes",        name: "THEMES",        year: "2025", cls: "m-uipacks",   file: "themes.zip"       },
-  { slug: "packs",         name: "PACKS",         year: "2025", cls: "m-silt",      file: "packs.zip"        },
-  { slug: "gen-ai-tools",  name: "GEN ART TOOLS", year: "2024", cls: "m-signal",    file: "gen-ai.mp4"       },
+  { slug: "gen-ai-tools",  name: "CREATIVE TOOLS", year: "2024", cls: "m-signal",    file: "gen-ai.mp4",      href: "https://unafield.vercel.app" },
   { slug: "animation",     name: "ANIMATION",     year: "2025", cls: "m-vanta",     file: "animation.mp4",   unicorn: true },
-  { slug: "design-tools",  name: "DESIGN TOOLS",  year: "2025", cls: "m-biome",     file: "design-tools.zip" },
-  { slug: "audio",         name: "AUDIO",         year: "2025", cls: "m-signal",    file: "47c4dy"           },
-  { slug: "github",        name: "GITHUB",        year: "2018–", cls: "m-plugins",  file: "github.com"      },
+  { slug: "audio",         name: "MUSIC",         year: "2025", cls: "m-signal",    file: "47c4dy"           },
+  { slug: "github",        name: "GITHUB",        year: "2018–", cls: "m-plugins",  file: "github.com",      href: "https://github.com/cadyberry" },
   { slug: "shop",          name: "SHOP",          year: "2025", cls: "m-unavoide",  file: "unavoide.com"    },
 ];
 
@@ -74,7 +71,7 @@ export default function Home() {
               const cls = `browser-window win-${i + 1}`;
               const isUnicorn = !!(p as { unicorn?: boolean }).unicorn;
               const inner = <>
-                <div className="window-titlebar">{p.file}</div>
+                <div className="window-titlebar">{p.name}</div>
                 <div className={`window-screen ${p.cls}`}>
                   {isUnicorn ? <UnicornWindow /> : <div className="screen" />}
                 </div>
@@ -121,7 +118,7 @@ export default function Home() {
         <div style={{
           display: "inline-block",
           animation: "marquee 32s linear infinite",
-          fontFamily: "UnifrakturMaguntia, cursive",
+          fontFamily: "Special Elite, monospace",
           fontSize: "0.52rem",
           letterSpacing: "0.28em",
           color: c.textFaint,
@@ -144,15 +141,15 @@ export default function Home() {
           backdropFilter: "blur(14px)",
           WebkitBackdropFilter: "blur(14px)",
         }}>
-          <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "lowercase" , marginBottom: "1rem" }}>Play</p>
-          <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
+          <p style={{ fontFamily: "Special Elite, monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "lowercase" , marginBottom: "1rem" }}>Play</p>
+          <p style={{ fontFamily: "Special Elite, monospace", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
             8 FREE TOOLS
           </p>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
             Kaleidoscope, pixel editor, generative art, digital rain — all browser-based, all free, built from scratch since 2018.
           </p>
           <a href="https://unafield.vercel.app" target="_blank" rel="noopener noreferrer" style={{
-            fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.55rem", letterSpacing: "0.2em",
+            fontFamily: "Special Elite, monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
             color: c.textDim, textDecoration: "none", textTransform: "lowercase" ,
             border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
             display: "inline-flex", alignItems: "center", minHeight: 44,
@@ -165,15 +162,12 @@ export default function Home() {
         </div>
 
         <div className="home-play-card" style={{ padding: "3.5rem 3rem", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)" }}>
-          <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "lowercase" , marginBottom: "1rem" }}>Shop</p>
-          <p style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
+          <p style={{ fontFamily: "Special Elite, monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "lowercase" , marginBottom: "1rem" }}>Shop</p>
+          <p style={{ fontFamily: "Special Elite, monospace", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 1.8rem", lineHeight: 1 }}>
             PRINTS + BOOKS
           </p>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
-            60+ digital art prints. Three books in production — travel photography, coloring book, print collection.
-          </p>
           <a href="https://unavoide.com" target="_blank" rel="noopener noreferrer" style={{
-            fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.55rem", letterSpacing: "0.2em",
+            fontFamily: "Special Elite, monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
             color: c.textDim, textDecoration: "none", textTransform: "lowercase" ,
             border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
             display: "inline-flex", alignItems: "center", minHeight: 44,
@@ -199,10 +193,10 @@ export default function Home() {
         backdropFilter: "blur(14px)",
         WebkitBackdropFilter: "blur(14px)",
       }}>
-        <span style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "lowercase"  }}>
+        <span style={{ fontFamily: "Special Elite, monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "lowercase"  }}>
           © 2026 ACADIA · Brooklyn, NY
         </span>
-        <span style={{ fontFamily: "UnifrakturMaguntia, cursive", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "lowercase"  }}>
+        <span style={{ fontFamily: "Special Elite, monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "lowercase"  }}>
           acadiaberry.com
         </span>
       </footer>
