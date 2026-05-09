@@ -165,11 +165,7 @@ export default function About() {
                     fontSize: "clamp(1.35rem, 2.4vw, 1.85rem)", lineHeight: 1.45,
                     letterSpacing: "-0.012em", color: c.text, maxWidth: "38ch", margin: 0,
                   }}>
-                    Visual, audio, or code
-                    <span style={{ fontStyle: "italic", color: c.dim }}> — design is the thread of what she does.</span>{" "}
-                    Acadia is drawn to the{" "}
-                    <span style={{ color: c.accent, fontStyle: "italic" }}>endless possibility of what can be expressed through computers</span>
-                    <span style={{ fontStyle: "italic", color: c.dim }}> and how that shapes the way people see, feel, and connect</span>.
+                    Acadia is drawn to the endless possibility of what can be expressed through computers and how that shapes the way people see, feel, and connect.
                   </p>
                 )}
 
