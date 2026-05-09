@@ -95,7 +95,7 @@ export default function About() {
               lineHeight: 0.9, color: c.text, margin: "0 0 1.4rem",
             }}>
               <em style={{ fontStyle: "normal" }}>acadia</em><br />
-              berry<span style={{ color: c.accent }}>.</span>
+              berr<span style={{ position: "relative", display: "inline-block" }}>y<span style={{ position: "absolute", top: "0.04em", left: "50%", transform: "translateX(-50%)", width: "0.18em", height: "0.18em", borderRadius: "50%", background: c.accent, display: "inline-block" }} /></span>
             </h1>
             <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: c.faint, margin: 0 }}>
               designer · artist · technologist
@@ -195,30 +195,50 @@ export default function About() {
 
                 {activeTab === "Offerings" && (
                   <div>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1.5rem" }}>
-                      {SERVICES.map(s => (
-                        <motion.button
-                          key={s.label}
-                          onClick={() => setActiveService(activeService === s.label ? null : s.label)}
-                          whileHover={{ scale: 1.04 }}
-                          whileTap={{ scale: 0.97 }}
-                          style={{
-                            fontFamily: "'JetBrains Mono', monospace", fontSize: "0.52rem",
-                            letterSpacing: "0.1em", textTransform: "uppercase",
-                            padding: "0.4rem 0.8rem", cursor: "pointer",
-                            border: `1px solid ${activeService === s.label ? c.accent : c.rule}`,
-                            background: activeService === s.label ? `${c.accent}18` : "transparent",
-                            color: activeService === s.label ? c.text : c.dim,
-                            borderRadius: 3,
-                            transition: "border-color 0.15s, background 0.15s, color 0.15s",
-                          }}
-                        >
-                          {s.label}
-                        </motion.button>
-                      ))}
+                    <div style={{ height: 440, position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {/* Venn */}
+                      <svg width="420" height="380" viewBox="0 0 420 380" style={{ overflow: "visible", position: "absolute" }}>
+                        <circle className="venn-c a" cx="210" cy="135" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
+                        <circle className="venn-c b" cx="140" cy="240" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
+                        <circle className="venn-c c" cx="280" cy="240" r="115" fill={c.accent} fillOpacity={0.08} stroke={c.accent} strokeOpacity={0.55} strokeWidth={1} />
+                      </svg>
+
+                      {/* Services list in center intersection */}
+                      <div style={{
+                        position: "absolute",
+                        top: "50%", left: "50%",
+                        transform: "translate(-50%, -38%)",
+                        width: 168, maxHeight: 200,
+                        overflowY: "auto",
+                        display: "flex", flexDirection: "column", gap: "2px",
+                        zIndex: 10,
+                        background: "transparent",
+                        scrollbarWidth: "none",
+                      }}>
+                        {SERVICES.map(s => (
+                          <motion.button
+                            key={s.label}
+                            onClick={() => setActiveService(activeService === s.label ? null : s.label)}
+                            whileHover={{ x: 3 }}
+                            whileTap={{ scale: 0.97 }}
+                            style={{
+                              fontFamily: "'JetBrains Mono', monospace", fontSize: "0.44rem",
+                              letterSpacing: "0.1em", textTransform: "uppercase",
+                              padding: "0.3rem 0.6rem", cursor: "pointer",
+                              border: `1px solid ${activeService === s.label ? c.accent : "transparent"}`,
+                              background: activeService === s.label ? `${c.accent}18` : "transparent",
+                              color: activeService === s.label ? c.text : c.dim,
+                              borderRadius: 2, textAlign: "left",
+                              transition: "border-color 0.15s, background 0.15s, color 0.15s",
+                            }}
+                          >
+                            {s.label}
+                          </motion.button>
+                        ))}
+                      </div>
                     </div>
 
-                    {/* Fixed-height description zone — always same position */}
+                    {/* Description zone */}
                     <div style={{ height: 72, borderTop: `1px solid ${c.hairline}`, paddingTop: "1rem" }}>
                       <AnimatePresence mode="wait">
                         {activeService && (() => {
@@ -230,7 +250,6 @@ export default function About() {
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, x: 4 }}
                               transition={{ duration: 0.16, ease: "easeOut" }}
-                              style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}
                             >
                               <div style={{ borderLeft: `2px solid ${c.accent}`, paddingLeft: "0.8rem" }}>
                                 <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.18em", textTransform: "uppercase", color: c.accent, marginBottom: "0.3rem" }}>
@@ -307,90 +326,11 @@ export default function About() {
           </div>
         </div>
 
-        {/* TIMELINE */}
+        {/* TIMELINE — commented out
         <section style={{ borderTop: `1px solid ${c.hairline}`, paddingTop: "4rem" }}>
-          <div style={{ marginBottom: "2.5rem", fontFamily: "'JetBrains Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.32em", textTransform: "uppercase", color: c.accent, display: "flex", alignItems: "center", gap: "0.6rem" }}>
-            <span style={{ display: "inline-block", width: 14, height: 1, background: "currentColor" }} />
-            Timeline
-          </div>
-          <div style={{ overflowX: "auto", paddingBottom: "1rem" }}>
-            <div style={{ position: "relative", minWidth: 640, height: 300 }}>
-              <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }} preserveAspectRatio="none">
-                <line x1="0" y1="150" x2="100%" y2="150" stroke={c.rule} strokeWidth="1.5" strokeDasharray="6 5" />
-              </svg>
-
-              {TIMELINE.map((item, i) => {
-                const above = i % 2 === 0;
-                const xPct = 8 + i * 21;
-                const stemLen = 56;
-                const cardH = 92;
-                const midY = 150;
-
-                return (
-                  <motion.div
-                    key={item.year}
-                    style={{ position: "absolute", left: `${xPct}%`, top: 0, width: 0 }}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    transition={{ duration: 0.3, delay: i * 0.1 }}
-                  >
-                    <motion.div
-                      initial={{ scaleY: 0 }}
-                      whileInView={{ scaleY: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.28, delay: i * 0.1 + 0.1 }}
-                      style={{
-                        position: "absolute", left: -1, width: 2,
-                        top: above ? midY - stemLen : midY,
-                        height: stemLen,
-                        background: item.color, opacity: 0.45,
-                        transformOrigin: above ? "bottom" : "top",
-                      }}
-                    />
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      whileHover={{ scale: 1.7 }}
-                      viewport={{ once: true }}
-                      transition={{ type: "spring", stiffness: 320, damping: 18, delay: i * 0.1 + 0.18 }}
-                      style={{
-                        position: "absolute", left: -7, top: midY - 7,
-                        width: 14, height: 14, borderRadius: "50%",
-                        background: item.color,
-                        boxShadow: `0 0 12px ${item.color}, 0 0 24px ${item.color}66`,
-                        zIndex: 2,
-                      }}
-                    />
-                    <motion.div
-                      initial={{ opacity: 0, y: above ? 10 : -10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      whileHover={{ y: above ? -4 : 4 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.36, delay: i * 0.1 + 0.22 }}
-                      style={{
-                        position: "absolute",
-                        top: above ? midY - stemLen - cardH : midY + stemLen,
-                        left: -72, width: 144,
-                        background: `${item.color}12`,
-                        border: `1px solid ${item.color}45`,
-                        borderRadius: 10,
-                        padding: "0.8rem 1rem",
-                        textAlign: "center",
-                        backdropFilter: "blur(14px)",
-                        WebkitBackdropFilter: "blur(14px)",
-                      }}
-                    >
-                      <div style={{ fontFamily: "Special Elite, monospace", fontSize: "0.6rem", color: item.color, marginBottom: "0.3rem" }}>{item.year}</div>
-                      <div style={{ fontFamily: "Inter, sans-serif", fontWeight: 600, fontSize: "0.78rem", color: c.text, marginBottom: "0.2rem" }}>{item.label}</div>
-                      <div style={{ fontFamily: "Inter, sans-serif", fontSize: "0.6rem", color: c.faint, lineHeight: 1.4 }}>{item.sub}</div>
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
+          ...
         </section>
+        */}
 
       </div>
     </main>
