@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTheme, type Theme } from "./theme";
 
@@ -47,10 +47,9 @@ export default function Home() {
   const c = pageColors(theme);
 
   const [offsets, setOffsets] = useState<Record<string, Offset>>({});
-  const drag = useRef<{
-    slug: string; startX: number; startY: number;
-    originX: number; originY: number; moved: boolean;
-  } | null>(null);
+  const offsetsRef = useRef<Record<string, Offset>>({});
+  const drag = useRef<{ slug: string; startX: number; startY: number; originX: number; originY: number } | null>(null);
+  const moved = useRef(false);
 
   useEffect(() => {
     const els = document.querySelectorAll<HTMLElement>(".browser-window");
@@ -64,10 +63,12 @@ export default function Home() {
       if (!drag.current) return;
       const dx = e.clientX - drag.current.startX;
       const dy = e.clientY - drag.current.startY;
-      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) drag.current.moved = true;
-      if (!drag.current.moved) return;
+      if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved.current = true;
+      if (!moved.current) return;
       const { slug, originX, originY } = drag.current;
-      setOffsets(prev => ({ ...prev, [slug]: { x: originX + dx, y: originY + dy } }));
+      const next = { ...offsetsRef.current, [slug]: { x: originX + dx, y: originY + dy } };
+      offsetsRef.current = next;
+      setOffsets(next);
     }
     function onUp() { drag.current = null; }
     window.addEventListener("mousemove", onMove);
@@ -75,15 +76,16 @@ export default function Home() {
     return () => { window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
   }, []);
 
-  const startDrag = useCallback((slug: string, e: React.MouseEvent) => {
+  function startDrag(slug: string, e: React.MouseEvent) {
     e.preventDefault();
-    const off = offsets[slug] ?? { x: 0, y: 0 };
-    drag.current = { slug, startX: e.clientX, startY: e.clientY, originX: off.x, originY: off.y, moved: false };
-  }, [offsets]);
+    moved.current = false;
+    const off = offsetsRef.current[slug] ?? { x: 0, y: 0 };
+    drag.current = { slug, startX: e.clientX, startY: e.clientY, originX: off.x, originY: off.y };
+  }
 
-  const guardClick = useCallback((e: React.MouseEvent) => {
-    if (drag.current?.moved) { e.preventDefault(); e.stopPropagation(); }
-  }, []);
+  function guardClick(e: React.MouseEvent) {
+    if (moved.current) { e.preventDefault(); e.stopPropagation(); }
+  }
 
   return (
     <div className="home-wrap">
@@ -101,13 +103,10 @@ export default function Home() {
             {PROJECTS.map((p, i) => {
               const dest = (p as { href?: string }).href ?? `/work/${p.slug}`;
               const external = !!(p as { href?: string }).href;
-              const off = offsets[p.slug] ?? { x: 0, y: 0 };
-              const hasMoved = off.x !== 0 || off.y !== 0;
-              const isDragging = drag.current?.slug === p.slug;
-              const iconStyle: React.CSSProperties = {
-                ...(hasMoved ? { transform: `translate(${off.x}px, ${off.y}px)` } : {}),
-                ...(isDragging ? { transition: "none", zIndex: 1000, cursor: "grabbing" } : {}),
-              };
+              const off = offsets[p.slug];
+              const iconStyle: React.CSSProperties = off
+                ? { transform: `translate(${off.x}px, ${off.y}px)` }
+                : {};
               const cls = `browser-window win-${i + 1}`;
               const inner = (
                 <>
