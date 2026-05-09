@@ -31,9 +31,9 @@ function pageColors(theme: Theme) {
 
 const PROJECTS = [
   { slug: "gen-ai-tools",  name: "CREATIVE TOOLS", year: "2024", cls: "m-signal",    file: "gen-ai.mp4",      href: "https://unafield.vercel.app" },
-  { slug: "animation",     name: "ANIMATION",     year: "2025", cls: "m-vanta",     file: "animation.mp4",   unicorn: true },
+  { slug: "motion",        name: "MOTION",        year: "2025", cls: "m-vanta",     file: "motion",          unicorn: true },
   { slug: "audio",         name: "MUSIC",         year: "2025", cls: "m-signal",    file: "47c4dy"           },
-  { slug: "github",        name: "GITHUB",        year: "2018–", cls: "m-plugins",  file: "github.com",      href: "https://github.com/cadyberry" },
+  { slug: "github",        name: "GITHUB",        year: "2018–", cls: "m-plugins",  file: "github.com",      href: "https://github.com/cadyberry", img: "/github-mark.png" },
   { slug: "shop",          name: "SHOP",          year: "2025", cls: "m-unavoide",  file: "unavoide.com"    },
 ];
 
@@ -70,10 +70,14 @@ export default function Home() {
               const external = !!(p as {href?: string}).href;
               const cls = `browser-window win-${i + 1}`;
               const isUnicorn = !!(p as { unicorn?: boolean }).unicorn;
+              const hasImg = !!(p as { img?: string }).img;
+              const imgSrc = (p as { img?: string }).img;
               const inner = <>
                 <div className="window-titlebar">{p.name}</div>
                 <div className={`window-screen ${p.cls}`}>
-                  {isUnicorn ? <UnicornWindow /> : <div className="screen" />}
+                  {hasImg
+                    ? <img src={imgSrc} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "contain", background: "#fff" }} />
+                    : isUnicorn ? <UnicornWindow /> : <div className="screen" />}
                 </div>
               </>;
               return external
