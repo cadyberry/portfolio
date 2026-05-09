@@ -71,8 +71,9 @@ export default function Home() {
               const imgSrc = (p as { img?: string }).img;
               const inner = <>
                 <div className="window-titlebar">{p.name}</div>
-                <div className={`window-screen ${p.cls}`} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <img src={imgSrc} alt={p.name} style={{ width: "52%", height: "52%", objectFit: "contain", opacity: 0.92 }} />
+                <div className={`window-screen ${p.cls}`} style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <div className="screen" style={{ position: "absolute", inset: 0 }} />
+                  <img src={imgSrc} alt={p.name} style={{ position: "relative", zIndex: 1, width: "48%", height: "48%", objectFit: "contain", opacity: 0.9 }} />
                 </div>
               </>;
               return external
