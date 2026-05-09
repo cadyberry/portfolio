@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { useTheme, type Theme } from "./theme";
-import UnicornWindow from "./components/UnicornWindow";
 
 function pageColors(theme: Theme) {
   if (theme === "light") return {
@@ -30,11 +29,11 @@ function pageColors(theme: Theme) {
 }
 
 const PROJECTS = [
-  { slug: "gen-ai-tools",  name: "CREATIVE TOOLS", year: "2024", cls: "m-signal",    file: "gen-ai.mp4",      href: "https://unafield.vercel.app" },
-  { slug: "motion",        name: "MOTION",        year: "2025", cls: "m-vanta",     file: "motion",          unicorn: true },
-  { slug: "audio",         name: "MUSIC",         year: "2025", cls: "m-signal",    file: "47c4dy"           },
-  { slug: "github",        name: "GITHUB",        year: "2018–", cls: "m-plugins",  file: "github.com",      href: "https://github.com/cadyberry", img: "/github-mark.png" },
-  { slug: "shop",          name: "SHOP",          year: "2025", cls: "m-unavoide",  file: "unavoide.com"    },
+  { slug: "gen-ai-tools",  name: "CREATIVE TOOLS", year: "2024", cls: "m-signal",    href: "https://unafield.vercel.app", img: "/icons/creative-tools.svg" },
+  { slug: "motion",        name: "MOTION",         year: "2025", cls: "m-vanta",                                          img: "/icons/motion.svg"         },
+  { slug: "audio",         name: "MUSIC",          year: "2025", cls: "m-signal",                                         img: "/icons/music.svg"          },
+  { slug: "github",        name: "GITHUB",         year: "2018–", cls: "m-plugins",  href: "https://github.com/cadyberry", img: "/icons/github.svg"         },
+  { slug: "shop",          name: "SHOP",           year: "2025", cls: "m-unavoide",                                       img: "/icons/shop.svg"           },
 ];
 
 const MARQUEE_TEXT = Array(6).fill(
@@ -69,15 +68,11 @@ export default function Home() {
               const dest = (p as {href?: string}).href ?? `/work/${p.slug}`;
               const external = !!(p as {href?: string}).href;
               const cls = `browser-window win-${i + 1}`;
-              const isUnicorn = !!(p as { unicorn?: boolean }).unicorn;
-              const hasImg = !!(p as { img?: string }).img;
               const imgSrc = (p as { img?: string }).img;
               const inner = <>
                 <div className="window-titlebar">{p.name}</div>
-                <div className={`window-screen ${p.cls}`}>
-                  {hasImg
-                    ? <img src={imgSrc} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "contain", background: "#fff" }} />
-                    : isUnicorn ? <UnicornWindow /> : <div className="screen" />}
+                <div className={`window-screen ${p.cls}`} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img src={imgSrc} alt={p.name} style={{ width: "52%", height: "52%", objectFit: "contain", opacity: 0.92 }} />
                 </div>
               </>;
               return external
