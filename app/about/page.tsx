@@ -95,7 +95,7 @@ export default function About() {
               lineHeight: 0.9, color: c.text, margin: "0 0 1.4rem",
             }}>
               <em style={{ fontStyle: "normal" }}>acadia</em><br />
-              berr<span style={{ position: "relative", display: "inline-block" }}>y<span style={{ position: "absolute", top: "0.04em", left: "50%", transform: "translateX(-50%)", width: "0.18em", height: "0.18em", borderRadius: "50%", background: c.accent, display: "inline-block" }} /></span>
+              berry
             </h1>
             <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: c.faint, margin: 0 }}>
               designer · artist · technologist
@@ -208,27 +208,27 @@ export default function About() {
                         position: "absolute",
                         top: "50%", left: "50%",
                         transform: "translate(-50%, -38%)",
-                        width: 168, maxHeight: 200,
+                        width: 220, maxHeight: 210,
                         overflowY: "auto",
-                        display: "flex", flexDirection: "column", gap: "2px",
+                        display: "flex", flexWrap: "wrap", gap: "3px",
+                        justifyContent: "space-between",
                         zIndex: 10,
-                        background: "transparent",
                         scrollbarWidth: "none",
                       }}>
                         {SERVICES.map(s => (
                           <motion.button
                             key={s.label}
                             onClick={() => setActiveService(activeService === s.label ? null : s.label)}
-                            whileHover={{ x: 3 }}
+                            whileHover={{ scale: 1.04 }}
                             whileTap={{ scale: 0.97 }}
                             style={{
-                              fontFamily: "'JetBrains Mono', monospace", fontSize: "0.44rem",
-                              letterSpacing: "0.1em", textTransform: "uppercase",
-                              padding: "0.3rem 0.6rem", cursor: "pointer",
-                              border: `1px solid ${activeService === s.label ? c.accent : "transparent"}`,
+                              fontFamily: "'JetBrains Mono', monospace", fontSize: "0.42rem",
+                              letterSpacing: "0.08em", textTransform: "uppercase",
+                              padding: "0.28rem 0.5rem", cursor: "pointer",
+                              border: `1px solid ${activeService === s.label ? c.accent : c.hairline}`,
                               background: activeService === s.label ? `${c.accent}18` : "transparent",
                               color: activeService === s.label ? c.text : c.dim,
-                              borderRadius: 2, textAlign: "left",
+                              borderRadius: 2, flex: "1 1 auto", textAlign: "center",
                               transition: "border-color 0.15s, background 0.15s, color 0.15s",
                             }}
                           >
@@ -279,7 +279,7 @@ export default function About() {
                 )}
 
                 {activeTab === "Stack" && (
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", justifyContent: "space-between" }}>
                     {TECH.map(t => (
                       <span key={t} style={{
                         fontFamily: "'JetBrains Mono', monospace", fontSize: "0.52rem",
@@ -287,7 +287,7 @@ export default function About() {
                         border: `1px solid ${c.accent}40`,
                         background: `${c.accent}08`,
                         padding: "0.4rem 0.8rem", textTransform: "uppercase",
-                        borderRadius: 4,
+                        borderRadius: 4, flex: "1 1 auto", textAlign: "center",
                       }}>{t}</span>
                     ))}
                   </div>
@@ -300,7 +300,7 @@ export default function About() {
                       fontSize: "clamp(1.4rem, 2.6vw, 2rem)", lineHeight: 1.25, color: c.text,
                       maxWidth: "24ch", letterSpacing: "-0.012em", margin: 0,
                     }}>
-                      Have something in mind?
+                      something in mind?
                     </p>
                     <div style={{ display: "flex", gap: "0.8rem", flexWrap: "wrap" }}>
                       <Link href="/contact" style={{
@@ -316,7 +316,7 @@ export default function About() {
                         padding: "0.95rem 1.6rem", display: "inline-flex", alignItems: "center",
                         minHeight: 44, color: c.dim, border: `1px solid ${c.rule}`,
                         background: "transparent",
-                      }}>See the work</Link>
+                      }}>see work</Link>
                     </div>
                   </div>
                 )}
