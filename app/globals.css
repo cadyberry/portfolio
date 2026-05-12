@@ -1,50 +1,70 @@
 @import "tailwindcss";
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* ── Theme tokens ───────────────────────────────────────────── */
-:root {
-  --neon-pink:   #ff00aa;
-  --neon-cyan:   #00ffee;
-  --neon-yellow: #ccff00;
-  --neon-orange: #ff6600;
-  --void:        #000000;
-
-  /* Semantic tokens — dark (void / neon) */
-  --bg:           #050508;
-  --text:         #ffffff;
-  --text-dim:     rgba(255,255,255,0.28);
-  --accent:       #ff00aa;
-  --border:       rgba(255,255,255,0.05);
-  --border-sub:   rgba(255,255,255,0.08);
+@font-face {
+  font-family: "Violet Sans";
+  src: url("/fonts/VioletSans-Regular.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* Light — editorial / gallery white */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-family: "Violet Sans", sans-serif !important; }
+
+/* ── Palette ────────────────────────────────────────────────── */
+:root {
+  --rose-900: #B80037;
+  --rose-600: #FF0550;
+  --rose-400: #FF5286;
+  --rose-200: #FF9EBB;
+  --rose-100: #FFCCDB;
+
+  /* Dark — deep black / rose neon */
+  --bg:           #060002;
+  --text:         #ffffff;
+  --text-dim:     rgba(255,204,219,0.55);
+  --accent:       #FF0550;
+  --border:       rgba(255,5,80,0.14);
+  --border-sub:   rgba(255,5,80,0.24);
+}
+
+/* Light — white / crimson */
 html.light {
   --bg:           #ffffff;
-  --text:         #111111;
-  --text-dim:     rgba(17,17,17,0.45);
-  --accent:       #e8003d;
-  --border:       rgba(0,0,0,0.09);
-  --border-sub:   rgba(0,0,0,0.13);
+  --text:         #0f0005;
+  --text-dim:     rgba(184,0,55,0.6);
+  --accent:       #B80037;
+  --border:       rgba(184,0,55,0.12);
+  --border-sub:   rgba(184,0,55,0.2);
 }
 
-/* Mid — purple cosmos / amber warmth */
+/* Mid — dark rose */
 html.mid {
-  --bg:           #12082a;
-  --text:         rgba(255,232,185,0.92);
-  --text-dim:     rgba(255,195,120,0.45);
-  --accent:       #ffaa00;
-  --border:       rgba(180,120,255,0.18);
-  --border-sub:   rgba(180,120,255,0.26);
+  --bg:           #1a0008;
+  --text:         #FFCCDB;
+  --text-dim:     rgba(255,158,187,0.65);
+  --accent:       #FF5286;
+  --border:       rgba(255,82,134,0.18);
+  --border-sub:   rgba(255,82,134,0.3);
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Violet Sans", sans-serif;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
   transition: color 0.3s ease;
+}
+
+/* ── Halftone overlay ── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background-image: radial-gradient(circle, rgba(180,180,180,0.13) 1px, transparent 1px);
+  background-size: 5px 5px;
+  mix-blend-mode: overlay;
 }
 
 
@@ -56,36 +76,81 @@ a[href*="unicorn.studio"] { display: none !important; }
 }
 
 /* ============================================================
-   HOME — ARCADE FLOOR
+   HOME
    ============================================================ */
 
-.home-wrap { background: transparent; color: var(--text); min-height: 100vh; }
-
-.home-header { text-align: center; padding: 4rem 1rem 2rem; }
-
-.home-wordmark {
-  font-family: "Inter", sans-serif;
-  font-size: clamp(3.5rem, 11vw, 8rem);
-  font-weight: 700;
-  letter-spacing: -0.04em;
+.home-wrap {
+  background: transparent;
   color: var(--text);
-  margin: 0 0 0.6rem;
-  text-shadow: 0 0 80px rgba(255,255,255,0.12);
-  line-height: 1;
-  transition: color 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5rem;
 }
 
-html.light .home-wordmark { text-shadow: none; }
-html.mid   .home-wordmark { text-shadow: 0 0 80px rgba(255,150,0,0.25); }
+.home-wordmark {
+  font-family: "Violet Sans", sans-serif;
+  font-size: clamp(3rem, 13vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 0.5rem;
+  line-height: 0.95;
+  transition: color 0.3s ease;
+  text-align: center;
+}
 
 .home-tagline {
-  font-family: "Special Elite", monospace;
-  font-size: 0.56rem;
-  letter-spacing: 0.3em;
+  font-family: "Violet Sans", sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.28em;
   color: var(--text-dim);
   text-transform: lowercase;
   margin: 0;
   transition: color 0.3s ease;
+  text-align: center;
+}
+
+/* ── Work list ── */
+.home-work-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.home-work-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.home-work-row:hover { background: var(--border); }
+
+.home-work-num {
+  font-family: "Violet Sans", sans-serif;
+  font-size: 0.44rem;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  min-width: 1.8rem;
+}
+
+.home-work-name {
+  font-family: "Violet Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  flex: 1;
+}
+
+.home-work-arrow {
+  font-family: "Violet Sans", sans-serif;
+  font-size: 0.7rem;
+  color: var(--accent);
 }
 
 /* --- Main Grid --- */
@@ -143,7 +208,7 @@ html.mid   .home-wordmark { text-shadow: 0 0 80px rgba(255,150,0,0.25); }
 }
 
 .window-titlebar {
-  font-family: "Special Elite", monospace;
+  font-family: "Violet Sans", sans-serif;
   font-size: 10px;
   font-weight: 400;
   padding: 2px 6px;
@@ -197,7 +262,7 @@ html.light .window-titlebar { color: #111; text-shadow: 0 1px 3px rgba(255,255,2
 }
 
 .index-label {
-  font-family: "Special Elite", monospace;
+  font-family: "Violet Sans", sans-serif;
   font-size: 11px;
   font-weight: 400;
   color: var(--text-dim);
@@ -215,7 +280,7 @@ html.light .window-titlebar { color: #111; text-shadow: 0 1px 3px rgba(255,255,2
   background: #ccff00;
   color: #000;
   text-decoration: none;
-  font-family: "Special Elite", monospace;
+  font-family: "Violet Sans", sans-serif;
   font-size: 10px;
   font-weight: 400;
   line-height: 1;

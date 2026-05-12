@@ -5,9 +5,7 @@ import { usePathname } from "next/navigation";
 import { useTheme, type Theme } from "../theme";
 
 const LINKS = [
-  { href: "/",        label: "HOME"    },
-  { href: "/about",   label: "ABOUT"   },
-  { href: "/contact", label: "CONTACT" },
+  { href: "/", label: "HOME" },
 ];
 
 function HomeGlyph() {
@@ -57,32 +55,32 @@ function HomeGlyph() {
 
 function MoonIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" fill="currentColor" />
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+      <path d="M22 16.5A9 9 0 1 1 13.5 8a7 7 0 0 0 8.5 8.5z" fill="currentColor" />
     </svg>
   );
 }
 
 function SunIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="5" fill="currentColor" />
-      <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+      <circle cx="15" cy="15" r="5.5" fill="currentColor" />
+      <line x1="15" y1="3" x2="15" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <line x1="15" y1="24" x2="15" y2="27" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <line x1="5.4" y1="5.4" x2="7.5" y2="7.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <line x1="22.5" y1="22.5" x2="24.6" y2="24.6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <line x1="3" y1="15" x2="6" y2="15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <line x1="24" y1="15" x2="27" y2="15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <line x1="5.4" y1="24.6" x2="7.5" y2="22.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <line x1="22.5" y1="7.5" x2="24.6" y2="5.4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
 
 function StarIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="currentColor">
+      <path d="M15 3l3 9.2h9.7L20 18l3 9.2L15 21.5 8 27.2l3-9.2L3.3 12.2H13z" />
     </svg>
   );
 }
@@ -97,26 +95,26 @@ function themeColors(theme: Theme) {
   if (theme === "light") return {
     nav:     "transparent",
     glassBg: "transparent",
-    text:    "#111111",
-    dim:     "rgba(17,17,17,0.38)",
-    accent:  "#e8003d",
-    border:  "rgba(0,0,0,0.1)",
+    text:    "#0f0005",
+    dim:     "rgba(184,0,55,0.45)",
+    accent:  "#B80037",
+    border:  "rgba(184,0,55,0.12)",
   };
   if (theme === "mid") return {
     nav:     "transparent",
     glassBg: "transparent",
-    text:    "rgba(255,232,185,0.92)",
-    dim:     "rgba(255,195,120,0.42)",
-    accent:  "#ffaa00",
-    border:  "rgba(180,120,255,0.2)",
+    text:    "#FFCCDB",
+    dim:     "rgba(255,158,187,0.55)",
+    accent:  "#FF5286",
+    border:  "rgba(255,82,134,0.2)",
   };
   return {
     nav:     "transparent",
     glassBg: "transparent",
     text:    "#ffffff",
-    dim:     "rgba(255,255,255,0.42)",
-    accent:  "#ff00aa",
-    border:  "rgba(255,255,255,0.08)",
+    dim:     "rgba(255,204,219,0.45)",
+    accent:  "#FF0550",
+    border:  "rgba(255,5,80,0.12)",
   };
 }
 
@@ -133,7 +131,7 @@ export default function Nav() {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: "1.2rem 2rem",
+      padding: "1.2rem 1.2rem",
       fontFamily: "Inter, sans-serif",
       background: "transparent",
       transition: "background 0.3s ease",
@@ -146,51 +144,55 @@ export default function Nav() {
       }}
       onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
       onMouseLeave={e => (e.currentTarget.style.opacity = "0.85")}>
-        <img src="/blackberry.png" alt="" width={30} height={30} style={{ objectFit: "contain" }} />
+        <img src="/blackberry.png" alt="" width={20} height={20} style={{ objectFit: "contain", transform: "rotate(45deg)", filter: theme === "light" ? "none" : "brightness(0) invert(1)" }} />
       </Link>
 
-      <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
+      {/* centered tabs */}
+      <div style={{
+        position: "absolute", left: "50%", transform: "translateX(-50%)",
+        display: "flex", gap: "clamp(0.6rem, 2.5vw, 1.4rem)", alignItems: "center",
+      }}>
         {LINKS.map(({ href, label }) => (
           <Link key={href} href={href} style={{
-            fontSize: "0.6rem",
+            fontSize: "clamp(0.5rem, 1.5vw, 0.6rem)",
             letterSpacing: "0.2em",
             color: (href === "/" ? path === "/" : path.startsWith(href)) ? c.accent : c.dim,
             textDecoration: "none",
             textTransform: "uppercase",
             transition: "color 0.2s",
+            padding: "0.5rem 0",
           }}
           onMouseEnter={e => (e.currentTarget.style.color = c.text)}
           onMouseLeave={e => (e.currentTarget.style.color = (href === "/" ? path === "/" : path.startsWith(href)) ? c.accent : c.dim)}>
             {label}
           </Link>
         ))}
-
-        {/* Theme toggle */}
-        <button
-          onClick={cycle}
-          aria-label="Toggle theme"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            color: c.text,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 32,
-            height: 32,
-            borderRadius: "50%",
-            padding: 0,
-            transition: "color 0.2s, opacity 0.2s",
-            opacity: 0.7,
-            marginLeft: "0.5rem",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
-          onMouseLeave={e => (e.currentTarget.style.opacity = "0.7")}
-        >
-          {ICONS[theme]}
-        </button>
       </div>
+
+      {/* Theme toggle — right side */}
+      <button
+        onClick={cycle}
+        aria-label="Toggle theme"
+        style={{
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          color: c.text,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 30,
+          height: 30,
+          borderRadius: "50%",
+          padding: 0,
+          transition: "color 0.2s, opacity 0.2s",
+          opacity: 0.7,
+        }}
+        onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
+        onMouseLeave={e => (e.currentTarget.style.opacity = "0.7")}
+      >
+        {ICONS[theme]}
+      </button>
     </nav>
   );
 }

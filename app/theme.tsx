@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export type Theme = "dark" | "light" | "mid";
 
-const ORDER: Theme[] = ["light", "mid", "dark"];
+const ORDER: Theme[] = ["dark", "light", "mid"];
 
 interface ThemeCtx {
   theme: Theme;
@@ -14,7 +14,7 @@ interface ThemeCtx {
 const Ctx = createContext<ThemeCtx>({ theme: "dark", cycle: () => {} });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") as Theme | null;

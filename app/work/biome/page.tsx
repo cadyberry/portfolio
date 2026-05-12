@@ -31,8 +31,7 @@ export default function Biome() {
         {/* Masonry-style grid */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gridTemplateRows: "auto",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(160px, 100%), 1fr))",
           gap: "1px",
           background: "#111",
         }}>
@@ -59,7 +58,7 @@ export default function Biome() {
         </div>
 
         {/* Statement */}
-        <div style={{ borderTop: "1px solid #111", marginTop: "4rem", paddingTop: "2.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem" }}>
+        <div style={{ borderTop: "1px solid #111", marginTop: "4rem", paddingTop: "2.5rem", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))", gap: "3rem" }}>
           <div>
             <p style={{ fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.3em", color: "#ff00aa", textTransform: "uppercase", marginBottom: "0.8rem" }}>PROCESS</p>
             <p style={{ fontFamily: "Georgia, serif", fontSize: "0.82rem", color: "#555", lineHeight: 1.8 }}>

@@ -36,7 +36,7 @@ export default function WorkPage({ params }: { params: Promise<{ slug: string }>
 
   return (
     <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "5rem", color: c.text }}>
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "3rem 2rem 8rem" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: "3rem clamp(1rem, 4vw, 2rem) 8rem" }}>
 
         {/* Back */}
         <Link href="/" style={{
@@ -56,9 +56,9 @@ export default function WorkPage({ params }: { params: Promise<{ slug: string }>
             {project.year}
           </p>
           <h1 style={{
-            fontFamily: "Inter, sans-serif",
+            fontFamily: "Playfair Display, serif",
             fontSize: "clamp(2.5rem, 8vw, 5rem)",
-            fontWeight: 700, letterSpacing: "-0.04em",
+            fontWeight: 700, letterSpacing: "-0.02em",
             color: c.text, margin: "0 0 1rem", lineHeight: 0.95,
           }}>
             {project.name}

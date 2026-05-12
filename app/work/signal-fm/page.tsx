@@ -125,7 +125,7 @@ export default function SignalFM() {
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", minHeight: "calc(100vh - 180px)" }}>
+      <div className="sfm-main-grid" style={{ display: "grid", gridTemplateColumns: "1fr 320px", minHeight: "calc(100vh - 180px)" }}>
 
         {/* Player */}
         <div style={{ padding: "2rem", borderRight: "1px solid #111", display: "flex", flexDirection: "column", gap: "2rem" }}>
@@ -228,7 +228,13 @@ export default function SignalFM() {
         </div>
       </div>
 
-      <style>{`@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }`}</style>
+      <style>{`
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        @media (max-width: 640px) {
+          .sfm-main-grid { grid-template-columns: 1fr !important; }
+          .sfm-main-grid > div:first-child { border-right: none !important; border-bottom: 1px solid #111; }
+        }
+      `}</style>
     </main>
   );
 }

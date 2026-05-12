@@ -60,14 +60,14 @@ export default function Work() {
 
   return (
     <main style={{ minHeight: "100vh", paddingTop: "6rem", paddingBottom: "4rem" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 2rem" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(1rem, 4vw, 2rem)" }}>
 
         <div style={{ marginBottom: "3rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1.5rem" }}>
-          <h1 style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 700, letterSpacing: "0.1em", color: c.text, margin: 0, transition: "color 0.3s" }}>
+          <h1 style={{ fontFamily: "Playfair Display, serif", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 700, letterSpacing: "0.02em", color: c.text, margin: 0, transition: "color 0.3s" }}>
             WORK
           </h1>
 
-          <div style={{ display: "flex", gap: "0" }}>
+          <div style={{ display: "flex", gap: "0", overflowX: "auto", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
             {CATS.map(({ id, label }) => (
               <button key={id} onClick={() => setActive(id)} style={{
                 fontFamily: "monospace",
@@ -82,6 +82,7 @@ export default function Work() {
                 cursor: "pointer",
                 transition: "all 0.2s",
                 marginLeft: -1,
+                flexShrink: 0,
               }}>
                 {label}
               </button>
@@ -91,7 +92,7 @@ export default function Work() {
 
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(320px, 100%), 1fr))",
           gap: "1px",
           background: c.grid,
         }}>

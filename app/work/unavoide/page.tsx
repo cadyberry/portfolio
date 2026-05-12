@@ -37,7 +37,7 @@ export default function Unavoide() {
         </p>
 
         {/* Stats bar */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1px", background: "#111", marginBottom: "4rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(140px, 100%), 1fr))", gap: "1px", background: "#111", marginBottom: "4rem" }}>
           {STATS.map(s => (
             <div key={s.label} style={{ background: "#000", padding: "1.5rem", textAlign: "center" }}>
               <p style={{ fontFamily: "'Arial Black', Arial, sans-serif", fontSize: "clamp(1.2rem, 4vw, 2rem)", fontWeight: 900, color: "#fff", margin: "0 0 0.3rem", letterSpacing: "-0.02em" }}>{s.val}</p>

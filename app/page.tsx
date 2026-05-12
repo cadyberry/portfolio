@@ -1,254 +1,258 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useTheme, type Theme } from "./theme";
+import { useRef, useState, useEffect, useCallback } from "react";
 
-function pageColors(theme: Theme) {
-  if (theme === "light") return {
-    border:     "rgba(0,0,0,0.09)",
-    text:       "#111111",
-    textDim:    "rgba(17,17,17,0.45)",
-    textFaint:  "rgba(17,17,17,0.2)",
-    accent:     "#e8003d",
-  };
-  if (theme === "mid") return {
-    border:     "rgba(180,120,255,0.18)",
-    text:       "rgba(255,232,185,0.92)",
-    textDim:    "rgba(255,195,120,0.45)",
-    textFaint:  "rgba(255,180,80,0.2)",
-    accent:     "#ffaa00",
-  };
-  return {
-    border:     "rgba(255,255,255,0.05)",
-    text:       "#ffffff",
-    textDim:    "rgba(255,255,255,0.28)",
-    textFaint:  "rgba(255,255,255,0.14)",
-    accent:     "#ff00aa",
-  };
-}
-
-const PROJECTS = [
-  { slug: "gen-ai-tools",  name: "CREATIVE TOOLS", year: "2024", cls: "m-signal",   href: "https://unafield.vercel.app", img: "/icons/creative-tools.svg" },
-  { slug: "motion",        name: "MOTION",         year: "2025", cls: "m-vanta",                                         img: "/icons/motion.svg"         },
-  { slug: "audio",         name: "MUSIC",          year: "2025", cls: "m-signal",                                        img: "/icons/music.svg"          },
-  { slug: "github",        name: "GITHUB",         year: "2018–", cls: "m-plugins", href: "https://github.com/cadyberry", img: "/icons/github.svg"         },
-  { slug: "shop",          name: "SHOP",           year: "2025", cls: "m-unavoide",                                      img: "/icons/shop.svg"           },
+const TABS = [
+  { num: "01", name: "creative tools", href: "/creative-tools",              external: false, desc: "browser-based design & art tools"        },
+  { num: "02", name: "shop",            href: "/shop",                         external: false, desc: "prints, goods, and digital downloads"                  },
+  { num: "03", name: "music",           href: "/work/audio",                   external: false, desc: "singles i produced"                                    },
+  { num: "04", name: "github",          href: "/github",                       external: false, desc: "open source projects and experiments"                  },
+  { num: "05", name: "art",             href: "/work/biome",                   external: false, desc: "original mixed-media artwork"                          },
+  { num: "06", name: "about",           href: "/about",                        external: false, desc: "background, process, and philosophy"                   },
+  { num: "07", name: "contact",         href: "/contact",                      external: false, desc: "interested in working together?"                         },
 ];
 
-const MARQUEE_TEXT = Array(6).fill(
-  "UI Design · Creative Direction · Digital Art · Brand Identity · Photography · Generative AI · Web Development · Brooklyn NY · Available for Hire · ✹ "
-).join("");
+const TAB  = 22;
+const R    = 32;
+const STEP = 360 / TABS.length;
 
-type Offset = { x: number; y: number };
+function vibrate() {
+  if (typeof navigator !== "undefined" && "vibrate" in navigator) navigator.vibrate(5);
+}
+
+function getActive(rot: number) {
+  const raw = Math.round((180 - rot) / STEP);
+  return ((raw % TABS.length) + TABS.length) % TABS.length;
+}
 
 export default function Home() {
-  const { theme } = useTheme();
-  const c = pageColors(theme);
-
-  const [offsets, setOffsets] = useState<Record<string, Offset>>({});
-  const offsetsRef = useRef<Record<string, Offset>>({});
-  const drag = useRef<{ slug: string; startX: number; startY: number; originX: number; originY: number } | null>(null);
-  const moved = useRef(false);
+  const rotRef        = useRef(0);
+  const [rot, setRot] = useState(0);
+  const stepRef       = useRef(0);
+  const lastY         = useRef(0);
+  const lastT         = useRef(0);
+  const velRef        = useRef(0);
+  const rafRef        = useRef<number>();
+  const containerRef  = useRef<HTMLDivElement>(null);
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    const els = document.querySelectorAll<HTMLElement>(".browser-window");
-    els.forEach((el, i) => {
-      setTimeout(() => el.classList.add("loaded"), 80 + i * 110);
-    });
+    if (!localStorage.getItem("spin-hint-seen")) setShowHint(true);
   }, []);
 
-  useEffect(() => {
-    function onMove(e: MouseEvent) {
-      if (!drag.current) return;
-      const dx = e.clientX - drag.current.startX;
-      const dy = e.clientY - drag.current.startY;
-      if (Math.abs(dx) > 4 || Math.abs(dy) > 4) moved.current = true;
-      if (!moved.current) return;
-      const { slug, originX, originY } = drag.current;
-      const next = { ...offsetsRef.current, [slug]: { x: originX + dx, y: originY + dy } };
-      offsetsRef.current = next;
-      setOffsets(next);
+  const activeIdx = getActive(rot);
+
+  const updateRot = useCallback((r: number) => {
+    const step = Math.round(r / STEP);
+    if (step !== stepRef.current) {
+      stepRef.current = step;
+      vibrate();
     }
-    function onUp() { drag.current = null; }
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
-    return () => { window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
+    rotRef.current = r;
+    setRot(r);
   }, []);
 
-  function startDrag(slug: string, e: React.MouseEvent) {
-    e.preventDefault();
-    moved.current = false;
-    const off = offsetsRef.current[slug] ?? { x: 0, y: 0 };
-    drag.current = { slug, startX: e.clientX, startY: e.clientY, originX: off.x, originY: off.y };
-  }
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
 
-  function guardClick(e: React.MouseEvent) {
-    if (moved.current) { e.preventDefault(); e.stopPropagation(); }
-  }
+    function onStart(e: TouchEvent) {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      lastY.current  = e.touches[0].clientY;
+      lastT.current  = Date.now();
+      velRef.current = 0;
+      localStorage.setItem("spin-hint-seen", "1");
+      setShowHint(false);
+    }
+    function onMove(e: TouchEvent) {
+      e.preventDefault();
+      const y  = e.touches[0].clientY;
+      const dy = y - lastY.current;
+      const dt = Math.max(Date.now() - lastT.current, 1);
+      velRef.current = dy / dt;
+      lastY.current  = y;
+      lastT.current  = Date.now();
+      updateRot(rotRef.current + dy * 0.55);
+    }
+    function onEnd() {
+      let v = velRef.current * 0.55 * 16;
+      function coast() {
+        v *= 0.88;
+        if (Math.abs(v) < 0.4) {
+          const snapped = Math.round(rotRef.current / STEP) * STEP;
+          rotRef.current = snapped;
+          setRot(snapped);
+          return;
+        }
+        updateRot(rotRef.current + v);
+        rafRef.current = requestAnimationFrame(coast);
+      }
+      rafRef.current = requestAnimationFrame(coast);
+    }
+
+    el.addEventListener("touchstart", onStart, { passive: true });
+    el.addEventListener("touchmove",  onMove,  { passive: false });
+    el.addEventListener("touchend",   onEnd,   { passive: true });
+    return () => {
+      el.removeEventListener("touchstart", onStart);
+      el.removeEventListener("touchmove",  onMove);
+      el.removeEventListener("touchend",   onEnd);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [updateRot]);
 
   return (
     <div className="home-wrap">
+      <style>{`
+        .orbit-wrap { background: var(--bg); position: relative; }
+        .orbit-tab {
+          position: absolute;
+          display: flex; align-items: center; justify-content: center;
+          background: #ffffff;
+          border-radius: clamp(22px, 7vw, 36px);
+          text-decoration: none;
+          transition: opacity 0.15s ease, box-shadow 0.2s ease, transform 0.2s ease;
+          user-select: none; -webkit-user-select: none;
+        }
+        .orbit-tab.active {
+          box-shadow: 0 0 0 2.5px var(--accent);
+          transform: scale(1.08);
+        }
+        .orbit-tab:hover { opacity: 0.78; }
+        .orbit-tab-name {
+          font-size: clamp(0.38rem, 2.2vw, 0.58rem);
+          font-weight: 400; letter-spacing: -0.01em;
+          color: #000; text-align: center; line-height: 1.2;
+          padding: 0 10%; pointer-events: none;
+        }
+        html.light .orbit-tab { background: #000; }
+        html.light .orbit-tab-name { color: #fff; }
+        html.light .orbit-tab.active { box-shadow: 0 0 0 2.5px var(--accent); }
 
-      {/* ── HEADER ── */}
-      <header className="home-header">
+        @keyframes _hint-bob {
+          0%, 100% { transform: translateX(-50%) translateY(0);   opacity: 0.5; }
+          50%       { transform: translateX(-50%) translateY(6px); opacity: 0.9; }
+        }
+        @keyframes _hint-fade {
+          from { opacity: 1; } to { opacity: 0; }
+        }
+        .spin-hint {
+          position: absolute;
+          bottom: -36px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex; flex-direction: column; align-items: center; gap: 4px;
+          animation: _hint-bob 1.6s ease-in-out infinite;
+          pointer-events: none;
+          white-space: nowrap;
+        }
+        .spin-hint.hide {
+          animation: _hint-fade 0.4s ease forwards;
+        }
+        .spin-hint-arrows {
+          font-size: 0.7rem;
+          color: var(--text-dim);
+          line-height: 1;
+        }
+        .spin-hint-label {
+          font-size: 0.38rem;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: var(--text-dim);
+        }
+        @keyframes _desc-in {
+          from { opacity: 0; transform: translateY(5px); }
+          to   { opacity: 1; transform: translateY(0);   }
+        }
+        .orbit-desc {
+          animation: _desc-in 0.22s ease forwards;
+        }
+
+        /* bottom indicator pip */
+        .orbit-pip {
+          position: absolute;
+          left: 50%; bottom: -10px;
+          transform: translateX(-50%);
+          width: 5px; height: 5px;
+          border-radius: 50%;
+          background: var(--accent);
+        }
+      `}</style>
+
+      <div style={{ padding: "2.5rem 1.4rem 2rem", textAlign: "center" }}>
         <h1 className="home-wordmark">acadia berry</h1>
         <p className="home-tagline">designer · artist · technologist · NYC</p>
-      </header>
-
-      {/* ── MAIN GRID ── */}
-      <div className="main-grid">
-        <div className="collage-area">
-          <div className="browser-collage">
-            {PROJECTS.map((p, i) => {
-              const dest = (p as { href?: string }).href ?? `/work/${p.slug}`;
-              const external = !!(p as { href?: string }).href;
-              const off = offsets[p.slug];
-              const iconStyle: React.CSSProperties = off
-                ? { transform: `translate(${off.x}px, ${off.y}px)` }
-                : {};
-              const cls = `browser-window win-${i + 1}`;
-              const inner = (
-                <>
-                  <div className={`window-screen ${p.cls}`} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <div className="screen" style={{ position: "absolute", inset: 0 }} />
-                    <img src={p.img} alt={p.name} style={{ position: "relative", zIndex: 1, width: "60%", height: "60%", objectFit: "contain", opacity: 0.92, pointerEvents: "none" }} />
-                  </div>
-                  <div className="window-titlebar">{p.name}</div>
-                </>
-              );
-              const sharedProps = {
-                className: cls,
-                style: iconStyle,
-                onMouseDown: (e: React.MouseEvent) => startDrag(p.slug, e),
-                onClick: guardClick,
-              };
-              return external
-                ? <a key={p.slug} href={dest} target="_blank" rel="noopener noreferrer" {...sharedProps}>{inner}</a>
-                : <Link key={p.slug} href={dest} {...sharedProps}>{inner}</Link>;
-            })}
-          </div>
-        </div>
-
-        <aside className="index-area">
-          <div className="work-index">
-            <div className="index-label">[INDEX]</div>
-            {PROJECTS.map((p, i) => {
-              const dest = (p as { href?: string }).href ?? `/work/${p.slug}`;
-              const external = !!(p as { href?: string }).href;
-              const rowStyle = { animationDelay: `${0.2 + i * 0.07}s` };
-              const inner = <>
-                <span className="row-num">{String(i + 1).padStart(2, "0")}.</span>
-                <span className="row-name">{p.name}</span>
-                <span className="row-year">{p.year}</span>
-              </>;
-              return external
-                ? <a key={p.slug} href={dest} target="_blank" rel="noopener noreferrer" className="work-row" style={rowStyle}>{inner}</a>
-                : <Link key={p.slug} href={dest} className="work-row" style={rowStyle}>{inner}</Link>;
-            })}
-          </div>
-        </aside>
       </div>
 
-      {/* ── MARQUEE ── */}
+      {/* Circle */}
+      <div ref={containerRef} className="orbit-wrap" style={{
+        width: "min(76vw, 76vh, 380px)",
+        aspectRatio: "1",
+        margin: "0 auto",
+        touchAction: "none",
+      }}>
+        {/* Bottom indicator pip */}
+        <div className="orbit-pip" />
+
+        {/* First-visit swipe hint */}
+        {showHint && (
+          <div className="spin-hint">
+            <span className="spin-hint-arrows">↕</span>
+            <span className="spin-hint-label">swipe to spin</span>
+          </div>
+        )}
+
+        {TABS.map((t, i) => {
+          const angleDeg = (i * STEP) - 90 + rot;
+          const angleRad = angleDeg * Math.PI / 180;
+          const cx = 50 + R * Math.cos(angleRad);
+          const cy = 50 + R * Math.sin(angleRad);
+          const isActive = i === activeIdx;
+          const style: React.CSSProperties = {
+            left: `${cx - TAB / 2}%`, top: `${cy - TAB / 2}%`,
+            width: `${TAB}%`, height: `${TAB}%`,
+          };
+          const inner = <span className="orbit-tab-name">{t.name}</span>;
+          return t.external
+            ? <a key={t.num} href={t.href} target="_blank" rel="noopener noreferrer"
+                 className={`orbit-tab${isActive ? " active" : ""}`} style={style}>{inner}</a>
+            : <Link key={t.num} href={t.href}
+                    className={`orbit-tab${isActive ? " active" : ""}`} style={style}>{inner}</Link>;
+        })}
+      </div>
+
+      {/* Live description */}
+      <div style={{ textAlign: "center", padding: "1.2rem 2rem 0", minHeight: "3rem" }}>
+        <p
+          key={activeIdx}
+          className="orbit-desc"
+          style={{
+            fontSize: "0.85rem",
+            letterSpacing: "0.04em",
+            color: "var(--text-dim)",
+            textTransform: "lowercase",
+            margin: 0,
+          }}
+        >
+          {TABS[activeIdx].desc}
+        </p>
+      </div>
+
       <div style={{
-        borderTop: `1px solid ${c.border}`,
-        borderBottom: `1px solid ${c.border}`,
-        overflow: "hidden",
-        whiteSpace: "nowrap",
-        padding: "0.85rem 0",
-        marginTop: "3rem",
-        background: "rgba(255,255,255,0.03)",
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
-      }}>
-        <div style={{
-          display: "inline-block",
-          animation: "marquee 32s linear infinite",
-          fontFamily: "Special Elite, monospace",
-          fontSize: "0.52rem",
-          letterSpacing: "0.28em",
-          color: c.textFaint,
-          textTransform: "lowercase",
-        }}>
-          {MARQUEE_TEXT}
-        </div>
-      </div>
-
-      {/* ── PLAY + SHOP ── */}
-      <section className="home-play-shop" style={{
-        borderTop: `1px solid ${c.border}`,
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-      }}>
-        <div className="home-play-card" style={{
-          padding: "3.5rem 3rem",
-          borderRight: `1px solid ${c.border}`,
-          background: "rgba(255,255,255,0.03)",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
-        }}>
-          <p style={{ fontFamily: "Special Elite, monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "lowercase", marginBottom: "1rem" }}>Play</p>
-          <p style={{ fontFamily: "Special Elite, monospace", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 0.8rem", lineHeight: 1 }}>
-            8 FREE TOOLS
-          </p>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "0.82rem", color: c.textDim, lineHeight: 1.7, marginBottom: "1.8rem", maxWidth: 360 }}>
-            Kaleidoscope, pixel editor, generative art, digital rain — all browser-based, all free, built from scratch since 2018.
-          </p>
-          <a href="https://unafield.vercel.app" target="_blank" rel="noopener noreferrer" style={{
-            fontFamily: "Special Elite, monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
-            color: c.textDim, textDecoration: "none", textTransform: "lowercase",
-            border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
-            display: "inline-flex", alignItems: "center", minHeight: 44, transition: "all 0.2s",
-          }}
-          onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = c.text; (e.currentTarget as HTMLAnchorElement).style.borderColor = c.textDim; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = c.textDim; (e.currentTarget as HTMLAnchorElement).style.borderColor = c.border; }}>
-            EXPLORE TOOLS →
-          </a>
-        </div>
-
-        <div className="home-play-card" style={{ padding: "3.5rem 3rem", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)" }}>
-          <p style={{ fontFamily: "Special Elite, monospace", fontSize: "0.52rem", letterSpacing: "0.3em", color: c.accent, textTransform: "lowercase", marginBottom: "1rem" }}>Shop</p>
-          <p style={{ fontFamily: "Special Elite, monospace", fontSize: "clamp(1.5rem, 4vw, 2.5rem)", fontWeight: 900, letterSpacing: "-0.02em", color: c.text, margin: "0 0 1.8rem", lineHeight: 1 }}>
-            PRINTS + BOOKS
-          </p>
-          <a href="https://unavoide.com" target="_blank" rel="noopener noreferrer" style={{
-            fontFamily: "Special Elite, monospace", fontSize: "0.55rem", letterSpacing: "0.2em",
-            color: c.textDim, textDecoration: "none", textTransform: "lowercase",
-            border: `1px solid ${c.border}`, padding: "0.8rem 1.5rem",
-            display: "inline-flex", alignItems: "center", minHeight: 44, transition: "all 0.2s",
-          }}
-          onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = c.text; (e.currentTarget as HTMLAnchorElement).style.borderColor = c.textDim; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = c.textDim; (e.currentTarget as HTMLAnchorElement).style.borderColor = c.border; }}>
-            VISIT SHOP →
-          </a>
-        </div>
-      </section>
-
-      {/* ── FOOTER ── */}
-      <footer style={{
-        borderTop: `1px solid ${c.border}`,
-        padding: "1.8rem clamp(1rem, 4vw, 3rem)",
+        padding: "1rem 1.4rem 2rem",
+        borderTop: "1px solid var(--border)",
+        marginTop: "auto",
+        fontSize: "0.44rem",
+        letterSpacing: "0.22em",
+        color: "var(--text-dim)",
+        textTransform: "lowercase",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: "1rem",
-        background: "rgba(255,255,255,0.03)",
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
       }}>
-        <span style={{ fontFamily: "Special Elite, monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "lowercase" }}>
-          © 2026 ACADIA · Brooklyn, NY
-        </span>
-        <span style={{ fontFamily: "Special Elite, monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: c.textFaint, textTransform: "lowercase" }}>
-          acadiaberry.com
-        </span>
-      </footer>
-
-      <style>{`
-        @keyframes marquee { 0% { transform: translateX(0) } 100% { transform: translateX(-50%) } }
-      `}</style>
+        <span>available for hire · 2026</span>
+        <span>brooklyn, ny</span>
+      </div>
     </div>
   );
 }

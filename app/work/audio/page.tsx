@@ -100,7 +100,7 @@ export default function AudioPage() {
 
   return (
     <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "5rem", color: c.text }}>
-      <div style={{ maxWidth: 700, margin: "0 auto", padding: "3rem 2rem 8rem" }}>
+      <div style={{ maxWidth: 700, margin: "0 auto", padding: "3rem clamp(1rem, 4vw, 2rem) 8rem" }}>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
