@@ -144,7 +144,7 @@ export default function Nav() {
       }}
       onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
       onMouseLeave={e => (e.currentTarget.style.opacity = "0.85")}>
-        <img src="/raspberry.png" alt="" width={20} height={20} style={{ objectFit: "contain" }} />
+        <img src="/raspberry.png" alt="" width={40} height={40} style={{ objectFit: "contain" }} />
       </Link>
 
       {/* centered tabs */}
