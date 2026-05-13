@@ -33,7 +33,7 @@ export default function Home() {
   const lastY         = useRef(0);
   const lastT         = useRef(0);
   const velRef        = useRef(0);
-  const rafRef        = useRef<number>();
+  const rafRef        = useRef<number>(0);
   const containerRef  = useRef<HTMLDivElement>(null);
   const [showHint, setShowHint] = useState(false);
 
