@@ -340,7 +340,7 @@ export default function About() {
             const rxEdge    = 1.0;
 
             const roots = Array.from({ length: fanCount }, (_, ri) => {
-              const t      = fanCount === 1 ? 0.5 : ri / (fanCount - 1); // 0..1
+              const t      = fanCount <= 1 ? 0.5 : ri / (fanCount - 1); // 0..1
               const dAngle = -fanSpread + t * fanSpread * 2;
               // bell-ish length curve: max at centre
               const bell   = 1 - Math.pow((t - 0.5) * 2, 2) * 0.55;
