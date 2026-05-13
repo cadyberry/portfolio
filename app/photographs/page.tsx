@@ -1,27 +1,8 @@
 "use client";
+
+import Link from "next/link";
 import { useState } from "react";
 import { useTheme, type Theme } from "../theme";
-
-function colors(theme: Theme) {
-  if (theme === "light") return {
-    bg: "#f9f7f4", text: "#111111", dim: "rgba(17,17,17,0.45)",
-    faint: "rgba(17,17,17,0.18)", accent: "#e8003d",
-    border: "rgba(0,0,0,0.09)",
-    glass: "rgba(255,255,255,0.55)", glassBorder: "rgba(255,255,255,0.85)",
-  };
-  if (theme === "mid") return {
-    bg: "#12082a", text: "rgba(255,232,185,0.92)", dim: "rgba(255,195,120,0.45)",
-    faint: "rgba(255,180,80,0.16)", accent: "#ffaa00",
-    border: "rgba(180,120,255,0.18)",
-    glass: "rgba(140,80,255,0.08)", glassBorder: "rgba(180,120,255,0.2)",
-  };
-  return {
-    bg: "#050508", text: "#ffffff", dim: "rgba(255,255,255,0.35)",
-    faint: "rgba(255,255,255,0.12)", accent: "#ff00aa",
-    border: "rgba(255,255,255,0.07)",
-    glass: "rgba(255,255,255,0.05)", glassBorder: "rgba(255,255,255,0.12)",
-  };
-}
 
 type Filter = "all" | "street" | "travel" | "abstract";
 
@@ -39,124 +20,239 @@ const PHOTOS = [
 ];
 
 const CATS: { id: Filter; label: string }[] = [
-  { id: "all",      label: "ALL"      },
-  { id: "street",   label: "STREET"   },
-  { id: "travel",   label: "TRAVEL"   },
-  { id: "abstract", label: "ABSTRACT" },
+  { id: "all",      label: "all"      },
+  { id: "street",   label: "street"   },
+  { id: "travel",   label: "travel"   },
+  { id: "abstract", label: "abstract" },
 ];
+
+const ITEMS = [
+  { label: "six years, multiple countries" },
+  { label: "street, travel, and abstract" },
+  { label: "shot on whatever was closest" },
+];
+
+function palette(theme: Theme) {
+  if (theme === "light") return {
+    bg:      "#f8f5f0",
+    text:    "#160008",
+    dim:     "rgba(0,0,0,0.38)",
+    border:  "rgba(0,0,0,0.08)",
+    accent:  "#B80037",
+    btnBg:   "#160008",
+    btnText: "#f8f5f0",
+  };
+  if (theme === "mid") return {
+    bg:      "#0e0005",
+    text:    "#FFCCDB",
+    dim:     "rgba(255,204,219,0.4)",
+    border:  "rgba(192,176,240,0.12)",
+    accent:  "#FF5286",
+    btnBg:   "#FFCCDB",
+    btnText: "#0e0005",
+  };
+  return {
+    bg:      "#060002",
+    text:    "#ffffff",
+    dim:     "rgba(255,255,255,0.35)",
+    border:  "rgba(255,255,255,0.07)",
+    accent:  "#FF0550",
+    btnBg:   "#ffffff",
+    btnText: "#060002",
+  };
+}
 
 export default function Photographs() {
   const { theme } = useTheme();
-  const c = colors(theme);
+  const p = palette(theme);
   const [active, setActive] = useState<Filter>("all");
   const [hovered, setHovered] = useState<number | null>(null);
 
-  const filtered = active === "all" ? PHOTOS : PHOTOS.filter(p => p.cat === active);
+  const filtered = active === "all" ? PHOTOS : PHOTOS.filter(ph => ph.cat === active);
 
   return (
-    <main style={{ minHeight: "100vh", paddingTop: "6rem", paddingBottom: "6rem" }}>
-      <div style={{ maxWidth: 1300, margin: "0 auto", padding: "0 2rem" }}>
+    <main style={{
+      minHeight:     "100vh",
+      background:    p.bg,
+      color:         p.text,
+      display:       "flex",
+      flexDirection: "column",
+      alignItems:    "center",
+      padding:       "6rem 1.5rem 4rem",
+      transition:    "background 0.3s, color 0.3s",
+    }}>
 
-        {/* Header */}
-        <div style={{ marginBottom: "3.5rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1.5rem" }}>
-          <div>
-            <p style={{ fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.4em", color: c.faint, textTransform: "uppercase", margin: "0 0 0.6rem" }}>
-              Brooklyn, NY — ongoing
-            </p>
-            <h1 style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "clamp(2.5rem, 8vw, 5rem)",
-              fontWeight: 700, letterSpacing: "-0.04em",
-              color: c.text, margin: 0, lineHeight: 0.9,
-              transition: "color 0.3s",
-            }}>photographs</h1>
-          </div>
+      <Link href="/" style={{
+        position:      "fixed",
+        top:           "1.4rem",
+        left:          "1.4rem",
+        fontSize:      "0.55rem",
+        letterSpacing: "0.18em",
+        textTransform: "uppercase",
+        color:         p.dim,
+        textDecoration:"none",
+        transition:    "color 0.2s",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.color = p.text)}
+      onMouseLeave={e => (e.currentTarget.style.color = p.dim)}
+      >
+        ← back
+      </Link>
 
-          {/* Filters */}
-          <div style={{ display: "flex", gap: 0 }}>
-            {CATS.map(({ id, label }) => (
-              <button key={id} onClick={() => setActive(id)} style={{
-                fontFamily: "monospace", fontSize: "0.55rem", letterSpacing: "0.18em",
-                color: active === id ? (theme === "light" ? "#f9f7f4" : c.bg) : c.dim,
-                background: active === id ? c.accent : c.glass,
-                border: `1px solid ${c.glassBorder}`,
-                backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
-                padding: "0.5rem 1.1rem", cursor: "pointer",
-                textTransform: "uppercase", transition: "all 0.2s",
-                marginLeft: -1, minHeight: 40,
-              }}>{label}</button>
-            ))}
-          </div>
-        </div>
+      <div style={{ maxWidth: 480, width: "100%" }}>
 
-        {/* Masonry grid */}
-        <div style={{
-          columns: "3 280px",
-          columnGap: "4px",
+        <p style={{
+          fontSize:      "0.55rem",
+          letterSpacing: "0.22em",
+          textTransform: "uppercase",
+          color:         p.dim,
+          marginBottom:  "0.6rem",
         }}>
-          {filtered.map((photo, i) => (
-            <div
-              key={`${photo.src}-${i}`}
+          photographs / brooklyn
+        </p>
+
+        <h1 style={{
+          fontSize:      "clamp(1.6rem, 6vw, 2.4rem)",
+          fontWeight:    700,
+          letterSpacing: "-0.02em",
+          lineHeight:    1.1,
+          marginBottom:  "1.8rem",
+        }}>
+          what I've shot
+        </h1>
+
+        <ul style={{
+          listStyle:     "none",
+          padding:       0,
+          margin:        "0 0 2rem",
+          display:       "flex",
+          flexDirection: "column",
+          gap:           "0.75rem",
+        }}>
+          {ITEMS.map((item, i) => (
+            <li key={i} style={{
+              display:    "flex",
+              alignItems: "baseline",
+              gap:        "0.75rem",
+              fontSize:   "clamp(0.85rem, 3vw, 1rem)",
+              lineHeight: 1.55,
+              color:      p.text,
+            }}>
+              <span style={{
+                flexShrink:  0,
+                width:       6,
+                height:      6,
+                borderRadius:"50%",
+                background:  p.accent,
+                marginTop:   "0.45em",
+                display:     "inline-block",
+              }}/>
+              {item.label}
+            </li>
+          ))}
+        </ul>
+
+        <div style={{ borderTop: `1px solid ${p.border}`, marginBottom: "2rem" }}/>
+
+        {/* filter row */}
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "2.4rem" }}>
+          {CATS.map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => setActive(id)}
               style={{
-                breakInside: "avoid",
-                marginBottom: "4px",
-                position: "relative",
-                overflow: "hidden",
-                cursor: "pointer",
-                aspectRatio: photo.span === "tall" ? "3/4" : photo.span === "wide" ? "4/3" : "1",
+                padding:       "0.55rem 1.2rem",
+                background:    active === id ? p.btnBg : "transparent",
+                color:         active === id ? p.btnText : p.dim,
+                fontSize:      "0.72rem",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                border:        `1px solid ${active === id ? p.btnBg : p.border}`,
+                borderRadius:  "10px",
+                cursor:        "pointer",
+                fontFamily:    "'Violet Sans', sans-serif",
+                transition:    "all 0.2s",
               }}
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
+              onMouseEnter={e => { if (active !== id) e.currentTarget.style.color = p.text; }}
+              onMouseLeave={e => { if (active !== id) e.currentTarget.style.color = p.dim; }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={photo.src}
-                alt=""
-                style={{
-                  width: "100%", height: "100%", objectFit: "cover", display: "block",
-                  transition: "transform 0.6s ease, filter 0.6s ease",
-                  transform: hovered === i ? "scale(1.04)" : "scale(1)",
-                  filter: hovered === i ? "brightness(0.75)" : "brightness(0.55)",
-                }}
-              />
-
-              {/* Hover overlay */}
-              <div style={{
-                position: "absolute", inset: 0,
-                background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%)",
-                backdropFilter: hovered === i ? "blur(0px)" : "none",
-                opacity: hovered === i ? 1 : 0,
-                transition: "opacity 0.3s ease",
-                display: "flex", flexDirection: "column", justifyContent: "flex-end",
-                padding: "1.2rem",
-                pointerEvents: "none",
-              }}>
-                <span style={{ fontFamily: "monospace", fontSize: "0.48rem", letterSpacing: "0.25em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase" }}>
-                  {photo.location} · {photo.year}
-                </span>
-              </div>
-
-              {/* Category tag */}
-              <div style={{
-                position: "absolute", top: "0.8rem", left: "0.8rem",
-                fontFamily: "monospace", fontSize: "0.42rem", letterSpacing: "0.2em",
-                color: "rgba(255,255,255,0.5)", textTransform: "uppercase",
-                opacity: hovered === i ? 1 : 0,
-                transition: "opacity 0.3s ease",
-              }}>{photo.cat}</div>
-            </div>
+              {label}
+            </button>
           ))}
         </div>
-
-        {/* Footer note */}
-        <p style={{
-          fontFamily: "Inter, sans-serif", fontSize: "0.8rem", fontStyle: "italic",
-          color: c.faint, textAlign: "center", marginTop: "4rem",
-          transition: "color 0.3s",
-        }}>
-          shot on various cameras, various places — more added as they come
-        </p>
       </div>
+
+      {/* photo grid */}
+      <div style={{
+        width:     "100%",
+        maxWidth:  960,
+        columns:   "3 240px",
+        columnGap: "4px",
+      }}>
+        {filtered.map((photo, i) => (
+          <div
+            key={`${photo.src}-${i}`}
+            style={{
+              breakInside: "avoid",
+              marginBottom: "4px",
+              position:    "relative",
+              overflow:    "hidden",
+              cursor:      "pointer",
+              aspectRatio: photo.span === "tall" ? "3/4" : photo.span === "wide" ? "4/3" : "1",
+            }}
+            onMouseEnter={() => setHovered(i)}
+            onMouseLeave={() => setHovered(null)}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={photo.src}
+              alt=""
+              style={{
+                width:      "100%",
+                height:     "100%",
+                objectFit:  "cover",
+                display:    "block",
+                transition: "transform 0.5s ease",
+                transform:  hovered === i ? "scale(1.04)" : "scale(1)",
+              }}
+            />
+
+            <div style={{
+              position:   "absolute",
+              inset:      0,
+              background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%)",
+              opacity:    hovered === i ? 1 : 0,
+              transition: "opacity 0.3s ease",
+              display:    "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              padding:    "1rem",
+              pointerEvents: "none",
+            }}>
+              <span style={{
+                fontSize:      "0.48rem",
+                letterSpacing: "0.25em",
+                color:         "rgba(255,255,255,0.55)",
+                textTransform: "uppercase",
+                fontFamily:    "monospace",
+              }}>
+                {photo.location} · {photo.year}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p style={{
+        fontSize:   "0.75rem",
+        fontStyle:  "italic",
+        color:      p.dim,
+        marginTop:  "3rem",
+        textAlign:  "center",
+        transition: "color 0.3s",
+      }}>
+        more added as they come
+      </p>
     </main>
   );
 }
