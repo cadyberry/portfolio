@@ -35,6 +35,7 @@ export default function Home() {
   const velRef        = useRef(0);
   const rafRef        = useRef<number>(0);
   const containerRef  = useRef<HTMLDivElement>(null);
+  const scrollTickRef = useRef(0);
   const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
@@ -59,9 +60,10 @@ export default function Home() {
 
     function onStart(e: TouchEvent) {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      lastY.current  = e.touches[0].clientY;
-      lastT.current  = Date.now();
-      velRef.current = 0;
+      lastY.current       = e.touches[0].clientY;
+      lastT.current       = Date.now();
+      velRef.current      = 0;
+      scrollTickRef.current = 0;
       localStorage.setItem("spin-hint-seen", "1");
       setShowHint(false);
     }
@@ -71,6 +73,14 @@ export default function Home() {
       const dy = y - lastY.current;
       const dt = Math.max(Date.now() - lastT.current, 1);
       velRef.current = dy / dt;
+      const dRot = Math.abs(dy * 0.55);
+      scrollTickRef.current += dRot;
+      if (scrollTickRef.current >= 8) {
+        scrollTickRef.current %= 8;
+        const speed = Math.abs(velRef.current);
+        const ms = Math.min(Math.max(Math.round(speed * 30), 1), 5);
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) navigator.vibrate(ms);
+      }
       lastY.current  = y;
       lastT.current  = Date.now();
       updateRot(rotRef.current + dy * 0.55);
@@ -131,21 +141,22 @@ export default function Home() {
         html.light .orbit-tab.active { box-shadow: 0 0 0 2.5px var(--accent); }
 
         @keyframes _hint-bob {
-          0%, 100% { transform: translateX(-50%) translateY(0);   opacity: 0.5; }
-          50%       { transform: translateX(-50%) translateY(6px); opacity: 0.9; }
+          0%, 100% { transform: translateY(-50%) translateX(0);    opacity: 0.5; }
+          50%       { transform: translateY(-50%) translateX(-6px); opacity: 0.9; }
         }
         @keyframes _hint-fade {
           from { opacity: 1; } to { opacity: 0; }
         }
         .spin-hint {
-          position: absolute;
-          bottom: -36px;
-          left: 50%;
-          transform: translateX(-50%);
+          position: fixed;
+          right: 16px;
+          top: 50%;
+          transform: translateY(-50%);
           display: flex; flex-direction: column; align-items: center; gap: 4px;
           animation: _hint-bob 1.6s ease-in-out infinite;
           pointer-events: none;
           white-space: nowrap;
+          z-index: 100;
         }
         .spin-hint.hide {
           animation: _hint-fade 0.4s ease forwards;
@@ -160,6 +171,8 @@ export default function Home() {
           letter-spacing: 0.22em;
           text-transform: uppercase;
           color: var(--text-dim);
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
         }
         @keyframes _desc-in {
           from { opacity: 0; transform: translateY(5px); }
@@ -195,14 +208,6 @@ export default function Home() {
         {/* Bottom indicator pip */}
         <div className="orbit-pip" />
 
-        {/* First-visit swipe hint */}
-        {showHint && (
-          <div className="spin-hint">
-            <span className="spin-hint-arrows">↕</span>
-            <span className="spin-hint-label">swipe to spin</span>
-          </div>
-        )}
-
         {TABS.map((t, i) => {
           const angleDeg = (i * STEP) - 90 + rot;
           const angleRad = angleDeg * Math.PI / 180;
@@ -221,6 +226,14 @@ export default function Home() {
                     className={`orbit-tab${isActive ? " active" : ""}`} style={style}>{inner}</Link>;
         })}
       </div>
+
+      {/* First-visit swipe hint — fixed to right edge */}
+      {showHint && (
+        <div className="spin-hint">
+          <span className="spin-hint-arrows">←</span>
+          <span className="spin-hint-label">spin</span>
+        </div>
+      )}
 
       {/* Live description */}
       <div style={{ textAlign: "center", padding: "1.2rem 2rem 0", minHeight: "3rem" }}>
