@@ -141,38 +141,35 @@ export default function Home() {
         html.light .orbit-tab.active { box-shadow: 0 0 0 2.5px var(--accent); }
 
         @keyframes _hint-bob {
-          0%, 100% { transform: translateY(-50%) translateX(0);    opacity: 0.5; }
-          50%       { transform: translateY(-50%) translateX(-6px); opacity: 0.9; }
+          0%, 100% { transform: translateY(0);   opacity: 0.6; }
+          50%       { transform: translateY(-5px); opacity: 1;   }
         }
         @keyframes _hint-fade {
           from { opacity: 1; } to { opacity: 0; }
         }
         .spin-hint {
-          position: fixed;
-          right: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          display: flex; flex-direction: column; align-items: center; gap: 4px;
-          animation: _hint-bob 1.6s ease-in-out infinite;
+          position: absolute;
+          left: 50%; top: 50%;
+          transform: translate(-50%, -50%);
+          display: flex; flex-direction: column; align-items: center; gap: 6px;
+          animation: _hint-bob 1.4s ease-in-out infinite;
           pointer-events: none;
-          white-space: nowrap;
           z-index: 100;
         }
         .spin-hint.hide {
           animation: _hint-fade 0.4s ease forwards;
         }
         .spin-hint-arrows {
-          font-size: 0.7rem;
-          color: var(--text-dim);
+          font-size: 1.6rem;
+          color: var(--text);
           line-height: 1;
+          opacity: 0.55;
         }
         .spin-hint-label {
-          font-size: 0.38rem;
-          letter-spacing: 0.22em;
+          font-size: 0.48rem;
+          letter-spacing: 0.28em;
           text-transform: uppercase;
           color: var(--text-dim);
-          writing-mode: vertical-rl;
-          text-orientation: mixed;
         }
         @keyframes _desc-in {
           from { opacity: 0; transform: translateY(5px); }
@@ -225,15 +222,15 @@ export default function Home() {
             : <Link key={t.num} href={t.href}
                     className={`orbit-tab${isActive ? " active" : ""}`} style={style}>{inner}</Link>;
         })}
-      </div>
 
-      {/* First-visit swipe hint — fixed to right edge */}
-      {showHint && (
-        <div className="spin-hint">
-          <span className="spin-hint-arrows">←</span>
-          <span className="spin-hint-label">spin</span>
-        </div>
-      )}
+        {/* First-visit drag hint — centered on dial */}
+        {showHint && (
+          <div className="spin-hint">
+            <span className="spin-hint-arrows">↕</span>
+            <span className="spin-hint-label">drag to spin</span>
+          </div>
+        )}
+      </div>
 
       {/* Live description */}
       <div style={{ textAlign: "center", padding: "1.2rem 2rem 0", minHeight: "3rem" }}>

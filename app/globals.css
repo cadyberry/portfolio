@@ -102,7 +102,7 @@ a[href*="unicorn.studio"] { display: none !important; }
 
 .home-tagline {
   font-family: "Violet Sans", sans-serif;
-  font-size: 0.52rem;
+  font-size: 0.66rem;
   letter-spacing: 0.28em;
   color: var(--text-dim);
   text-transform: lowercase;
