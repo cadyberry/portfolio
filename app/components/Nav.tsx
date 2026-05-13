@@ -1,12 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useTheme, type Theme } from "../theme";
-
-const LINKS = [
-  { href: "/", label: "HOME" },
-];
 
 function HomeGlyph() {
   // hex-packed drupelets clipped to berry ellipse
@@ -119,7 +113,6 @@ function themeColors(theme: Theme) {
 }
 
 export default function Nav() {
-  const path = usePathname() ?? "";
   const { theme, cycle } = useTheme();
   const c = themeColors(theme);
 
@@ -130,63 +123,20 @@ export default function Nav() {
       zIndex: 200,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "flex-end",
       padding: "1.2rem 1.2rem",
-      fontFamily: "Inter, sans-serif",
+      minHeight: "4rem",
       background: "transparent",
-      transition: "background 0.3s ease",
     }}>
-      <Link href="/" aria-label="Home" style={{
-        display: "flex",
-        alignItems: "center",
-        opacity: 0.85,
-        transition: "opacity 0.2s",
-      }}
-      onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
-      onMouseLeave={e => (e.currentTarget.style.opacity = "0.85")}>
-        {/* raspberry logo temporarily hidden */}
-      </Link>
-
-      {/* centered tabs */}
-      <div style={{
-        position: "absolute", left: "50%", transform: "translateX(-50%)",
-        display: "flex", gap: "clamp(0.6rem, 2.5vw, 1.4rem)", alignItems: "center",
-      }}>
-        {LINKS.map(({ href, label }) => (
-          <Link key={href} href={href} style={{
-            fontSize: "clamp(0.5rem, 1.5vw, 0.6rem)",
-            letterSpacing: "0.2em",
-            color: (href === "/" ? path === "/" : path.startsWith(href)) ? c.accent : c.dim,
-            textDecoration: "none",
-            textTransform: "uppercase",
-            transition: "color 0.2s",
-            padding: "0.5rem 0",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.color = c.text)}
-          onMouseLeave={e => (e.currentTarget.style.color = (href === "/" ? path === "/" : path.startsWith(href)) ? c.accent : c.dim)}>
-            {label}
-          </Link>
-        ))}
-      </div>
-
-      {/* Theme toggle — right side */}
       <button
         onClick={cycle}
         aria-label="Toggle theme"
         style={{
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          color: c.text,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 30,
-          height: 30,
-          borderRadius: "50%",
-          padding: 0,
-          transition: "color 0.2s, opacity 0.2s",
-          opacity: 0.7,
+          background: "none", border: "none", cursor: "pointer",
+          color: c.text, display: "flex", alignItems: "center",
+          justifyContent: "center", width: 30, height: 30,
+          borderRadius: "50%", padding: 0,
+          transition: "color 0.2s, opacity 0.2s", opacity: 0.7,
         }}
         onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
         onMouseLeave={e => (e.currentTarget.style.opacity = "0.7")}

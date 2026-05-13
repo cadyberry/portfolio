@@ -148,13 +148,10 @@ export default function Home() {
           from { opacity: 1; } to { opacity: 0; }
         }
         .spin-hint {
-          position: absolute;
-          left: 50%; top: 50%;
-          transform: translate(-50%, -50%);
           display: flex; flex-direction: column; align-items: center; gap: 6px;
           animation: _hint-bob 1.4s ease-in-out infinite;
           pointer-events: none;
-          z-index: 100;
+          margin: 0.8rem auto 0;
         }
         .spin-hint.hide {
           animation: _hint-fade 0.4s ease forwards;
@@ -223,14 +220,15 @@ export default function Home() {
                     className={`orbit-tab${isActive ? " active" : ""}`} style={style}>{inner}</Link>;
         })}
 
-        {/* First-visit drag hint — centered on dial */}
-        {showHint && (
-          <div className="spin-hint">
-            <span className="spin-hint-arrows">↕</span>
-            <span className="spin-hint-label">drag to spin</span>
-          </div>
-        )}
       </div>
+
+      {/* First-visit drag hint — below the dial */}
+      {showHint && (
+        <div className="spin-hint">
+          <span className="spin-hint-arrows">↕</span>
+          <span className="spin-hint-label">drag to spin</span>
+        </div>
+      )}
 
       {/* Live description */}
       <div style={{ textAlign: "center", padding: "1.2rem 2rem 0", minHeight: "3rem" }}>

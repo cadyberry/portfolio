@@ -10,19 +10,23 @@ const TOOLS_URL = "https://unafield.vercel.app";
 const HIGHLIGHTS = [
   {
     name: "kaleidoscope",
-    desc: "mirror your camera or an image into infinite symmetry. real-time, adjustable segments.",
+    desc: "draw mirrored across 2–16 axes of symmetry simultaneously. real-time, exportable.",
+    path: "kaleidoscope",
   },
   {
-    name: "color field",
-    desc: "generate flowing color gradients and export them as wallpapers or artwork.",
+    name: "generative art",
+    desc: "recursive patterns, lissajous curves, and particle systems you can export.",
+    path: "generative-art",
   },
   {
-    name: "pattern maker",
-    desc: "build repeating tile patterns from shapes and export to SVG.",
+    name: "pixel editor",
+    desc: "grid-snapped pixel art with animation frames, sprite sheets, and gif export.",
+    path: "pixel-editor",
   },
   {
-    name: "noise canvas",
-    desc: "perlin noise visualizer — tweak scale, speed, and palette until something clicks.",
+    name: "digital rain",
+    desc: "matrix-style cascading character rain — customize charset, speed, and colors.",
+    path: "digital-rain",
   },
 ];
 
@@ -97,7 +101,7 @@ export default function CreativeToolsPage() {
       onMouseEnter={e => (e.currentTarget.style.color = p.text)}
       onMouseLeave={e => (e.currentTarget.style.color = p.dim)}
       >
-        ← back
+        <span style={{color:"#caff3a"}}>←</span> back
       </Link>
 
       <div style={{ maxWidth: 480, width: "100%" }}>
@@ -128,7 +132,7 @@ export default function CreativeToolsPage() {
           lineHeight:    1.65,
           marginBottom:  "1.8rem",
         }}>
-          free to use in the browser. no installs, no accounts.
+          4 of 8 tools on spacescape — free, browser-based, no installs.
         </p>
 
         {/* 2×2 quadrant grid — home tab style */}

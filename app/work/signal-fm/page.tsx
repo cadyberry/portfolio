@@ -5,6 +5,7 @@
  * Interactive mockup: working radio player UI, track list, waveform, frequency dial
  */
 
+import Link from "next/link";
 import { useEffect, useRef, useState, useCallback } from "react";
 
 const TRACKS = [
@@ -80,6 +81,17 @@ export default function SignalFM() {
 
   return (
     <main style={{ background: "#000", minHeight: "100vh", paddingTop: "5rem" }}>
+      <Link href="/" style={{
+        position: "fixed", top: "1.4rem", left: "1.4rem", zIndex: 200,
+        fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase",
+        color: "#333", textDecoration: "none", transition: "color 0.2s",
+        display: "flex", alignItems: "center", gap: "0.3em",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
+      onMouseLeave={e => (e.currentTarget.style.color = "#333")}
+      >
+        <span style={{color:"#caff3a"}}>←</span> back
+      </Link>
 
       {/* Brand header */}
       <div style={{

@@ -115,7 +115,7 @@ export default function AudioPage() {
           }}
           onMouseEnter={e => (e.currentTarget.style.color = c.text)}
           onMouseLeave={e => (e.currentTarget.style.color = c.faint)}>
-            ← Index
+            <span style={{color:"#caff3a"}}>←</span> Index
           </Link>
         </motion.div>
 
@@ -131,6 +131,18 @@ export default function AudioPage() {
         >
           Music
         </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          style={{
+            fontFamily: "Inter, sans-serif", fontSize: "clamp(0.85rem, 2.2vw, 1rem)",
+            color: c.dim, lineHeight: 1.65, margin: "0 0 3rem", maxWidth: 480,
+          }}
+        >
+          Singles and production work. Mostly electronic — ambient, club, in-between.
+        </motion.p>
 
         {/* Carousel */}
         <motion.div

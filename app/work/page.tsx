@@ -60,6 +60,17 @@ export default function Work() {
 
   return (
     <main style={{ minHeight: "100vh", paddingTop: "6rem", paddingBottom: "4rem" }}>
+      <Link href="/" style={{
+        position: "fixed", top: "1.4rem", left: "1.4rem", zIndex: 200,
+        fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase",
+        color: c.dim, textDecoration: "none", transition: "color 0.2s",
+        display: "flex", alignItems: "center", gap: "0.3em",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.color = c.text)}
+      onMouseLeave={e => (e.currentTarget.style.color = c.dim)}
+      >
+        <span style={{color:"#caff3a"}}>←</span> back
+      </Link>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(1rem, 4vw, 2rem)" }}>
 
         <div style={{ marginBottom: "3rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1.5rem" }}>

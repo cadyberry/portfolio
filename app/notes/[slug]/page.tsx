@@ -93,7 +93,7 @@ export default function NotePage({ params }: { params: Promise<{ slug: string }>
         }}
         onMouseEnter={e => (e.currentTarget.style.color = c.text)}
         onMouseLeave={e => (e.currentTarget.style.color = c.faint)}>
-          ← All notes
+          <span style={{color:"#caff3a"}}>←</span> All notes
         </Link>
 
         <p style={{ fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.3em", color: c.faint, textTransform: "uppercase", margin: "0 0 0.8rem" }}>
@@ -121,7 +121,7 @@ export default function NotePage({ params }: { params: Promise<{ slug: string }>
           }}
           onMouseEnter={e => (e.currentTarget.style.color = c.text)}
           onMouseLeave={e => (e.currentTarget.style.color = c.faint)}>
-            ← Back to all notes
+            <span style={{color:"#caff3a"}}>←</span> Back to all notes
           </Link>
         </div>
 

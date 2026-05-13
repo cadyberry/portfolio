@@ -635,7 +635,7 @@ export default function UIPacks() {
             color: "#444", textDecoration: "none", textTransform: "uppercase",
             border: "1px solid #1a1a1a", padding: "0.9rem 1.8rem",
             display: "inline-flex", alignItems: "center", minHeight: 44,
-          }}>← BACK TO WORK</Link>
+          }}><span style={{color:"#caff3a"}}>←</span> BACK TO WORK</Link>
         </div>
       </div>
     </main>

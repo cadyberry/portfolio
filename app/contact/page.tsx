@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { useTheme, type Theme } from "../theme";
 
@@ -97,6 +98,17 @@ export default function Contact() {
 
   return (
     <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "5rem", color: c.text, transition: "color 0.3s" }}>
+      <Link href="/" style={{
+        position: "fixed", top: "1.4rem", left: "1.4rem", zIndex: 200,
+        fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase",
+        color: c.dim, textDecoration: "none", transition: "color 0.2s",
+        display: "flex", alignItems: "center", gap: "0.3em",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.color = c.text)}
+      onMouseLeave={e => (e.currentTarget.style.color = c.dim)}
+      >
+        <span style={{color:"#caff3a"}}>←</span> back
+      </Link>
       <style>{`
         .contact-input::placeholder { color: ${c.faint}; font-style: italic; }
         .contact-input:focus { border-bottom-color: ${c.accent} !important; }

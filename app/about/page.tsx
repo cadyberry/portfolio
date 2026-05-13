@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useTheme, type Theme } from "../theme";
@@ -206,6 +207,17 @@ export default function About() {
         if ((e.target as HTMLElement).closest("svg") === null && open !== null) setOpen(null);
       }}
     >
+      <Link href="/" style={{
+        position: "fixed", top: "1.4rem", left: "1.4rem", zIndex: 200,
+        fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase",
+        color: p.dim, textDecoration: "none", transition: "color 0.2s",
+        display: "flex", alignItems: "center", gap: "0.3em",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.color = p.text)}
+      onMouseLeave={e => (e.currentTarget.style.color = p.dim)}
+      >
+        <span style={{color:"#caff3a"}}>←</span> back
+      </Link>
       <style>{`
         @keyframes _prism {
           0%   { fill: rgba(100, 48,255,0.92); }
@@ -252,7 +264,7 @@ export default function About() {
         textAlign:     "center",
         pointerEvents: "none",
       }}>
-        explore the nodes to learn more
+        click a node
       </p>
 
       {/* SVG map */}

@@ -96,7 +96,7 @@ export default function Photographs() {
       onMouseEnter={e => (e.currentTarget.style.color = p.text)}
       onMouseLeave={e => (e.currentTarget.style.color = p.dim)}
       >
-        ← back
+        <span style={{color:"#caff3a"}}>←</span> back
       </Link>
 
       <div style={{ maxWidth: 480, width: "100%" }}>

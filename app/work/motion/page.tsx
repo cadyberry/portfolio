@@ -51,7 +51,7 @@ export default function MotionPage() {
           }}
           onMouseEnter={e => (e.currentTarget.style.color = c.text)}
           onMouseLeave={e => (e.currentTarget.style.color = c.faint)}>
-            ← Index
+            <span style={{color:"#caff3a"}}>←</span> Index
           </Link>
         </motion.div>
 

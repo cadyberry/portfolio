@@ -88,7 +88,7 @@ export default function Biome() {
             transition: "all 0.2s",
           }}
 >
-            ← BACK TO WORK
+            <span style={{color:"#caff3a"}}>←</span> BACK TO WORK
           </Link>
         </div>
       </div>

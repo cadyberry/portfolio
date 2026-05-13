@@ -225,7 +225,7 @@ export default function Hollow() {
           }}
           onMouseEnter={e => { e.currentTarget.style.color = "#fff"; e.currentTarget.style.borderColor = "#fff"; }}
           onMouseLeave={e => { e.currentTarget.style.color = "#333"; e.currentTarget.style.borderColor = "#1a1a1a"; }}>
-            ← BACK TO WORK
+            <span style={{color:"#caff3a"}}>←</span> BACK TO WORK
           </Link>
         </div>
       </div>

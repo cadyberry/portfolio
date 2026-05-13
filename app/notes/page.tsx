@@ -27,6 +27,17 @@ export default function Notes() {
 
   return (
     <main style={{ background: "transparent", minHeight: "100vh", paddingTop: "5rem", color: c.text }}>
+      <Link href="/" style={{
+        position: "fixed", top: "1.4rem", left: "1.4rem", zIndex: 200,
+        fontSize: "0.55rem", letterSpacing: "0.18em", textTransform: "uppercase",
+        color: c.dim, textDecoration: "none", transition: "color 0.2s",
+        display: "flex", alignItems: "center", gap: "0.3em",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.color = c.text)}
+      onMouseLeave={e => (e.currentTarget.style.color = c.dim)}
+      >
+        <span style={{color:"#caff3a"}}>←</span> back
+      </Link>
       <div style={{ maxWidth: 780, margin: "0 auto", padding: "3rem 2rem 8rem" }}>
 
         <p style={{ fontFamily: "monospace", fontSize: "0.5rem", letterSpacing: "0.4em", color: c.faint, textTransform: "uppercase", margin: "0 0 0.8rem" }}>
