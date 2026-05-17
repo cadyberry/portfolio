@@ -109,7 +109,6 @@ export default function About() {
   const { theme }             = useTheme();
   const p                     = palette(theme);
   const [open, setOpen]       = useState<number | null>(null);
-  const [visited, setVisited] = useState<Set<number>>(new Set());
 
   // drag state
   const [offsets, setOffsets] = useState<{x:number;y:number}[]>(() => NODES.map(() => ({x:0,y:0})));
@@ -175,7 +174,6 @@ export default function About() {
     if (didDrag.current) return; // don't open if we just dragged
     if (open === i) { setOpen(null); return; }
     setOpen(i);
-    setVisited(prev => new Set([...prev, i]));
   };
 
   // effective node positions
@@ -264,7 +262,7 @@ export default function About() {
         textAlign:     "center",
         pointerEvents: "none",
       }}>
-        click a node
+        click to explore
       </p>
 
       {/* SVG map */}
@@ -333,9 +331,8 @@ export default function About() {
 
           {/* terminal root clusters */}
           {effNodes.map((n, i) => {
-            const isVis    = visited.has(i);
             const isOpen   = open === i;
-            const fill     = isVis ? undefined : p.blob;
+            const fill     = undefined;
             const opacity  = isOpen ? 1 : 0.82;
 
             // direction away from junction — this is where roots grow
@@ -385,7 +382,7 @@ export default function About() {
 
                 {/* root tendrils */}
                 <g
-                  className={`nd${isVis ? " vis" : ""}`}
+                  className="nd vis"
                   filter="url(#root)"
                   pointerEvents="none"
                 >
