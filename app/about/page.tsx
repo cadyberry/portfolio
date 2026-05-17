@@ -348,8 +348,8 @@ export default function About() {
             // tendril lengths: longer in centre, shorter at edges; per-node offset for variety
             const lenMid    = 130 + (i % 4) * 18; // 130–184
             const lenEdge   = 70  + (i % 3) * 12; // 70–94
-            const rxMid     = 2.2 + (i % 2) * 0.3;
-            const rxEdge    = 1.0;
+            const rxMid     = 8.0 + (i % 2) * 1.2;
+            const rxEdge    = 4.5;
 
             const roots = Array.from({ length: fanCount }, (_, ri) => {
               const t      = fanCount <= 1 ? 0.5 : ri / (fanCount - 1); // 0..1
