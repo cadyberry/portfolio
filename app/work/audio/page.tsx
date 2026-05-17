@@ -68,6 +68,15 @@ const SONGS = [
     soundcloud: "https://soundcloud.com/47c4dy/called-it",
     spotify:    "https://open.spotify.com/album/2LxzeT4U9Zgwsf6cIxlTcf",
     apple:      "https://music.apple.com/us/song/called-it/1810528222",
+    lyrics: `Called it
+They only see it when they called it
+And my heart ain't growing softer
+I see the world just to get lost
+I see the world just to get lost-er
+Oh, I think we lost her
+Lil baby she's a goner
+She's back to popping collars
+So she can get these dollars`,
   },
   {
     title: "Checkers",
@@ -75,6 +84,38 @@ const SONGS = [
     soundcloud: "https://soundcloud.com/47c4dy/thisonerighthere_7",
     spotify:    "https://open.spotify.com/album/6fbaKle3RQmQTi2F548fDv",
     apple:      "https://music.apple.com/us/song/checkers/1812183006",
+    lyrics: `I need patience
+I really need patience for you
+And you know I'm not waiting
+No I'm not waiting on you
+
+And there's nobody to blame
+For the way it all changed
+Thought you were the whole thing
+You're always switching lanes
+
+Thought you were the whole
+But you're all switching lanes
+And I wish that we were strangers
+Always switching lanes
+
+We in two different places
+On two different thangs
+We just don't see the same
+Just don't see the same
+
+I need patience
+I really need patience for you
+And you know I'm not waiting on you
+No I'm not waiting on you
+
+And there's nobody to blame
+For the way it all changed
+Always switching lanes
+
+Need to see some new faces
+Need to rearrange this
+It's getting too crazy`,
   },
   {
     title: "Rage",
