@@ -63,18 +63,18 @@ function SoundCloudLogo({ size = 32 }: { size?: number }) {
 
 const SONGS = [
   {
-    title: "Checkers",
-    spotifyEmbed: "https://open.spotify.com/embed/album/6fbaKle3RQmQTi2F548fDv?utm_source=generator",
-    soundcloud: "https://soundcloud.com/47c4dy/thisonerighthere_7",
-    spotify:    "https://open.spotify.com/album/6fbaKle3RQmQTi2F548fDv",
-    apple:      "https://music.apple.com/us/song/checkers/1812183006",
-  },
-  {
     title: "Called It",
     spotifyEmbed: "https://open.spotify.com/embed/album/2LxzeT4U9Zgwsf6cIxlTcf?utm_source=generator",
     soundcloud: "https://soundcloud.com/47c4dy/called-it",
     spotify:    "https://open.spotify.com/album/2LxzeT4U9Zgwsf6cIxlTcf",
     apple:      "https://music.apple.com/us/song/called-it/1810528222",
+  },
+  {
+    title: "Checkers",
+    spotifyEmbed: "https://open.spotify.com/embed/album/6fbaKle3RQmQTi2F548fDv?utm_source=generator",
+    soundcloud: "https://soundcloud.com/47c4dy/thisonerighthere_7",
+    spotify:    "https://open.spotify.com/album/6fbaKle3RQmQTi2F548fDv",
+    apple:      "https://music.apple.com/us/song/checkers/1812183006",
   },
   {
     title: "Rage",
@@ -132,17 +132,6 @@ export default function AudioPage() {
           Music
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          style={{
-            fontFamily: "Inter, sans-serif", fontSize: "clamp(0.85rem, 2.2vw, 1rem)",
-            color: c.dim, lineHeight: 1.65, margin: "0 0 3rem", maxWidth: 480,
-          }}
-        >
-          Singles and production work. Mostly electronic — ambient, club, in-between.
-        </motion.p>
 
         {/* Carousel */}
         <motion.div
