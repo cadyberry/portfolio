@@ -68,8 +68,7 @@ const SONGS = [
     soundcloud: "https://soundcloud.com/47c4dy/called-it",
     spotify:    "https://open.spotify.com/album/2LxzeT4U9Zgwsf6cIxlTcf",
     apple:      "https://music.apple.com/us/song/called-it/1810528222",
-    lyrics: `Called it
-They only see it when they called it
+    lyrics: `They only see it when they called it
 And my heart ain't growing softer
 I see the world just to get lost
 I see the world just to get lost-er
