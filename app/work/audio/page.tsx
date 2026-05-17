@@ -125,16 +125,20 @@ It's getting too crazy`,
     lyrics: `All alone, on my own it, all sounds the same
 And you'd know I'd do anything to drown the pain
 When you called I was gone now I'm out to play
+
 And you know I get down with the rage
 And you know there's things I cannot say
 You know there's things that I still chase
 With all I've done the feeling stays
+
 My mind's in chains
 Want my mind erased
+
 Can't escape
 You know it's all part of the game
 You know why that's why you take the pain
 I can feel the strain
+
 Ask myself like what's to gain
 So much that I can't explain
 So much that remains unchanged
