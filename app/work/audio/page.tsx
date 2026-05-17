@@ -122,7 +122,7 @@ It's getting too crazy`,
     soundcloud: "https://soundcloud.com/47c4dy/feb-24-fminor-f-bflat-1",
     spotify:    "https://open.spotify.com/album/3Vz4mfECOHTvaQReu6SMTU",
     apple:      "https://music.apple.com/us/album/rage/1811779887?i=1811779888",
-    lyrics: `All alone, on my own it, all sounds the same
+    lyrics: `All alone, on my own, it all sounds the same
 And you'd know I'd do anything to drown the pain
 When you called I was gone now I'm out to play
 
