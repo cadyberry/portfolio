@@ -132,7 +132,7 @@ export default function CreativeToolsPage() {
           lineHeight:    1.65,
           marginBottom:  "1.8rem",
         }}>
-          4 of 8 tools on spacescape — free, browser-based, no installs.
+          here's a look at some of the tools on spacescape. free, browser-based tools with no installs.
         </p>
 
         {/* 2×2 quadrant grid — home tab style */}
