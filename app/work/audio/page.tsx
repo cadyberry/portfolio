@@ -82,6 +82,23 @@ const SONGS = [
     soundcloud: "https://soundcloud.com/47c4dy/feb-24-fminor-f-bflat-1",
     spotify:    "https://open.spotify.com/album/3Vz4mfECOHTvaQReu6SMTU",
     apple:      "https://music.apple.com/us/album/rage/1811779887?i=1811779888",
+    lyrics: `All alone, on my own it, all sounds the same
+And you'd know I'd do anything to drown the pain
+When you called I was gone now I'm out to play
+And you know I get down with the rage
+And you know there's things I cannot say
+You know there's things that I still chase
+With all I've done the feeling stays
+My mind's in chains
+Want my mind erased
+Can't escape
+You know it's all part of the game
+You know why that's why you take the pain
+I can feel the strain
+Ask myself like what's to gain
+So much that I can't explain
+So much that remains unchanged
+Like I'm dancing in the rain`,
   },
 ];
 
@@ -90,10 +107,12 @@ export default function AudioPage() {
   const c = colors(theme);
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [showLyrics, setShowLyrics] = useState(false);
 
   function go(next: number) {
     setDirection(next > index ? 1 : -1);
     setIndex(next);
+    setShowLyrics(false);
   }
 
   const song = SONGS[index];
@@ -257,6 +276,50 @@ export default function AudioPage() {
               </motion.a>
             ))}
           </div>
+
+          {/* Lyrics */}
+          {song.lyrics && (
+            <>
+              <div style={{ borderTop: `1px solid ${c.glassBorder}` }}>
+                <button
+                  onClick={() => setShowLyrics(v => !v)}
+                  style={{
+                    width: "100%", background: "none", border: "none", cursor: "pointer",
+                    display: "flex", alignItems: "center", justifyContent: "space-between",
+                    padding: "0.75rem 1.4rem",
+                    fontFamily: "Special Elite, monospace", fontSize: "0.48rem",
+                    letterSpacing: "0.22em", textTransform: "uppercase",
+                    color: c.dim, transition: "color 0.2s",
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = c.text)}
+                  onMouseLeave={e => (e.currentTarget.style.color = c.dim)}
+                >
+                  <span>lyrics</span>
+                  <span style={{ fontSize: "0.65rem", transition: "transform 0.25s", display: "inline-block", transform: showLyrics ? "rotate(180deg)" : "none" }}>↓</span>
+                </button>
+              </div>
+              <AnimatePresence>
+                {showLyrics && (
+                  <motion.div
+                    key="lyrics"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+                    style={{ overflow: "hidden", borderTop: `1px solid ${c.glassBorder}` }}
+                  >
+                    <p style={{
+                      fontFamily: "Inter, sans-serif", fontSize: "0.88rem", lineHeight: 1.8,
+                      color: c.dim, whiteSpace: "pre-line",
+                      margin: 0, padding: "1.2rem 1.4rem 1.4rem",
+                    }}>
+                      {song.lyrics}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
+          )}
         </motion.div>
 
         {/* Song list */}
